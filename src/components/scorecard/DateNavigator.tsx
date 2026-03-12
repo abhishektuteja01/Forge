@@ -51,27 +51,27 @@ export function DateNavigator({
   const isFuture = selectedDate >= today;
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between gap-4">
       {/* Previous day */}
       <button
         type="button"
         onClick={() => onDateChange(shiftDate(selectedDate, -1))}
         aria-label="Previous day"
-        className="flex h-10 w-10 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+        className="text-slate-400 hover:bg-white hover:shadow-premium-hover flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-black/[0.03] bg-white shadow-premium transition-all hover:scale-105 active:scale-95 hover:text-slate-900"
       >
-        <ChevronLeft className="h-5 w-5" />
+        <ChevronLeft className="h-6 w-6" strokeWidth={2.5} />
       </button>
 
       {/* Date display + today jump */}
-      <div className="flex items-center gap-3">
-        <span className="font-display text-lg font-bold tracking-tight text-gray-900">
+      <div className="flex flex-1 items-center justify-center gap-4">
+        <h2 className="font-display text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
           {formatDisplayDate(selectedDate)}
-        </span>
+        </h2>
         {!isToday && (
           <button
             type="button"
             onClick={() => onDateChange(today)}
-            className="rounded-lg bg-indigo-50 px-2.5 py-1 text-xs font-bold text-primary transition-colors hover:bg-indigo-100"
+            className="rounded-full bg-primary/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-primary transition-all hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/20"
           >
             Today
           </button>
@@ -84,13 +84,13 @@ export function DateNavigator({
         onClick={() => onDateChange(shiftDate(selectedDate, 1))}
         disabled={isFuture}
         aria-label="Next day"
-        className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
+        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-black/[0.03] transition-all ${
           isFuture
-            ? "cursor-not-allowed text-gray-200"
-            : "text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+            ? "cursor-not-allowed opacity-30 bg-slate-100"
+            : "bg-white text-slate-400 shadow-premium hover:shadow-premium-hover hover:scale-105 active:scale-95 hover:text-slate-900"
         }`}
       >
-        <ChevronRight className="h-5 w-5" />
+        <ChevronRight className="h-6 w-6" strokeWidth={2.5} />
       </button>
     </div>
   );

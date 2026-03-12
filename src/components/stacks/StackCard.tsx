@@ -14,11 +14,26 @@ interface StackCardProps {
 
 const TAG_ICON_STYLES: Record<
   Tag,
-  { bg: string; text: string; label: string }
+  { bg: string; text: string; label: string; ring: string }
 > = {
-  positive: { bg: "bg-green-50", text: "text-positive", label: "+" },
-  negative: { bg: "bg-red-50", text: "text-negative", label: "−" },
-  neutral: { bg: "bg-gray-100", text: "text-neutral", label: "=" },
+  positive: {
+    bg: "bg-positive/10",
+    text: "text-positive",
+    label: "+",
+    ring: "ring-positive/20",
+  },
+  negative: {
+    bg: "bg-negative/10",
+    text: "text-negative",
+    label: "−",
+    ring: "ring-negative/20",
+  },
+  neutral: {
+    bg: "bg-neutral/10",
+    text: "text-neutral",
+    label: "=",
+    ring: "ring-neutral/20",
+  },
 };
 
 function RoutineNode({
@@ -29,19 +44,26 @@ function RoutineNode({
   role: "ANCHOR" | "STACKED";
 }) {
   const icon = TAG_ICON_STYLES[routine.tag];
+  const tagAccentStyles: Record<Tag, string> = {
+    positive: "border-l-emerald-500",
+    negative: "border-l-rose-500",
+    neutral: "border-l-slate-300",
+  };
 
   return (
-    <div className="flex items-center gap-3">
+    <div className={`group flex items-center gap-5 border-l-[3px] py-4 pl-6 pr-4 transition-all duration-300 hover:bg-slate-50/50 ${tagAccentStyles[routine.tag]}`}>
       <div
-        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-lg font-bold ${icon.bg} ${icon.text}`}
+        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-xl font-black shadow-sm ring-1 ring-white ${icon.bg} ${icon.text}`}
       >
         {icon.label}
       </div>
       <div>
-        <span className="block text-[10px] font-bold uppercase tracking-widest text-gray-400">
-          {role}
-        </span>
-        <span className="block text-base font-bold text-gray-900">
+        <div className="mb-1 flex items-center gap-2">
+          <span className={`text-[10px] font-black uppercase tracking-[0.2em] ${role === "ANCHOR" ? "rounded-lg bg-slate-100 px-2 py-0.5 text-slate-900" : "text-slate-400"}`}>
+            {role}
+          </span>
+        </div>
+        <span className="block font-display text-xl font-bold tracking-tight text-slate-800 transition-colors group-hover:text-primary">
           {routine.name}
         </span>
       </div>
@@ -51,12 +73,14 @@ function RoutineNode({
 
 function Connector() {
   return (
-    <div className="flex items-center gap-2 py-1 pl-5">
+    <div className="flex items-center gap-4 py-4 pl-9">
       <div className="flex flex-col items-center">
-        <div className="h-4 w-0.5 bg-primary" />
-        <ArrowDown className="h-4 w-4 text-primary" />
+        <div className="h-6 w-1 rounded-full bg-gradient-to-b from-primary/20 to-primary/40" />
+        <ArrowDown className="h-6 w-6 text-primary/60" strokeWidth={2.5} />
       </div>
-      <span className="text-sm italic text-primary">then I will...</span>
+      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/40">
+        Then I will
+      </span>
     </div>
   );
 }
@@ -80,20 +104,22 @@ export function StackCard({ chain, onDelete }: StackCardProps) {
   }, [menuOpen]);
 
   return (
-    <Card className="relative space-y-1">
+    <Card className="relative overflow-visible !p-0">
       {/* Menu button */}
-      <div className="absolute right-4 top-4" ref={menuRef}>
+      <div className="absolute right-4 top-5 z-10" ref={menuRef}>
         <button
           type="button"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Stack options"
-          className="flex h-8 w-8 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+          className={`flex h-9 w-9 items-center justify-center rounded-xl transition-all duration-300 hover:bg-white hover:shadow-premium hover:text-slate-900 ${
+            menuOpen ? "bg-white shadow-premium text-slate-900" : "text-slate-400"
+          }`}
         >
-          <MoreVertical className="h-4 w-4" />
+          <MoreVertical className="h-5 w-5" />
         </button>
 
         {menuOpen && (
-          <div className="absolute right-0 top-full z-20 mt-1 w-40 overflow-hidden rounded-xl border border-border bg-white shadow-lg">
+          <div className="absolute right-0 top-full z-20 mt-1 w-48 overflow-hidden rounded-xl border border-black/[0.03] bg-white shadow-premium animate-in fade-in zoom-in-95">
             {chain.steps.map((step) => (
               <button
                 key={step.stack.id}
@@ -102,7 +128,7 @@ export function StackCard({ chain, onDelete }: StackCardProps) {
                   setMenuOpen(false);
                   onDelete(step.stack.id);
                 }}
-                className="flex w-full items-center px-4 py-3 text-left text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
+                className="flex w-full items-center px-4 py-3 text-left text-sm font-bold text-rose-600 transition-colors hover:bg-rose-50"
               >
                 {chain.steps.length > 1
                   ? `Remove "${step.routine.name}"`
@@ -113,16 +139,21 @@ export function StackCard({ chain, onDelete }: StackCardProps) {
         )}
       </div>
 
-      {/* Anchor */}
-      <RoutineNode routine={chain.anchor} role="ANCHOR" />
-
-      {/* Steps: connector → stacked, repeated for each step in chain */}
-      {chain.steps.map((step) => (
-        <div key={step.stack.id}>
-          <Connector />
-          <RoutineNode routine={step.routine} role="STACKED" />
+      <div className="divide-y divide-slate-50">
+        <div className="overflow-hidden rounded-t-[1.95rem]">
+          <RoutineNode routine={chain.anchor} role="ANCHOR" />
         </div>
-      ))}
+
+        {chain.steps.map((step, idx) => (
+          <div 
+            key={step.stack.id} 
+            className={`bg-slate-50/30 ${idx === chain.steps.length - 1 ? "rounded-b-[1.95rem]" : ""}`}
+          >
+            <Connector />
+            <RoutineNode routine={step.routine} role="STACKED" />
+          </div>
+        ))}
+      </div>
     </Card>
   );
 }

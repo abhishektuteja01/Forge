@@ -24,15 +24,21 @@ export function RoutineGroup({
   if (routines.length === 0) return null;
 
   return (
-    <div className="space-y-2">
+    <div className="group/section space-y-4">
       {/* Section header */}
-      <h3 className="px-1 text-xs font-bold uppercase tracking-widest text-gray-400">
-        {label}
-      </h3>
+      <div className="flex items-center gap-4 px-2">
+        <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-slate-100 text-[10px] font-black text-slate-400 transition-colors group-hover/section:bg-primary/10 group-hover/section:text-primary">
+          {label[0]}
+        </div>
+        <h3 className="text-xs font-black uppercase tracking-[0.2em] text-slate-400 transition-colors group-hover/section:text-slate-900">
+          {label}
+        </h3>
+        <div className="h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent opacity-50" />
+      </div>
 
       {/* Routines card */}
-      <Card className="divide-y divide-gray-100 !p-0">
-        {routines.map((routine) => {
+      <Card className="divide-y divide-slate-100 !p-0 !overflow-visible">
+        {routines.map((routine, index) => {
           const ci = checkIns.get(routine.id);
           const completed = ci?.completed ?? false;
 
@@ -44,6 +50,8 @@ export function RoutineGroup({
               onToggle={onToggle}
               onEdit={onEdit}
               onDelete={onDelete}
+              isFirst={index === 0}
+              isLast={index === routines.length - 1}
             />
           );
         })}

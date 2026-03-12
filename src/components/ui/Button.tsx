@@ -36,13 +36,13 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Variant mapping
     const variantMap = {
       primary:
-        "bg-indigo-500 text-white hover:bg-indigo-600 focus:ring-indigo-500 shadow-sm hover:shadow active:scale-[0.98]",
+        "bg-primary text-primary-foreground hover:bg-indigo-700/90 shadow-[0_4px_12px_-2px_rgba(79,70,229,0.3)] hover:shadow-[0_8px_20px_-4px_rgba(79,70,229,0.4)] active:scale-95",
       secondary:
-        "bg-white text-gray-900 border-2 border-border hover:bg-gray-50 focus:ring-gray-200 active:scale-[0.98]",
+        "bg-white text-slate-700 border-2 border-slate-100 hover:border-slate-200 hover:bg-slate-50 active:scale-95 shadow-sm",
       danger:
-        "bg-negative text-white hover:bg-red-600 focus:ring-red-500 shadow-sm active:scale-[0.98]",
+        "bg-negative text-white hover:bg-negative/90 shadow-[0_4px_12px_-2px_rgba(244,63,94,0.3)] active:scale-95",
       ghost:
-        "bg-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:ring-gray-200",
+        "bg-transparent text-slate-500 hover:text-slate-900 hover:bg-slate-100/50",
     };
 
     return (

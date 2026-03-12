@@ -160,7 +160,7 @@ export default function ScorecardPage() {
 
   // --------------- Render ---------------
   return (
-    <div className="mx-auto w-full max-w-lg px-4 py-6">
+    <div className="flex flex-col gap-10">
       {/* Date navigation */}
       <DateNavigator
         selectedDate={selectedDate}
@@ -168,20 +168,23 @@ export default function ScorecardPage() {
       />
 
       {/* Page heading */}
-      <h1 className="mb-6 mt-4 font-display text-2xl font-bold tracking-tight text-gray-900">
-        Daily Scorecard
-      </h1>
+      <div className="space-y-4">
+        <h1 className="font-display text-5xl font-black tracking-tight text-slate-900 sm:text-6xl">
+          Intelligence <span className="text-primary italic">Scorecard</span>
+        </h1>
+        <p className="text-lg leading-relaxed text-slate-500 max-w-xl">
+           Ruthlessly inventory your daily mechanics. Tag your routines to see the <span className="font-bold text-slate-900 underline decoration-primary/30">identity</span> you are forging.
+        </p>
+      </div>
 
       {/* Progress summary */}
       {routines.length > 0 && (
-        <div className="mb-8">
-          <ScorecardSummary routines={routines} checkIns={checkIns} />
-        </div>
+        <ScorecardSummary routines={routines} checkIns={checkIns} />
       )}
 
       {/* Routine groups */}
       {routines.length > 0 ? (
-        <div className="space-y-6">
+        <div className="space-y-12">
           {TIME_GROUPS.map(({ key, label }) => {
             const groupRoutines = groupedRoutines.get(key) ?? [];
             return (
@@ -198,26 +201,36 @@ export default function ScorecardPage() {
           })}
         </div>
       ) : (
-        /* Empty state */
-        <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 px-6 py-16 text-center">
-          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50">
-            <Plus className="h-7 w-7 text-primary" />
+        /* Empty state - Redesigned to be warmer and more inviting */
+        <div className="relative overflow-hidden rounded-[2.5rem] border border-black/[0.03] bg-white p-12 text-center shadow-premium">
+          {/* Subtle background decorative element */}
+          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
+          <div className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-indigo-50 blur-3xl" />
+
+          <div className="relative z-10 flex flex-col items-center">
+            <div className="mb-8 flex h-24 w-24 items-center justify-center rounded-[2rem] bg-slate-50 shadow-inner ring-1 ring-black/[0.03]">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary shadow-lg shadow-primary/20">
+                <Plus className="h-8 w-8 text-white" />
+              </div>
+            </div>
+            
+            <h3 className="mb-4 font-display text-3xl font-black tracking-tight text-slate-900">
+              Forging Starts Here
+            </h3>
+            <p className="mx-auto mb-10 max-w-sm text-lg font-medium leading-relaxed text-slate-500">
+              Your scorecard is empty. Start by listing the behaviors that already define your day. 
+              <span className="mt-2 block italic text-slate-400">"The first step to changing your identity is changing what you do."</span>
+            </p>
+            
+            <button
+              type="button"
+              onClick={handleOpenAdd}
+              className="group relative inline-flex items-center gap-3 overflow-hidden rounded-2xl bg-slate-900 px-10 py-5 text-lg font-bold text-white shadow-xl transition-all hover:scale-105 hover:bg-slate-800 active:scale-95"
+            >
+              <Plus className="h-5 w-5" strokeWidth={3} />
+              Add First Habit
+            </button>
           </div>
-          <h3 className="mb-2 font-display text-lg font-bold text-gray-900">
-            Start your Scorecard
-          </h3>
-          <p className="mb-6 max-w-xs text-sm text-gray-500">
-            List your daily routines and tag them as positive, negative, or
-            neutral. Start with what you already do — not what you wish you did.
-          </p>
-          <button
-            type="button"
-            onClick={handleOpenAdd}
-            className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-600"
-          >
-            <Plus className="h-4 w-4" />
-            Add your first routine
-          </button>
         </div>
       )}
 
@@ -227,9 +240,9 @@ export default function ScorecardPage() {
           type="button"
           onClick={handleOpenAdd}
           aria-label="Add routine"
-          className="fixed bottom-24 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-all hover:bg-indigo-600 hover:shadow-xl active:scale-95 md:bottom-8 md:right-8"
+          className="fixed bottom-24 right-5 z-40 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-white shadow-2xl shadow-primary/40 transition-all hover:scale-110 hover:bg-indigo-700 active:scale-90 md:bottom-10 md:right-10"
         >
-          <Plus className="h-6 w-6" strokeWidth={2.5} />
+          <Plus className="h-8 w-8" strokeWidth={3} />
         </button>
       )}
 

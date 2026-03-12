@@ -27,7 +27,7 @@ const TAG_OPTIONS: { value: Tag; label: string; activeClass: string }[] = [
   {
     value: "neutral",
     label: "Neutral (=)",
-    activeClass: "border-neutral bg-gray-50 text-neutral",
+    activeClass: "border-neutral bg-surface text-neutral",
   },
 ];
 
@@ -84,7 +84,7 @@ export function AddRoutineForm({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Name input */}
       <Input
         label="Routine name"
@@ -96,63 +96,72 @@ export function AddRoutineForm({
       />
 
       {/* Tag selection */}
-      <div className="space-y-2">
-        <label className="text-sm font-semibold text-gray-900">
-          How does this habit affect you?
+      <div className="space-y-3">
+        <label className="text-xs font-black uppercase tracking-widest text-slate-400">
+          Habit Impact
         </label>
-        <div className="flex gap-2">
-          {TAG_OPTIONS.map((option) => (
-            <button
-              key={option.value}
-              type="button"
-              onClick={() => setTag(option.value)}
-              className={`flex-1 rounded-xl border-2 px-3 py-3 text-center text-sm font-semibold transition-all ${
-                tag === option.value
-                  ? option.activeClass
-                  : "border-gray-200 text-gray-500 hover:border-gray-300"
-              }`}
-            >
-              {option.label}
-            </button>
-          ))}
+        <div className="grid grid-cols-3 gap-3">
+          {TAG_OPTIONS.map((option) => {
+            const isSelected = tag === option.value;
+            return (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => setTag(option.value)}
+                className={`flex flex-col items-center justify-center gap-2 rounded-2xl border-2 px-3 py-4 transition-all duration-300 ${
+                  isSelected
+                    ? option.activeClass + " shadow-lg scale-[1.02]"
+                    : "border-slate-100 bg-slate-50/50 text-slate-400 hover:border-slate-200 hover:bg-slate-50"
+                }`}
+              >
+                <span className="text-lg font-black">{option.label.split(" (")[1].replace(")", "")}</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest">{option.label.split(" (")[0]}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
       {/* Time of day selection */}
-      <div className="space-y-2">
-        <label className="text-sm font-semibold text-gray-900">
-          When do you usually do this?
+      <div className="space-y-3">
+        <label className="text-xs font-black uppercase tracking-widest text-slate-400">
+          Implementation Intention
         </label>
         <div className="flex flex-wrap gap-2">
-          {TIME_OPTIONS.map((option) => (
-            <button
-              key={option.label}
-              type="button"
-              onClick={() => setTimeOfDay(option.value)}
-              className={`rounded-xl border-2 px-4 py-2.5 text-sm font-medium transition-all ${
-                timeOfDay === option.value
-                  ? "border-primary bg-indigo-50 text-primary"
-                  : "border-gray-200 text-gray-500 hover:border-gray-300"
-              }`}
-            >
-              {option.label}
-            </button>
-          ))}
+          {TIME_OPTIONS.map((option) => {
+            const isSelected = timeOfDay === option.value;
+            return (
+              <button
+                key={option.label}
+                type="button"
+                onClick={() => setTimeOfDay(option.value)}
+                className={`rounded-xl border-2 px-4 py-2.5 text-sm font-bold transition-all duration-300 ${
+                  isSelected
+                    ? "border-primary bg-primary text-white shadow-lg shadow-primary/20 scale-105"
+                    : "border-slate-100 bg-slate-50/50 text-slate-500 hover:border-slate-200 hover:bg-slate-50"
+                }`}
+              >
+                {option.label}
+              </button>
+            );
+          })}
         </div>
       </div>
 
       {/* Error display */}
       {error && name.trim() && (
-        <p className="text-sm font-medium text-negative">{error}</p>
+        <p className="rounded-xl bg-negative/10 p-3 text-center text-sm font-bold text-negative">
+          {error}
+        </p>
       )}
 
       {/* Action buttons */}
-      <div className="flex gap-3 pt-2">
-        <Button variant="secondary" onClick={onClose} fullWidth>
+      <div className="flex gap-3 pt-4">
+        <Button variant="ghost" onClick={onClose} fullWidth>
           Cancel
         </Button>
         <Button onClick={handleSubmit} loading={loading} fullWidth>
-          {isEditing ? "Save Changes" : "Add Routine"}
+          {isEditing ? "Save Impact" : "Commit Habit"}
         </Button>
       </div>
     </div>

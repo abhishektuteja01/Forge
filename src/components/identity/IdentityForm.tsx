@@ -103,12 +103,12 @@ export function IdentityForm({
   }[mode];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Statement input */}
       {showStatement && (
         <Input
           label="Identity statement"
-          placeholder='e.g., "I am someone who reads daily"'
+          placeholder='e.g., "I am someone who never misses a workout"'
           value={statement}
           onChange={(e) => setStatement(e.target.value)}
           error={error && !statement.trim() ? error : undefined}
@@ -118,85 +118,93 @@ export function IdentityForm({
 
       {/* Routine multi-select */}
       {showRoutines && (
-        <div className="space-y-3">
-          <div>
-            <label className="text-sm font-semibold text-gray-900">
+        <div className="space-y-4">
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-black uppercase tracking-widest text-slate-900">
               Link habits to this identity
             </label>
-            <p className="mt-0.5 text-xs text-gray-500">
+            <p className="text-xs font-medium text-slate-400">
               Each time you complete a linked habit, it counts as a vote.
             </p>
           </div>
 
-          <div className="max-h-52 space-y-2 overflow-y-auto">
+          <div className="max-h-64 space-y-3 overflow-y-auto pr-2">
             {routines.length > 0 ? (
               routines.map((routine) => {
                 const isSelected = selectedRoutineIds.has(routine.id);
+                const tagColors: Record<Tag, string> = {
+                  positive: "text-emerald-500",
+                  negative: "text-rose-500",
+                  neutral: "text-slate-400",
+                };
 
                 return (
                   <button
                     key={routine.id}
                     type="button"
                     onClick={() => toggleRoutine(routine.id)}
-                    className={`flex w-full items-center gap-3 rounded-xl border-2 px-4 py-3 text-left transition-all ${
+                    className={`flex w-full items-center gap-4 rounded-2xl border-2 px-5 py-4 text-left transition-all duration-300 ${
                       isSelected
-                        ? "border-primary bg-indigo-50"
-                        : "border-gray-200 hover:border-gray-300"
+                        ? "border-primary bg-primary/5 shadow-premium ring-1 ring-primary/20 scale-[1.02]"
+                        : "border-slate-100 bg-white hover:border-slate-200 hover:bg-slate-50"
                     }`}
                   >
                     {/* Checkbox indicator */}
                     <div
-                      className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 text-xs transition-all ${
+                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border-2 transition-all duration-300 ${
                         isSelected
-                          ? "border-primary bg-primary text-white"
-                          : "border-gray-300 bg-white"
+                          ? "border-primary bg-primary text-white shadow-lg shadow-primary/20 scale-110"
+                          : "border-slate-200 bg-white"
                       }`}
                     >
-                      {isSelected && "✓"}
+                      {isSelected && <span className="text-xs font-black">✓</span>}
                     </div>
 
-                    {/* Tag indicator */}
-                    <span
-                      className={`text-sm font-bold ${TAG_COLORS[routine.tag]}`}
-                    >
-                      {TAG_LABELS[routine.tag]}
-                    </span>
-
-                    {/* Routine name */}
-                    <span
-                      className={`flex-1 text-sm font-medium ${
-                        isSelected ? "text-primary" : "text-gray-900"
-                      }`}
-                    >
-                      {routine.name}
-                    </span>
+                    <div className="flex flex-1 items-center gap-3">
+                      <span
+                        className={`font-display text-lg font-black ${tagColors[routine.tag]}`}
+                      >
+                        {TAG_LABELS[routine.tag]}
+                      </span>
+                      <span
+                        className={`font-display text-lg font-bold tracking-tight ${
+                          isSelected ? "text-slate-900" : "text-slate-600"
+                        }`}
+                      >
+                        {routine.name}
+                      </span>
+                    </div>
                   </button>
                 );
               })
             ) : (
-              <p className="rounded-xl border border-dashed border-gray-200 px-4 py-6 text-center text-sm text-gray-400">
-                No routines yet. Add some on the Scorecard first.
+              <p className="rounded-[2rem] border-2 border-dashed border-slate-100 bg-slate-50/50 px-8 py-10 text-center text-sm font-bold text-slate-400">
+                No routines yet. Add some routines on the Scorecard first.
               </p>
             )}
           </div>
 
           {routines.length > 0 && (
-            <p className="text-xs text-gray-400">
-              {selectedRoutineIds.size} habit
-              {selectedRoutineIds.size !== 1 ? "s" : ""} selected
-            </p>
+            <div className="flex justify-end">
+              <p className="rounded-full bg-slate-100 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                {selectedRoutineIds.size} habit
+                {selectedRoutineIds.size !== 1 ? "s" : ""} selected
+              </p>
+            </div>
           )}
         </div>
       )}
 
       {/* Error */}
       {error && statement.trim() && (
-        <p className="text-sm font-medium text-negative">{error}</p>
+        <p className="rounded-xl bg-negative/10 px-4 py-3 text-center text-sm font-bold text-negative">
+          {error}
+        </p>
       )}
 
       {/* Actions */}
-      <div className="flex gap-3 pt-2">
-        <Button variant="secondary" onClick={onClose} fullWidth>
+      <div className="flex gap-4 pt-4">
+        <Button variant="ghost" onClick={onClose} fullWidth>
           Cancel
         </Button>
         <Button onClick={handleSubmit} loading={loading} fullWidth>

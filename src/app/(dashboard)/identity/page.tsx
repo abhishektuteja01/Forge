@@ -112,9 +112,9 @@ export default function IdentityPage() {
   if (loading && identities.length === 0) {
     return (
       <div className="flex flex-1 items-center justify-center p-6">
-        <div className="flex flex-col items-center gap-3 text-gray-400">
+        <div className="flex flex-col items-center gap-3 text-slate-400">
           <Loader2 className="h-8 w-8 animate-spin" />
-          <span className="text-sm font-medium">Loading identities...</span>
+          <span className="text-sm font-black uppercase tracking-widest">Loading identities...</span>
         </div>
       </div>
     );
@@ -124,9 +124,9 @@ export default function IdentityPage() {
   if (error && identities.length === 0) {
     return (
       <div className="flex flex-1 items-center justify-center p-6">
-        <div className="flex max-w-sm flex-col items-center gap-3 text-center">
-          <p className="text-sm font-medium text-negative">{error}</p>
-          <p className="text-sm text-gray-500">
+        <div className="flex max-w-sm flex-col items-center gap-4 text-center">
+          <p className="rounded-xl bg-negative/10 px-4 py-2 text-sm font-bold text-negative">{error}</p>
+          <p className="text-sm font-medium text-slate-500">
             Check your connection and try refreshing.
           </p>
         </div>
@@ -136,19 +136,20 @@ export default function IdentityPage() {
 
   // --------------- Render ---------------
   return (
-    <div className="mx-auto w-full max-w-lg px-4 py-6">
+    <div className="flex flex-col gap-10">
       {/* Page heading */}
-      <h1 className="mb-2 font-display text-2xl font-bold tracking-tight text-gray-900">
-        Identity
-      </h1>
-      <p className="mb-8 text-sm text-gray-500">
-        Every action is a vote for the person you want to become. Define who
-        that is, link your habits, and watch the votes add up.
-      </p>
+      <div className="space-y-4">
+        <h1 className="font-display text-5xl font-black tracking-tight text-slate-900 sm:text-6xl">
+          Your <span className="text-primary italic">Identity</span>
+        </h1>
+        <p className="text-lg leading-relaxed text-slate-500 max-w-xl">
+          Every action is a vote for the person you want to become. <span className="font-bold text-slate-900 underline decoration-primary/30">Define</span> who that is, one habit at a time.
+        </p>
+      </div>
 
       {/* Identity cards */}
       {identities.length > 0 ? (
-        <div className="space-y-4">
+        <div className="space-y-8">
           {identities.map((identity) => (
             <IdentityCard
               key={identity.id}
@@ -160,26 +161,36 @@ export default function IdentityPage() {
           ))}
         </div>
       ) : (
-        /* Empty state */
-        <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 px-6 py-16 text-center">
-          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50">
-            <Fingerprint className="h-7 w-7 text-primary" />
+        /* Empty state - Unique personality for identity */
+        <div className="relative overflow-hidden rounded-[2.5rem] border border-black/[0.03] bg-white p-12 text-center shadow-premium">
+          {/* Subtle background decorative element */}
+          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
+          <div className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-indigo-50 blur-3xl" />
+
+          <div className="relative z-10 flex flex-col items-center">
+            <div className="mb-8 flex h-24 w-24 items-center justify-center rounded-[2rem] bg-slate-50 shadow-inner ring-1 ring-black/[0.03]">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary shadow-lg shadow-primary/20">
+                <Fingerprint className="h-8 w-8 text-white" />
+              </div>
+            </div>
+            
+            <h3 className="mb-4 font-display text-3xl font-black tracking-tight text-slate-900">
+              Who do you want to become?
+            </h3>
+            <p className="mx-auto mb-10 max-w-sm text-lg font-medium leading-relaxed text-slate-500">
+              Define a statement of who you are. Link habits that prove it.
+              <span className="mt-2 block italic text-slate-400">&ldquo;I am someone who never misses a workout.&rdquo;</span>
+            </p>
+            
+            <button
+              type="button"
+              onClick={handleCreate}
+              className="group relative inline-flex items-center gap-3 overflow-hidden rounded-2xl bg-slate-900 px-10 py-5 text-lg font-bold text-white shadow-xl transition-all hover:scale-105 hover:bg-slate-800 active:scale-95"
+            >
+              <Plus className="h-5 w-5" strokeWidth={3} />
+              Define First Identity
+            </button>
           </div>
-          <h3 className="mb-2 font-display text-lg font-bold text-gray-900">
-            Who do you want to become?
-          </h3>
-          <p className="mb-6 max-w-xs text-sm text-gray-500">
-            Define an identity statement and link habits to it. Every completed
-            habit is a vote — and the votes never reset.
-          </p>
-          <button
-            type="button"
-            onClick={handleCreate}
-            className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-600"
-          >
-            <Plus className="h-4 w-4" />
-            Define your first identity
-          </button>
         </div>
       )}
 
@@ -189,9 +200,9 @@ export default function IdentityPage() {
           type="button"
           onClick={handleCreate}
           aria-label="Create identity"
-          className="fixed bottom-24 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-all hover:bg-indigo-600 hover:shadow-xl active:scale-95 md:bottom-8 md:right-8"
+          className="fixed bottom-24 right-5 z-40 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-white shadow-2xl shadow-primary/40 transition-all hover:scale-110 hover:bg-indigo-700 active:scale-90 md:bottom-10 md:right-10"
         >
-          <Plus className="h-6 w-6" strokeWidth={2.5} />
+          <Plus className="h-8 w-8" strokeWidth={3} />
         </button>
       )}
 
