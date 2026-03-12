@@ -53,8 +53,6 @@ export function computeStreaks(
     if (ci.completed) completedDates.add(ci.date);
   });
 
-  const sortedDates = Array.from(completedDates).sort().reverse();
-
   // Current streak: count consecutive days backwards from today
   let currentStreak = 0;
   const cursor = new Date();

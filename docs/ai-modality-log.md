@@ -62,6 +62,18 @@ The rules file had a measurable impact on code generation quality. Without it, t
 
 With the rules file, generated code aligned with the data model, folder structure, and architectural patterns on the first attempt in most cases.
 
+## Modality 3: Creative Modality (Image Generation)
+
+### App Branding and Assets
+
+Used Antigravity's `generate_image` tool to create high-quality branding assets for Forge. Instead of using generic placeholder icons, we generated custom logo concepts that align with the "Forge" identity—focusing on themes of strength, craftsmanship, and habit building.
+
+- **Logo Concept**: Generated a premium, minimalist logo featuring a stylized anvil and hammer striking a spark, using a sophisticated indigo and gold palette. This was used to define the visual brand and UI inspiration.
+
+![Forge Logo Concept](assets/logo.png)
+
+- **Visual Theme**: The generated assets influenced the choice of "premium, warm, and confident" design language used across the dashboard screens.
+
 ## How the Modalities Complement Each Other
 
 The workflow was: Claude Web creates the plan (what to build, in what order, with what interfaces), then the code is generated following that plan with the AGENTS.md rules enforcing project conventions.
