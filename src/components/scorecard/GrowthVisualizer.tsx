@@ -115,7 +115,7 @@ export const GrowthVisualizer: React.FC<GrowthVisualizerProps> = ({
                   fill: "#9ca3af",
                 }}
               />
-            <YAxis
+              <YAxis
                 unit=""
                 tick={{ fontSize: 12, fill: "#9ca3af" }}
                 axisLine={{ stroke: "#e5e7eb" }}
@@ -196,9 +196,10 @@ export const GrowthVisualizer: React.FC<GrowthVisualizerProps> = ({
       {/* Summary Callout */}
       <div className="border-primary border-l-4 bg-gray-50 p-6">
         <p className="text-lg leading-relaxed font-medium text-gray-900">
-          At 1% better each day, your <span className="text-primary font-bold">Impact Score</span> reaches{" "}
-          <span className="text-positive font-bold">{summary.better}</span>{" "}
-          by day {horizon}. At 1% worse, you&apos;d be at{" "}
+          At 1% better each day, your{" "}
+          <span className="text-primary font-bold">Impact Score</span> reaches{" "}
+          <span className="text-positive font-bold">{summary.better}</span> by
+          day {horizon}. At 1% worse, you&apos;d be at{" "}
           <span className="text-negative font-bold">{summary.worse}</span>.
         </p>
       </div>
