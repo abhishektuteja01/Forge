@@ -94,7 +94,7 @@ export function StackCard({ chain, onDelete }: StackCardProps) {
 
         {menuOpen && (
           <div className="absolute right-0 top-full z-20 mt-1 w-40 overflow-hidden rounded-xl border border-border bg-white shadow-lg">
-            {chain.steps.map((step, index) => (
+            {chain.steps.map((step) => (
               <button
                 key={step.stack.id}
                 type="button"
