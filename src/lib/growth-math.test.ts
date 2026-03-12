@@ -22,15 +22,13 @@ describe("computeGrowthSeries", () => {
     expect(result[1].worse).toBeLessThan(result[1].current);
   });
 
-  it("should enforce the 100% cap", () => {
+  it("should allow values beyond 100%", () => {
     const baseline = 100;
-    const horizon = 90;
+    const horizon = 30;
     const result = computeGrowthSeries(baseline, horizon);
 
-    result.forEach((dp) => {
-      expect(dp.better).toBeLessThanOrEqual(100);
-      expect(dp.better).toBe(100);
-    });
+    expect(result[30].better).toBeGreaterThan(100);
+    expect(result[30].better).toBeCloseTo(100 * Math.pow(1.01, 30), 2);
   });
 
   it("should enforce the 0% floor", () => {

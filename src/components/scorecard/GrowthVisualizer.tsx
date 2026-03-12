@@ -54,7 +54,7 @@ export const GrowthVisualizer: React.FC<GrowthVisualizerProps> = ({
             htmlFor="baseline"
             className="text-xs font-bold tracking-widest text-gray-400 uppercase"
           >
-            Current consistency (%)
+            Baseline consistency (%)
           </label>
           <input
             id="baseline"
@@ -115,12 +115,18 @@ export const GrowthVisualizer: React.FC<GrowthVisualizerProps> = ({
                   fill: "#9ca3af",
                 }}
               />
-              <YAxis
-                domain={[0, 100]}
-                unit="%"
+            <YAxis
+                unit=""
                 tick={{ fontSize: 12, fill: "#9ca3af" }}
                 axisLine={{ stroke: "#e5e7eb" }}
                 tickLine={false}
+                label={{
+                  value: "Impact Score",
+                  angle: -90,
+                  position: "insideLeft",
+                  fontSize: 12,
+                  fill: "#9ca3af",
+                }}
               />
               <Tooltip
                 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -139,7 +145,7 @@ export const GrowthVisualizer: React.FC<GrowthVisualizerProps> = ({
                             style={{ color: entry.color }}
                           >
                             <span>{entry.name}:</span>
-                            <span>{Number(entry.value).toFixed(1)}%</span>
+                            <span>{Number(entry.value).toFixed(1)}</span>
                           </div>
                         ))}
                       </div>
@@ -190,10 +196,10 @@ export const GrowthVisualizer: React.FC<GrowthVisualizerProps> = ({
       {/* Summary Callout */}
       <div className="border-primary border-l-4 bg-gray-50 p-6">
         <p className="text-lg leading-relaxed font-medium text-gray-900">
-          At 1% better each day, you&apos;d reach{" "}
-          <span className="text-positive font-bold">{summary.better}%</span>{" "}
-          consistency by day {horizon}. At 1% worse, you&apos;d be at{" "}
-          <span className="text-negative font-bold">{summary.worse}%</span>.
+          At 1% better each day, your <span className="text-primary font-bold">Impact Score</span> reaches{" "}
+          <span className="text-positive font-bold">{summary.better}</span>{" "}
+          by day {horizon}. At 1% worse, you&apos;d be at{" "}
+          <span className="text-negative font-bold">{summary.worse}</span>.
         </p>
       </div>
     </div>

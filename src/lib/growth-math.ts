@@ -18,9 +18,9 @@ export function computeGrowthSeries(
 
     series.push({
       day,
-      current: Math.min(100, Math.max(0, current)),
-      better: Math.min(100, Math.max(0, better)),
-      worse: Math.min(100, Math.max(0, worse)),
+      current: Math.max(0, current),
+      better: Math.max(0, better),
+      worse: Math.max(0, worse),
     });
   }
 
