@@ -1,4 +1,5 @@
 import { Tag, TimeOfDay } from "./common";
+import type { PartnershipStatus } from "./partners";
 
 export interface Database {
   public: {
@@ -162,6 +163,67 @@ export interface Database {
           user_id?: string;
         };
       };
+      partnerships: {
+        Row: {
+          id: string; // uuid
+          requester_id: string; // uuid
+          partner_id: string | null; // uuid, null while pending
+          invite_token: string;
+          invite_email: string | null;
+          status: PartnershipStatus;
+          created_at: string; // timestamptz
+          updated_at: string; // timestamptz
+        };
+        Insert: {
+          id?: string;
+          requester_id: string;
+          partner_id?: string | null;
+          invite_token: string;
+          invite_email?: string | null;
+          status?: PartnershipStatus;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          requester_id?: string;
+          partner_id?: string | null;
+          invite_token?: string;
+          invite_email?: string | null;
+          status?: PartnershipStatus;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      nudges: {
+        Row: {
+          id: string; // uuid
+          partnership_id: string; // uuid
+          sender_id: string; // uuid
+          receiver_id: string; // uuid
+          message: string;
+          read: boolean;
+          created_at: string; // timestamptz
+        };
+        Insert: {
+          id?: string;
+          partnership_id: string;
+          sender_id: string;
+          receiver_id: string;
+          message?: string;
+          read?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          partnership_id?: string;
+          sender_id?: string;
+          receiver_id?: string;
+          message?: string;
+          read?: boolean;
+          created_at?: string;
+        };
+      };
     };
   };
 }
@@ -174,3 +236,6 @@ export type HabitStack = Database["public"]["Tables"]["habit_stacks"]["Row"];
 export type Identity = Database["public"]["Tables"]["identities"]["Row"];
 export type IdentityHabit =
   Database["public"]["Tables"]["identity_habits"]["Row"];
+export type PartnershipRow =
+  Database["public"]["Tables"]["partnerships"]["Row"];
+export type NudgeRow = Database["public"]["Tables"]["nudges"]["Row"];
