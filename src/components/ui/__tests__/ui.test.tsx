@@ -39,7 +39,7 @@ describe("Button", () => {
   it("applies primary variant styles by default", () => {
     render(<Button>Primary</Button>);
     const btn = screen.getByRole("button");
-    expect(btn.className).toContain("bg-indigo-500");
+    expect(btn.className).toContain("bg-gray-900");
   });
 
   it("applies danger variant styles", () => {
@@ -103,7 +103,7 @@ describe("Card", () => {
 
   it("has base card styles", () => {
     const { container } = render(<Card>Content</Card>);
-    expect(container.firstChild).toHaveClass("rounded-2xl");
+    expect(container.firstChild).toHaveClass("border-2");
     expect(container.firstChild).toHaveClass("bg-white");
   });
 });

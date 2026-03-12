@@ -13,6 +13,7 @@ export type LoginData = z.infer<typeof loginSchema>;
 
 export const signupSchema = z
   .object({
+    display_name: z.string().trim().min(1, "Name is required"),
     email: z
       .string()
       .trim()

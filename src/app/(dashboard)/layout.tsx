@@ -37,7 +37,7 @@ export default function DashboardLayout({
       */}
       <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-border bg-white md:flex">
         <div className="p-6">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/scorecard" className="flex items-center gap-2">
             <Flame className="h-6 w-6 text-primary" />
             <span className="font-display text-2xl font-bold tracking-tight text-gray-900">
               Forge
