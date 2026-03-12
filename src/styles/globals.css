@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #111827;
+    /* text-gray-900 */
+    --surface: #f9fafb;
+    /* bg-gray-50 */
+    --border: #e5e7eb;
+    /* border-gray-200 */
+    --primary: #6366f1;
+    /* text-indigo-500 */
+    --primary-foreground: #ffffff;
+    --positive: #22c55e;
+    /* text-green-500 */
+    --negative: #ef4444;
+    /* text-red-500 */
+    --neutral: #9ca3af;
+    /* text-gray-400 */
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900 antialiased font-sans;
+  }
+}
+
+/* Custom Utilities for Micro-interactions */
+@layer utilities {
+  .animate-vote {
+    @apply transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg;
+  }
+}

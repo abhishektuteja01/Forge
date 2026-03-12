@@ -1,0 +1,3 @@
+-- Seed Data for Development
+-- Insert test users via Supabase Studio or CLI first to populate auth.users
+-- This file is intentionally left blank for now as requested.
