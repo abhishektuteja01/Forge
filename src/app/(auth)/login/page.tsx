@@ -9,6 +9,10 @@ import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 
+// Prevent Next.js from attempting to statically prerender this page
+// since it requires Supabase environment variables at runtime.
+export const dynamic = "force-dynamic";
+
 export default function LoginPage() {
   const router = useRouter();
   const supabase = createClient();
