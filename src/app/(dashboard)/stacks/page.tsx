@@ -117,7 +117,7 @@ export default function StacksPage() {
     return (
       <div className="flex flex-1 items-center justify-center p-6">
         <div className="flex max-w-sm flex-col items-center gap-3 text-center">
-          <p className="text-sm font-medium text-negative">{error}</p>
+          <p className="text-negative text-sm font-medium">{error}</p>
           <p className="text-sm text-gray-500">
             Check your connection and try refreshing.
           </p>
@@ -128,9 +128,9 @@ export default function StacksPage() {
 
   // --------------- Render ---------------
   return (
-    <div className="mx-auto w-full max-w-lg px-4 py-6 duration-500 animate-in fade-in slide-in-from-bottom-4">
+    <div className="animate-in fade-in slide-in-from-bottom-4 mx-auto w-full max-w-lg px-4 py-6 duration-500">
       {/* Page heading */}
-      <h1 className="mb-2 font-display text-2xl font-bold tracking-tight text-gray-900">
+      <h1 className="font-display mb-2 text-2xl font-bold tracking-tight text-gray-900">
         Habit Stacks
       </h1>
       <p className="mb-8 text-sm text-gray-500">
@@ -152,10 +152,10 @@ export default function StacksPage() {
       ) : (
         /* Empty state */
         <div className="flex flex-col items-center justify-center border-2 border-gray-900 bg-white px-6 py-16 text-center">
-          <div className="mb-6 flex h-14 w-14 items-center justify-center border-2 border-primary bg-white">
-            <Layers className="h-7 w-7 text-primary" />
+          <div className="border-primary mb-6 flex h-14 w-14 items-center justify-center border-2 bg-white">
+            <Layers className="text-primary h-7 w-7" />
           </div>
-          <h3 className="mb-2 font-display text-lg font-bold text-gray-900">
+          <h3 className="font-display mb-2 text-lg font-bold text-gray-900">
             Build your first stack
           </h3>
           <p className="mb-6 max-w-xs text-sm text-gray-500">
@@ -166,13 +166,13 @@ export default function StacksPage() {
             <button
               type="button"
               onClick={handleOpenBuilder}
-              className="inline-flex items-center gap-2 border-2 border-gray-900 bg-gray-900 px-6 py-3 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-black"
+              className="inline-flex items-center gap-2 border-2 border-gray-900 bg-gray-900 px-6 py-3 text-sm font-bold tracking-widest text-white uppercase transition-colors hover:bg-black"
             >
               <Plus className="h-4 w-4" />
               Create your first stack
             </button>
           ) : (
-            <p className="text-sm italic text-gray-400">
+            <p className="text-sm text-gray-400 italic">
               Add some routines on the Scorecard first, then come back here.
             </p>
           )}
@@ -185,7 +185,7 @@ export default function StacksPage() {
           type="button"
           onClick={handleOpenBuilder}
           aria-label="Create stack"
-          className="fixed bottom-24 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-none border-2 border-gray-900 bg-primary text-white transition-all hover:bg-indigo-600 active:scale-95 md:bottom-8 md:right-8"
+          className="bg-primary fixed right-5 bottom-24 z-40 flex h-14 w-14 items-center justify-center rounded-none border-2 border-gray-900 text-white transition-all hover:bg-indigo-600 active:scale-95 md:right-8 md:bottom-8"
         >
           <Plus className="h-6 w-6" strokeWidth={2.5} />
         </button>

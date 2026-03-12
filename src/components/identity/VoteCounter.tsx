@@ -35,7 +35,7 @@ export function VoteCounter({
           </span>
         </div>
         {votesToday > 0 && (
-          <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-bold text-positive">
+          <span className="text-positive rounded-full bg-green-50 px-3 py-1 text-xs font-bold">
             +{votesToday} today
           </span>
         )}
@@ -43,7 +43,7 @@ export function VoteCounter({
 
       {/* Weekly mini bar chart */}
       <div>
-        <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+        <p className="mb-2 text-[10px] font-bold tracking-widest text-gray-400 uppercase">
           Last 7 days
         </p>
         <div className="flex items-end gap-1.5">
@@ -92,7 +92,7 @@ export function VoteCounter({
                 {/* Day label */}
                 <span
                   className={`text-[10px] font-medium ${
-                    isToday ? "font-bold text-primary" : "text-gray-400"
+                    isToday ? "text-primary font-bold" : "text-gray-400"
                   }`}
                 >
                   {getDayLabel(day.date)}

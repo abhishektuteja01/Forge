@@ -289,6 +289,7 @@ describe("loginSchema", () => {
 describe("signupSchema", () => {
   it("accepts valid signup data", () => {
     const result = signupSchema.safeParse({
+      display_name: "Test User",
       email: "test@example.com",
       password: "password123",
       confirmPassword: "password123",
@@ -298,6 +299,7 @@ describe("signupSchema", () => {
 
   it("rejects password under 6 characters", () => {
     const result = signupSchema.safeParse({
+      display_name: "Test User",
       email: "test@example.com",
       password: "12345",
       confirmPassword: "12345",
@@ -308,6 +310,7 @@ describe("signupSchema", () => {
   it("rejects password over 72 characters", () => {
     const long = "a".repeat(73);
     const result = signupSchema.safeParse({
+      display_name: "Test User",
       email: "test@example.com",
       password: long,
       confirmPassword: long,
@@ -317,6 +320,7 @@ describe("signupSchema", () => {
 
   it("rejects mismatched passwords", () => {
     const result = signupSchema.safeParse({
+      display_name: "Test User",
       email: "test@example.com",
       password: "password123",
       confirmPassword: "password456",
@@ -332,6 +336,7 @@ describe("signupSchema", () => {
 
   it("accepts password at exactly 6 characters", () => {
     const result = signupSchema.safeParse({
+      display_name: "Test User",
       email: "test@example.com",
       password: "123456",
       confirmPassword: "123456",

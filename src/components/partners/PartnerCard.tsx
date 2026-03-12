@@ -59,7 +59,7 @@ export function PartnerCard({
       {/* Header: avatar + name + remove */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-50 text-lg font-bold text-primary">
+          <div className="text-primary flex h-10 w-10 items-center justify-center rounded-full bg-indigo-50 text-lg font-bold">
             {displayName.charAt(0).toUpperCase()}
           </div>
           <div>
@@ -80,7 +80,7 @@ export function PartnerCard({
           type="button"
           onClick={() => onRemove(partnership.id)}
           aria-label="Remove partner"
-          className="flex h-8 w-8 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-red-50 hover:text-negative"
+          className="hover:text-negative flex h-8 w-8 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-red-50"
         >
           <X className="h-4 w-4" />
         </button>
@@ -91,7 +91,7 @@ export function PartnerCard({
         <button
           type="button"
           onClick={() => onViewProgress(partnerUserId)}
-          className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-border bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50"
+          className="border-border inline-flex flex-1 items-center justify-center gap-2 rounded-xl border bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50"
         >
           <Eye className="h-4 w-4" />
           View Progress
@@ -106,8 +106,8 @@ export function PartnerCard({
           disabled={nudgeLoading}
           className={`inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors ${
             nudgeSent
-              ? "bg-green-50 text-positive"
-              : "bg-indigo-50 text-primary hover:bg-indigo-100"
+              ? "text-positive bg-green-50"
+              : "text-primary bg-indigo-50 hover:bg-indigo-100"
           }`}
         >
           {nudgeLoading ? (
@@ -125,8 +125,8 @@ export function PartnerCard({
 
       {/* Nudge message picker */}
       {showNudgePicker && (
-        <div className="space-y-1.5 rounded-xl border border-border bg-gray-50 p-3">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+        <div className="border-border space-y-1.5 rounded-xl border bg-gray-50 p-3">
+          <p className="text-[10px] font-bold tracking-widest text-gray-400 uppercase">
             Pick a message
           </p>
           {NUDGE_MESSAGES.map((msg) => (
@@ -135,7 +135,7 @@ export function PartnerCard({
               type="button"
               onClick={() => handleNudge(msg)}
               disabled={nudgeLoading}
-              className="flex w-full items-center rounded-lg px-3 py-2 text-left text-sm text-gray-700 transition-colors hover:bg-white hover:text-primary"
+              className="hover:text-primary flex w-full items-center rounded-lg px-3 py-2 text-left text-sm text-gray-700 transition-colors hover:bg-white"
             >
               {msg}
             </button>

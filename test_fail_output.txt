@@ -1,0 +1,185 @@
+
+> forge-app@0.1.0 test
+> vitest run
+
+
+[1m[46m RUN [49m[22m [36mv4.1.0 [39m[90m/Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge[39m
+
+[90mstderr[2m | src/hooks/__tests__/hooks.integration.test.ts[2m > [22m[2museRoutines[2m > [22m[2mstarts in loading state
+[22m[39mAn update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/hooks/__tests__/hooks.coverage.test.ts[2m > [22m[2mHooks Coverage (Edge Cases)[2m > [22m[2museRoutines coverage[2m > [22m[2mhandles connection error (Supabase not configured)
+[22m[39museRoutines: Supabase not configured, showing empty state
+
+[90mstderr[2m | src/hooks/__tests__/hooks.coverage.test.ts[2m > [22m[2mHooks Coverage (Edge Cases)[2m > [22m[2museRoutines coverage[2m > [22m[2mhandles non-connection error
+[22m[39museRoutines fetch error: Error: Table not found
+    at [90m/Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39msrc/hooks/__tests__/hooks.coverage.test.ts:80:34
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:296:11
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1258:26
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1681:20
+    at new Promise (<anonymous>)
+    at runWithCancel [90m(file:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1678:10[90m)[39m
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1660:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1627:10[90m)[39m
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:2309:64
+
+[90mstderr[2m | src/components/partners/__tests__/partners.test.tsx[2m > [22m[2mInvitePartner[2m > [22m[2mshows error on failure
+[22m[39mInvitePartner error: Error: Network error
+    at [90m/Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39msrc/components/partners/__tests__/partners.test.tsx:169:50
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:296:11
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1258:26
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1681:20
+    at new Promise (<anonymous>)
+    at runWithCancel [90m(file:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1678:10[90m)[39m
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1660:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1627:10[90m)[39m
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:2309:64
+
+ [32m✓[39m src/components/identity/__tests__/identity.test.tsx [2m([22m[2m24 tests[22m[2m)[22m[32m 100[2mms[22m[39m
+ [32m✓[39m src/components/partners/__tests__/partners.test.tsx [2m([22m[2m31 tests[22m[2m)[22m[32m 133[2mms[22m[39m
+ [32m✓[39m src/components/ui/__tests__/ui.test.tsx [2m([22m[2m22 tests[22m[2m)[22m[32m 157[2mms[22m[39m
+[90mstderr[2m | src/hooks/__tests__/hooks.coverage.test.ts[2m > [22m[2mHooks Coverage (Edge Cases)[2m > [22m[2museCheckIns coverage[2m > [22m[2mreverts optimistic update on failure (existing)
+[22m[39mtoggleCheckIn error: Error: Update failed
+    at [90m/Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39msrc/hooks/__tests__/hooks.coverage.test.ts:116:34
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1258:20
+
+[90mstderr[2m | src/hooks/__tests__/hooks.coverage.test.ts[2m > [22m[2mHooks Coverage (Edge Cases)[2m > [22m[2museCheckIns coverage[2m > [22m[2mhandles connection error during fetch
+[22m[39museCheckIns: Supabase not configured, showing empty state
+
+[90mstderr[2m | src/hooks/__tests__/hooks.coverage.test.ts[2m > [22m[2mHooks Coverage (Edge Cases)[2m > [22m[2museCheckIns coverage[2m > [22m[2mhandles non-connection error during fetch
+[22m[39museCheckIns fetch error: Error: Custom Error
+    at [90m/Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39msrc/hooks/__tests__/hooks.coverage.test.ts:141:34
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:296:11
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1258:26
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1681:20
+    at new Promise (<anonymous>)
+    at runWithCancel [90m(file:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1678:10[90m)[39m
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1660:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1627:10[90m)[39m
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:2309:64
+
+ [31m❯[39m src/components/onboarding/__tests__/onboarding.test.tsx [2m([22m[2m11 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 414[2mms[22m[39m
+     [32m✓[39m renders Step 1 initially[32m 16[2mms[22m[39m
+     [32m✓[39m advances to Step 2 when 'Start Scorecard' is clicked[32m 10[2mms[22m[39m
+     [32m✓[39m skips onboarding when 'Skip' is clicked on Step 1[32m 56[2mms[22m[39m
+     [32m✓[39m adds a new routine row in Step 2[32m 10[2mms[22m[39m
+     [32m✓[39m removes a routine row in Step 2[32m 102[2mms[22m[39m
+     [32m✓[39m disables remove button for the last row[32m 50[2mms[22m[39m
+     [32m✓[39m saves routines and completes onboarding when Step 2 is submitted[32m 62[2mms[22m[39m
+     [32m✓[39m shows error if no user is found on completion[32m 6[2mms[22m[39m
+     [32m✓[39m shows error if Supabase insert fails[32m 13[2mms[22m[39m
+[31m     [31m×[31m updates routine tag and time of day[39m[32m 29[2mms[22m[39m
+     [32m✓[39m filters out empty routines on submission[32m 59[2mms[22m[39m
+[90mstderr[2m | src/hooks/__tests__/hooks.coverage.test.ts[2m > [22m[2mHooks Coverage (Edge Cases)[2m > [22m[2museIdentities coverage[2m > [22m[2mhandles connection error
+[22m[39museIdentities: Supabase not configured, showing empty state
+
+[90mstderr[2m | src/hooks/__tests__/hooks.coverage.test.ts[2m > [22m[2mHooks Coverage (Edge Cases)[2m > [22m[2museIdentities coverage[2m > [22m[2mhandles non-connection error
+[22m[39museIdentities fetch error: Error: Identity Error
+    at [90m/Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39msrc/hooks/__tests__/hooks.coverage.test.ts:169:34
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:296:11
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1258:26
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1681:20
+    at new Promise (<anonymous>)
+    at runWithCancel [90m(file:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1678:10[90m)[39m
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1660:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1627:10[90m)[39m
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:2309:64
+
+[90mstderr[2m | src/hooks/__tests__/hooks.coverage.test.ts[2m > [22m[2mHooks Coverage (Edge Cases)[2m > [22m[2musePartners coverage[2m > [22m[2mhandles fetch connection error
+[22m[39musePartners: Supabase not configured, showing empty state
+
+ [32m✓[39m src/hooks/__tests__/hooks.integration.test.ts [2m([22m[2m13 tests[22m[2m)[22m[33m 659[2mms[22m[39m
+[90mstderr[2m | src/hooks/__tests__/hooks.coverage.test.ts[2m > [22m[2mHooks Coverage (Edge Cases)[2m > [22m[2musePartners coverage[2m > [22m[2mhandles fetch non-connection error
+[22m[39musePartners fetch error: Error: Partner Error
+    at [90m/Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39msrc/hooks/__tests__/hooks.coverage.test.ts:197:34
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:296:11
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1258:26
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1681:20
+    at new Promise (<anonymous>)
+    at runWithCancel [90m(file:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1678:10[90m)[39m
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1660:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1627:10[90m)[39m
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:2309:64
+
+ [32m✓[39m src/lib/validators/__tests__/validators.test.ts [2m([22m[2m47 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m src/components/scorecard/__tests__/scorecard.test.tsx [2m([22m[2m39 tests[22m[2m)[22m[32m 127[2mms[22m[39m
+ [32m✓[39m src/components/stacks/__tests__/stacks.test.tsx [2m([22m[2m17 tests[22m[2m)[22m[32m 102[2mms[22m[39m
+[90mstderr[2m | src/hooks/__tests__/hooks.coverage.test.ts[2m > [22m[2mHooks Coverage (Edge Cases)[2m > [22m[2museStacks coverage[2m > [22m[2mhandles connection error
+[22m[39museStacks: Supabase not configured, showing empty state
+
+(node:92294) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ [32m✓[39m src/hooks/__tests__/useIdentities.test.ts [2m([22m[2m15 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+[90mstderr[2m | src/hooks/__tests__/hooks.coverage.test.ts[2m > [22m[2mHooks Coverage (Edge Cases)[2m > [22m[2museStacks coverage[2m > [22m[2mhandles non-connection error
+[22m[39museStacks fetch error: Error: Stack Error
+    at [90m/Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39msrc/hooks/__tests__/hooks.coverage.test.ts:262:34
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:296:11
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1258:26
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1681:20
+    at new Promise (<anonymous>)
+    at runWithCancel [90m(file:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1678:10[90m)[39m
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1660:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:1627:10[90m)[39m
+    at [90mfile:///Users/abhishektuteja/Desktop/Courses/CS7180-SpTp-in-Artificial-Intelligence---Coursework/Forge/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:2309:64
+
+ [32m✓[39m src/hooks/__tests__/hooks.coverage.test.ts [2m([22m[2m19 tests[22m[2m)[22m[33m 1035[2mms[22m[39m
+(node:92295) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ [32m✓[39m src/hooks/__tests__/usePartners.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+(node:92297) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ [32m✓[39m src/hooks/__tests__/useStacks.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m src/hooks/__tests__/hooks.mutations.test.ts [2m([22m[2m21 tests[22m[2m)[22m[33m 1160[2mms[22m[39m
+(node:92298) Warning: `--localstorage-file` was provided without a valid path
+(Use `node --trace-warnings ...` to show where the warning was created)
+ [32m✓[39m src/hooks/__tests__/useStacks.logic.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 2[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/components/onboarding/__tests__/onboarding.test.tsx[2m > [22mOnboardingWizard[2m > [22mupdates routine tag and time of day
+[31m[1mError[22m: Unable to fire a "change" event - please provide a DOM element.[39m
+[90m [2m❯[22m createEvent node_modules/@testing-library/dom/dist/events.js:[2m27:11[22m[39m
+[90m [2m❯[22m createEvent.<computed> [as change] node_modules/@testing-library/dom/dist/events.js:[2m106:38[22m[39m
+[90m [2m❯[22m fireEvent.<computed> [as change] node_modules/@testing-library/dom/dist/events.js:[2m110:68[22m[39m
+[90m [2m❯[22m fireEvent.<computed> [as change] node_modules/@testing-library/react/dist/fire-event.js:[2m15:52[22m[39m
+[36m [2m❯[22m src/components/onboarding/__tests__/onboarding.test.tsx:[2m190:15[22m[39m
+    [90m188|[39m       [33m.[39m[34mgetAllByRole[39m([32m"combobox"[39m)
+    [90m189|[39m       .filter((s) => s.className.includes("text-xs font-bold uppercase…
+    [90m190|[39m     fireEvent[33m.[39m[34mchange[39m(tagSelects[[34m0[39m][33m,[39m { target[33m:[39m { value[33m:[39m [32m"positive"[39m } })[33m;[39m
+    [90m   |[39m               [31m^[39m
+    [90m191|[39m     [34mexpect[39m(tagSelects[[34m0[39m])[33m.[39m[34mtoHaveValue[39m([32m"positive"[39m)[33m;[39m
+    [90m192|[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m13 passed[39m[22m[90m (14)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m290 passed[39m[22m[90m (291)[39m
+[2m   Start at [22m 13:43:39
+[2m   Duration [22m 2.11s[2m (transform 707ms, setup 626ms, import 1.76s, tests 3.91s, environment 5.45s)[22m
+

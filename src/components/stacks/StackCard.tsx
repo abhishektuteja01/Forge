@@ -38,7 +38,7 @@ function RoutineNode({
         {icon.label}
       </div>
       <div>
-        <span className="block text-[10px] font-bold uppercase tracking-widest text-gray-400">
+        <span className="block text-[10px] font-bold tracking-widest text-gray-400 uppercase">
           {role}
         </span>
         <span className="block text-base font-bold text-gray-900">
@@ -53,10 +53,10 @@ function Connector() {
   return (
     <div className="flex items-center gap-2 py-1 pl-5">
       <div className="flex flex-col items-center">
-        <div className="h-4 w-0.5 bg-primary" />
-        <ArrowDown className="h-4 w-4 text-primary" />
+        <div className="bg-primary h-4 w-0.5" />
+        <ArrowDown className="text-primary h-4 w-4" />
       </div>
-      <span className="text-sm italic text-primary">then I will...</span>
+      <span className="text-primary text-sm italic">then I will...</span>
     </div>
   );
 }
@@ -82,7 +82,7 @@ export function StackCard({ chain, onDelete }: StackCardProps) {
   return (
     <Card className="relative space-y-1">
       {/* Menu button */}
-      <div className="absolute right-4 top-4" ref={menuRef}>
+      <div className="absolute top-4 right-4" ref={menuRef}>
         <button
           type="button"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -93,7 +93,7 @@ export function StackCard({ chain, onDelete }: StackCardProps) {
         </button>
 
         {menuOpen && (
-          <div className="absolute right-0 top-full z-20 mt-1 w-40 overflow-hidden rounded-xl border border-border bg-white shadow-lg">
+          <div className="border-border absolute top-full right-0 z-20 mt-1 w-40 overflow-hidden rounded-xl border bg-white shadow-lg">
             {chain.steps.map((step) => (
               <button
                 key={step.stack.id}
