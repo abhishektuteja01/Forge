@@ -8,33 +8,26 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ label, error, className = "", id, ...props }, ref) => {
     // Generate an ID if one isn't passed mapping label to HTML 'for'
-    const inputId = id || label.toLowerCase().replace(/\s+/g, '-');
+    const inputId = id || label.toLowerCase().replace(/\s+/g, "-");
 
     return (
-      <div className="w-full space-y-2 flex flex-col items-start">
+      <div className="flex w-full flex-col items-start space-y-2">
         <label
           htmlFor={inputId}
-          className="text-sm font-semibold text-gray-900 font-sans"
+          className="font-sans text-sm font-semibold text-gray-900"
         >
           {label}
         </label>
-        
+
         <input
           id={inputId}
           ref={ref}
-          className={`
-            w-full px-4 py-3 min-h-[44px] rounded-xl border bg-white text-gray-900 font-sans
-            transition-colors duration-200 outline-none
-            focus:ring-2 focus:ring-offset-1 focus:ring-primary focus:border-primary
-            placeholder:text-gray-400
-            ${error ? "border-negative focus:ring-negative focus:border-negative" : "border-border"}
-            ${className}
-          `}
+          className={`min-h-[44px] w-full rounded-xl border bg-white px-4 py-3 font-sans text-gray-900 outline-none transition-colors duration-200 placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary focus:ring-offset-1 ${error ? "border-negative focus:border-negative focus:ring-negative" : "border-border"} ${className} `}
           {...props}
         />
-        
+
         {error && (
-          <p className="text-sm text-negative font-medium" role="alert">
+          <p className="text-sm font-medium text-negative" role="alert">
             {error}
           </p>
         )}

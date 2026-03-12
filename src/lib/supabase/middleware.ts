@@ -35,7 +35,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const url = request.nextUrl.clone();
-  
+
   // Define public routes based on PRD requirements
   const isPublicRoute =
     url.pathname === "/" ||
@@ -51,7 +51,10 @@ export async function updateSession(request: NextRequest) {
   }
 
   // Optional: if a signed-in user hits /login or /signup, redirect them to dashboard
-  if (user && (url.pathname.startsWith("/login") || url.pathname.startsWith("/signup"))) {
+  if (
+    user &&
+    (url.pathname.startsWith("/login") || url.pathname.startsWith("/signup"))
+  ) {
     // Assuming /scorecard is the main authenticated entry layout. You'll likely adjust this
     // once we build the layout.
     url.pathname = "/scorecard";

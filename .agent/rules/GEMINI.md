@@ -4,20 +4,20 @@ trigger: always_on
 
 # AGENTS.md — Forge
 
-Forge is a mobile-first habit-building web app based on *Atomic Habits* by James Clear. Implements Habits Scorecard, Habit Stacking, Identity-Based Voting, and (Sprint 2) Four Laws Audit + Compound Growth Visualizer. All insights rule-based — no AI/ML. Full PRD: `Atomic_PRD.md`.
+Forge is a mobile-first habit-building web app based on _Atomic Habits_ by James Clear. Implements Habits Scorecard, Habit Stacking, Identity-Based Voting, and (Sprint 2) Four Laws Audit + Compound Growth Visualizer. All insights rule-based — no AI/ML. Full PRD: `Atomic_PRD.md`.
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 14 (App Router) |
-| UI | React 18, Tailwind CSS (mobile-first) |
-| Language | TypeScript (strict mode) |
-| Backend/DB | Supabase (PostgreSQL + Auth + Realtime) |
-| Auth | Supabase Auth (email/password + Google OAuth) |
-| Hosting | Vercel |
+| Layer      | Technology                                    |
+| ---------- | --------------------------------------------- |
+| Framework  | Next.js 14 (App Router)                       |
+| UI         | React 18, Tailwind CSS (mobile-first)         |
+| Language   | TypeScript (strict mode)                      |
+| Backend/DB | Supabase (PostgreSQL + Auth + Realtime)       |
+| Auth       | Supabase Auth (email/password + Google OAuth) |
+| Hosting    | Vercel                                        |
 
 **Approved deps only:** `next`, `react`, `react-dom`, `@supabase/supabase-js`, `@supabase/ssr`, `tailwindcss`, `postcss`, `autoprefixer`, `recharts` (Sprint 2), `lucide-react`, `zod`, `vitest`, `@testing-library/react`, `@playwright/test`, `eslint`, `eslint-config-next`, `prettier`, `prettier-plugin-tailwindcss`.
 
@@ -34,6 +34,7 @@ App Router with Server Components by default. Client Components (`"use client"`)
 **Validation:** Zod schemas in `lib/validators/` for all user input. Validate client + server side.
 
 **RLS pattern** (apply to every table with `user_id`):
+
 ```sql
 CREATE POLICY "Users access own data" ON table_name FOR ALL
   USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
@@ -193,6 +194,7 @@ Positive → `text-green-500` / `bg-green-500`. Negative → `text-red-500` / `b
 **Code Quality:** ESLint (`eslint-config-next`) + Prettier (`prettier-plugin-tailwindcss`). Run `npm run lint` and `npm run format:check` before every commit. No warnings or errors allowed in CI.
 
 **CI/CD (GitHub Actions):** Pipeline on every PR and `main` push:
+
 1. **Lint** — ESLint + Prettier check + TypeScript compile (`tsc --noEmit`)
 2. **Test** — Vitest (unit) + Playwright (E2E), coverage report uploaded
 3. **Build** — `next build` must pass with zero errors

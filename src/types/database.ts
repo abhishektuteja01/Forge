@@ -172,4 +172,5 @@ export type Routine = Database["public"]["Tables"]["routines"]["Row"];
 export type CheckIn = Database["public"]["Tables"]["check_ins"]["Row"];
 export type HabitStack = Database["public"]["Tables"]["habit_stacks"]["Row"];
 export type Identity = Database["public"]["Tables"]["identities"]["Row"];
-export type IdentityHabit = Database["public"]["Tables"]["identity_habits"]["Row"];
+export type IdentityHabit =
+  Database["public"]["Tables"]["identity_habits"]["Row"];
