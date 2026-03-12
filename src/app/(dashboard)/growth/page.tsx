@@ -2,6 +2,8 @@ import { createClient } from "@/lib/supabase/server";
 import { GrowthVisualizer } from "@/components/scorecard/GrowthVisualizer";
 import { TrendingUp } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export default async function GrowthPage() {
   let consistencyRate = 50.0;
 
