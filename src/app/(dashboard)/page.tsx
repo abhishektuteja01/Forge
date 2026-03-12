@@ -1,14 +1,8 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+// Middleware redirects all traffic before this page renders:
+// - Authenticated users → /scorecard
+// - Unauthenticated users → /login
+// This file exists only to satisfy Next.js build requirements for the (dashboard) route group.
 
 export default function DashboardHome() {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace("/scorecard");
-  }, [router]);
-
-  return null;
+  return <div />;
 }
