@@ -37,7 +37,7 @@ export default function LandingPage() {
               href="/login"
               className="hover:text-primary hover:decoration-primary inline-flex items-center justify-center px-12 py-6 text-lg font-bold text-gray-900 underline decoration-2 underline-offset-8 transition-colors"
             >
-              SIGN IN
+              RESUME FORGING
             </Link>
           </div>
         </div>
