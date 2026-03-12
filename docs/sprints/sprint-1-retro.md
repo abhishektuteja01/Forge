@@ -6,6 +6,7 @@
 ## What Got Done
 
 **Abhishek:**
+
 - Project scaffolding with Next.js 14, React 18, Tailwind CSS, Supabase
 - Full database migration: all 6 tables, RLS policies, triggers for auto profile creation and updated_at timestamps
 - Supabase client setup (browser, server, middleware)
@@ -20,6 +21,7 @@
 - Auth pages: in progress at sprint end, not merged yet
 
 **Derek:**
+
 - Scorecard screen: useRoutines hook (CRUD with soft delete), useCheckIns hook (toggle with optimistic UI), ScorecardSummary component (progress bar + tag breakdown), RoutineItem (checkbox + tag badge + menu), RoutineGroup (time of day sections), AddRoutineForm (name + tag picker + time picker), DateNavigator (timezone safe date switching), full page wiring
 - Stacks screen: useStacks hook (parallel fetch, chain grouping by anchor, auto position), StackCard component (anchor/connector/stacked visual matching mockup), StackBuilder (two step form with pick existing or create new, live preview), full page with new routine orchestration
 - Identity screen: useIdentities hook (four table parallel fetch, vote computation from check_ins joined with identity_habits, weekly history), VoteCounter (total + today badge + 7 day mini bar chart), IdentityCard (statement + weekly progress bar + vote counter + linked routine chips), IdentityForm (three modes: create/edit/links with multi select routine picker), full page with single modal three mode pattern

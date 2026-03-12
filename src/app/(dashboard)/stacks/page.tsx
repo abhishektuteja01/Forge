@@ -17,8 +17,15 @@ export default function StacksPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // --------------- Data ---------------
-  const { chains, routines, loading, error, addStack, deleteStack, refreshStacks } =
-    useStacks();
+  const {
+    chains,
+    routines,
+    loading,
+    error,
+    addStack,
+    deleteStack,
+    refreshStacks,
+  } = useStacks();
 
   // --------------- Handlers ---------------
   const handleOpenBuilder = useCallback(() => {

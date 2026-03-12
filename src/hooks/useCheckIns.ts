@@ -59,7 +59,9 @@ export function useCheckIns(date: string): UseCheckInsReturn {
         message.includes("fetch");
 
       if (isConnectionIssue) {
-        console.warn("useCheckIns: Supabase not configured, showing empty state");
+        console.warn(
+          "useCheckIns: Supabase not configured, showing empty state"
+        );
         setCheckIns(new Map());
       } else {
         setError(message);

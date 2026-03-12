@@ -72,7 +72,10 @@ export function IdentityForm({
           setError("Identity statement is required");
           return;
         }
-        await onSubmitCreate?.(statement.trim(), Array.from(selectedRoutineIds));
+        await onSubmitCreate?.(
+          statement.trim(),
+          Array.from(selectedRoutineIds)
+        );
       } else if (mode === "edit" && identity) {
         if (!statement.trim()) {
           setError("Identity statement is required");

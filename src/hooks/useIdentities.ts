@@ -2,7 +2,12 @@
 
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
-import type { Identity, IdentityHabit, Routine, CheckIn } from "@/types/database";
+import type {
+  Identity,
+  IdentityHabit,
+  Routine,
+  CheckIn,
+} from "@/types/database";
 import type { IdentityWithDetails, DailyVoteCount } from "@/types/identity";
 
 interface UseIdentitiesReturn {
@@ -13,10 +18,7 @@ interface UseIdentitiesReturn {
   addIdentity: (statement: string, routineIds: string[]) => Promise<void>;
   updateIdentity: (id: string, statement: string) => Promise<void>;
   deleteIdentity: (id: string) => Promise<void>;
-  updateLinks: (
-    identityId: string,
-    newRoutineIds: string[]
-  ) => Promise<void>;
+  updateLinks: (identityId: string, newRoutineIds: string[]) => Promise<void>;
   refreshIdentities: () => Promise<void>;
 }
 
@@ -168,10 +170,7 @@ export function useIdentities(): UseIdentitiesReturn {
             .eq("user_id", user.id)
             .is("archived_at", null)
             .order("created_at", { ascending: true }),
-          supabase
-            .from("identity_habits")
-            .select("*")
-            .eq("user_id", user.id),
+          supabase.from("identity_habits").select("*").eq("user_id", user.id),
           supabase
             .from("routines")
             .select("*")
