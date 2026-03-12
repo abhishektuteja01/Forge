@@ -1,8 +1,14 @@
-import { redirect } from "next/navigation";
+"use client";
 
-export const dynamic = "force-dynamic";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function DashboardHome() {
-  // PRD specifies the Scorecard is the primary view constraint for Day 1
-  redirect("/scorecard");
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace("/scorecard");
+  }, [router]);
+
+  return null;
 }
