@@ -46,10 +46,11 @@ export default function LoginPage() {
     setLoading(true);
 
     // Call Supabase Auth
-    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { data: authData, error: authError } =
+      await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
     if (authError) {
       setError(authError.message);
@@ -71,10 +72,15 @@ export default function LoginPage() {
       .single();
 
     if (profileError) {
-      console.warn("Could not fetch profile, falling back safely: ", profileError.message);
+      console.warn(
+        "Could not fetch profile, falling back safely: ",
+        profileError.message
+      );
     }
 
-    const targetRoute = profile?.onboarding_complete ? "/scorecard" : "/onboarding";
+    const targetRoute = profile?.onboarding_complete
+      ? "/scorecard"
+      : "/onboarding";
 
     // Success - redirect directly to correct destination mapping and hydrate SSR framework
     router.push(targetRoute);
