@@ -5,21 +5,26 @@ This document tracks how AI tools were used across the development of Forge, cov
 ## Modality 1: Claude Web (Planning, Architecture, Code Review)
 
 ### Project Planning and PRD
+
 Used Claude Web to develop the initial PRD including user personas, user stories with acceptance criteria, data model design, sprint planning, and the feature priority matrix. Claude helped structure the Mom Test interview simulations that validated our product assumptions before writing any code.
 
 ### Architecture Decisions
+
 Used Claude Web to evaluate architectural tradeoffs:
+
 - Server Components vs Client Components boundary decisions
 - Whether to use Supabase PostgREST joins vs JavaScript side joins for multi table queries (chose JS joins for reliability)
 - Vote computation strategy: storing votes vs computing from check_ins (chose computed for data integrity)
 - Soft delete pattern with archived_at vs hard delete for routines and identities
 
 ### Implementation Planning
+
 Before each screen was built, Claude Web was used to create a detailed implementation plan: exact files to create, component interfaces, prop types, data flow, and build order. This eliminated guesswork during the coding phase.
 
 Example: The Scorecard screen plan specified 8 files in exact build order (hooks first, components bottom up, page last) with the rationale for each decision. This pattern was reused for Stacks and Identity.
 
 ### Code Review and Bug Catching
+
 Claude Web caught a timezone bug where `toISOString()` was converting dates to UTC, causing the date navigator to show "Thu, Mar 12" instead of "Today" for a user in Pacific time at 7 PM. The fix was switching to local date math everywhere dates are formatted.
 
 Also identified that the Supabase anon key format was incorrect before it became a blocking issue (JWT format vs the short key that was initially shared).
@@ -27,7 +32,9 @@ Also identified that the Supabase anon key format was incorrect before it became
 ## Modality 2: Antigravity IDE (Code Generation, Scaffolding)
 
 ### Foundation Layer (Abhishek's work)
+
 Antigravity was used with the AGENTS.md rules file to generate:
+
 - Supabase client configurations (browser, server, middleware)
 - TypeScript type definitions matching the database schema exactly
 - Zod validation schemas
@@ -37,13 +44,17 @@ Antigravity was used with the AGENTS.md rules file to generate:
 - CI/CD pipeline configuration
 
 ### Feature Screens (Derek's work)
+
 Antigravity (with Claude Web providing the implementation plans) was used to generate:
+
 - All custom hooks (useRoutines, useCheckIns, useStacks, useIdentities) with Supabase queries, error handling, and optimistic UI updates
 - All feature components matching the mockup designs
 - Page files that wire hooks and components together with proper state management
 
 ### Impact of AGENTS.md Rules File
+
 The rules file had a measurable impact on code generation quality. Without it, the AI agent would make mistakes like:
+
 - Using wrong table names or column names that don't match the migration
 - Implementing custom API routes instead of using Supabase RLS directly
 - Using incorrect auth patterns (e.g., not calling getUser() before queries)

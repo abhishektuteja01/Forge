@@ -12,7 +12,10 @@ interface StackCardProps {
   onDelete: (stackId: string) => void;
 }
 
-const TAG_ICON_STYLES: Record<Tag, { bg: string; text: string; label: string }> = {
+const TAG_ICON_STYLES: Record<
+  Tag,
+  { bg: string; text: string; label: string }
+> = {
   positive: { bg: "bg-green-50", text: "text-positive", label: "+" },
   negative: { bg: "bg-red-50", text: "text-negative", label: "−" },
   neutral: { bg: "bg-gray-100", text: "text-neutral", label: "=" },

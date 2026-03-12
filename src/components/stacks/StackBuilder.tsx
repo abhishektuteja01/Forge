@@ -83,9 +83,7 @@ function RoutinePickerItem({
           : "border-gray-200 hover:border-gray-300"
       }`}
     >
-      <span
-        className={`text-sm font-bold ${tagColors[routine.tag]}`}
-      >
+      <span className={`text-sm font-bold ${tagColors[routine.tag]}`}>
         {tagLabels[routine.tag]}
       </span>
       <span
@@ -99,7 +97,11 @@ function RoutinePickerItem({
   );
 }
 
-export function StackBuilder({ routines, onSubmit, onClose }: StackBuilderProps) {
+export function StackBuilder({
+  routines,
+  onSubmit,
+  onClose,
+}: StackBuilderProps) {
   // Anchor selection
   const [anchorId, setAnchorId] = useState<string | null>(null);
 
@@ -139,7 +141,9 @@ export function StackBuilder({ routines, onSubmit, onClose }: StackBuilderProps)
   // Validation
   const canSubmit =
     anchorId !== null &&
-    (stackedMode === "existing" ? stackedId !== null : newName.trim().length > 0);
+    (stackedMode === "existing"
+      ? stackedId !== null
+      : newName.trim().length > 0);
 
   async function handleSubmit() {
     if (!anchorId) return;
@@ -320,13 +324,11 @@ export function StackBuilder({ routines, onSubmit, onClose }: StackBuilderProps)
           <div className="rounded-xl bg-indigo-50 px-4 py-3">
             <p className="text-sm font-medium text-primary">
               &ldquo;After I{" "}
-              <span className="font-bold">
-                {anchorRoutine?.name ?? "..."}
-              </span>
-              , I will{" "}
+              <span className="font-bold">{anchorRoutine?.name ?? "..."}</span>,
+              I will{" "}
               <span className="font-bold">
                 {stackedMode === "existing"
-                  ? stackedRoutine?.name ?? "..."
+                  ? (stackedRoutine?.name ?? "...")
                   : newName.trim() || "..."}
               </span>
               .&rdquo;

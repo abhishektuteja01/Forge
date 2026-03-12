@@ -31,7 +31,7 @@ export function RoutineGroup({
       </h3>
 
       {/* Routines card */}
-      <Card className="!p-0 divide-y divide-gray-100">
+      <Card className="divide-y divide-gray-100 !p-0">
         {routines.map((routine) => {
           const ci = checkIns.get(routine.id);
           const completed = ci?.completed ?? false;

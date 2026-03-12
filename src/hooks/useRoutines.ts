@@ -56,7 +56,9 @@ export function useRoutines(): UseRoutinesReturn {
         message.includes("fetch");
 
       if (isConnectionIssue) {
-        console.warn("useRoutines: Supabase not configured, showing empty state");
+        console.warn(
+          "useRoutines: Supabase not configured, showing empty state"
+        );
         setRoutines([]);
       } else {
         setError(message);
