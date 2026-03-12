@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CheckSquare, Layers, Flame, Users } from "lucide-react";
+import { CheckSquare, Layers, Flame, Users, TrendingUp } from "lucide-react";
 
 export default function DashboardLayout({
   children,
@@ -16,6 +16,7 @@ export default function DashboardLayout({
     { name: "Stacks", href: "/stacks", icon: Layers },
     { name: "Identity", href: "/identity", icon: Flame },
     { name: "Partners", href: "/partners", icon: Users },
+    { name: "Growth", href: "/growth", icon: TrendingUp },
   ];
 
   return (
