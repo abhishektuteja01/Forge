@@ -186,14 +186,18 @@ describe("OnboardingWizard", () => {
 
     // Every routine row has two selects (tag and time)
     const allSelects = screen.getAllByRole("combobox");
-    
+
     // Tag select should have 'positive' or 'neutral' or 'negative' values
-    const tagSelects = allSelects.filter(s => s.className.includes("uppercase"));
+    const tagSelects = allSelects.filter((s) =>
+      s.className.includes("uppercase")
+    );
     fireEvent.change(tagSelects[0], { target: { value: "positive" } });
     expect(tagSelects[0]).toHaveValue("positive");
 
     // Time select is the one with 'Any Time' option
-    const timeSelects = allSelects.filter(s => s.className.includes("bg-white"));
+    const timeSelects = allSelects.filter((s) =>
+      s.className.includes("bg-white")
+    );
     fireEvent.change(timeSelects[0], { target: { value: "morning" } });
     expect(timeSelects[0]).toHaveValue("morning");
   });

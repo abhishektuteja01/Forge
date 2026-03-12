@@ -26,7 +26,7 @@ export function RoutineGroup({
   return (
     <div className="space-y-2">
       {/* Section header */}
-      <h3 className="px-1 text-xs font-bold tracking-widest text-gray-400 uppercase">
+      <h3 className="px-1 text-xs font-bold uppercase tracking-widest text-gray-400">
         {label}
       </h3>
 

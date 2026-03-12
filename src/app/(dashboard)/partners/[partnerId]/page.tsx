@@ -104,7 +104,7 @@ export default function PartnerProgressPage() {
 
         <Card className="flex flex-col items-center py-12 text-center">
           <AlertCircle className="mb-3 h-8 w-8 text-gray-400" />
-          <p className="text-negative text-sm font-medium">
+          <p className="text-sm font-medium text-negative">
             {error ?? "Could not load partner data"}
           </p>
           <p className="mt-1 text-sm text-gray-500">
@@ -130,7 +130,7 @@ export default function PartnerProgressPage() {
 
       {/* Header */}
       <div className="mb-6 flex items-center gap-3">
-        <div className="text-primary flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 text-xl font-bold">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 text-xl font-bold text-primary">
           {displayName.charAt(0).toUpperCase()}
         </div>
         <div>
@@ -148,7 +148,7 @@ export default function PartnerProgressPage() {
       {partnership && (
         <div className="mt-6">
           <Card className="space-y-3">
-            <h2 className="text-sm font-bold tracking-widest text-gray-400 uppercase">
+            <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400">
               Send Encouragement
             </h2>
 
@@ -181,7 +181,7 @@ export default function PartnerProgressPage() {
                     type="button"
                     onClick={() => handleNudge(msg)}
                     disabled={nudgeLoading}
-                    className="border-border hover:border-primary hover:text-primary flex w-full items-center rounded-lg border px-4 py-3 text-left text-sm text-gray-700 transition-colors hover:bg-indigo-50"
+                    className="flex w-full items-center rounded-lg border border-border px-4 py-3 text-left text-sm text-gray-700 transition-colors hover:border-primary hover:bg-indigo-50 hover:text-primary"
                   >
                     {msg}
                   </button>

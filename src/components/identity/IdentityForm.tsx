@@ -191,7 +191,7 @@ export function IdentityForm({
 
       {/* Error */}
       {error && statement.trim() && (
-        <p className="text-negative text-sm font-medium">{error}</p>
+        <p className="text-sm font-medium text-negative">{error}</p>
       )}
 
       {/* Actions */}

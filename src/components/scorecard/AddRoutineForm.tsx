@@ -131,7 +131,7 @@ export function AddRoutineForm({
               onClick={() => setTimeOfDay(option.value)}
               className={`rounded-xl border-2 px-4 py-2.5 text-sm font-medium transition-all ${
                 timeOfDay === option.value
-                  ? "border-primary text-primary bg-indigo-50"
+                  ? "border-primary bg-indigo-50 text-primary"
                   : "border-gray-200 text-gray-500 hover:border-gray-300"
               }`}
             >
@@ -143,7 +143,7 @@ export function AddRoutineForm({
 
       {/* Error display */}
       {error && name.trim() && (
-        <p className="text-negative text-sm font-medium">{error}</p>
+        <p className="text-sm font-medium text-negative">{error}</p>
       )}
 
       {/* Action buttons */}

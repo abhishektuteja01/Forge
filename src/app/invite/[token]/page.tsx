@@ -177,10 +177,10 @@ export default function InviteAcceptPage() {
   const displayName = requesterName ?? "Someone";
 
   return (
-    <div className="bg-surface flex min-h-screen flex-col items-center justify-center px-4 py-12">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-surface px-4 py-12">
       {/* Logo */}
       <div className="mb-8 flex items-center gap-2">
-        <Flame className="text-primary h-6 w-6" />
+        <Flame className="h-6 w-6 text-primary" />
         <span className="font-display text-2xl font-bold tracking-tight text-gray-900">
           Forge
         </span>
@@ -199,7 +199,7 @@ export default function InviteAcceptPage() {
         {state === "ready" && (
           <Card className="space-y-6 text-center">
             <div className="flex flex-col items-center">
-              <div className="text-primary mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-50 text-2xl font-bold">
+              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-50 text-2xl font-bold text-primary">
                 {displayName.charAt(0).toUpperCase()}
               </div>
               <h1 className="font-display text-xl font-bold text-gray-900">
@@ -240,7 +240,7 @@ export default function InviteAcceptPage() {
         {/* Accepting */}
         {state === "accepting" && (
           <Card className="flex flex-col items-center py-12 text-center">
-            <Loader2 className="text-primary mb-3 h-8 w-8 animate-spin" />
+            <Loader2 className="mb-3 h-8 w-8 animate-spin text-primary" />
             <p className="text-sm text-gray-500">Setting up partnership...</p>
           </Card>
         )}
@@ -250,7 +250,7 @@ export default function InviteAcceptPage() {
           <Card className="space-y-6 text-center">
             <div className="flex flex-col items-center">
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-50">
-                <UserCheck className="text-positive h-8 w-8" />
+                <UserCheck className="h-8 w-8 text-positive" />
               </div>
               <h1 className="font-display text-xl font-bold text-gray-900">
                 You&apos;re partners!
@@ -324,7 +324,7 @@ export default function InviteAcceptPage() {
           <Card className="space-y-6 text-center">
             <div className="flex flex-col items-center">
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-50">
-                <UserCheck className="text-primary h-8 w-8" />
+                <UserCheck className="h-8 w-8 text-primary" />
               </div>
               <h1 className="font-display text-lg font-bold text-gray-900">
                 Already partners
@@ -349,7 +349,7 @@ export default function InviteAcceptPage() {
           <Card className="space-y-6 text-center">
             <div className="flex flex-col items-center">
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-50">
-                <XCircle className="text-negative h-8 w-8" />
+                <XCircle className="h-8 w-8 text-negative" />
               </div>
               <h1 className="font-display text-lg font-bold text-gray-900">
                 Invite already used
@@ -374,7 +374,7 @@ export default function InviteAcceptPage() {
           <Card className="space-y-6 text-center">
             <div className="flex flex-col items-center">
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-50">
-                <XCircle className="text-negative h-8 w-8" />
+                <XCircle className="h-8 w-8 text-negative" />
               </div>
               <h1 className="font-display text-lg font-bold text-gray-900">
                 Invite not found
@@ -399,7 +399,7 @@ export default function InviteAcceptPage() {
           <Card className="space-y-6 text-center">
             <div className="flex flex-col items-center">
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-50">
-                <XCircle className="text-negative h-8 w-8" />
+                <XCircle className="h-8 w-8 text-negative" />
               </div>
               <h1 className="font-display text-lg font-bold text-gray-900">
                 Something went wrong

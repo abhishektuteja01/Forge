@@ -58,7 +58,7 @@ export function RoutineItem({
         className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border-2 transition-all duration-200 ${
           completed
             ? "border-primary bg-primary text-white"
-            : "hover:border-primary border-gray-300 bg-white"
+            : "border-gray-300 bg-white hover:border-primary"
         }`}
       >
         {completed && <Check className="h-4 w-4" strokeWidth={3} />}
@@ -94,7 +94,7 @@ export function RoutineItem({
         </button>
 
         {menuOpen && (
-          <div className="border-border absolute top-full right-0 z-20 mt-1 w-36 overflow-hidden rounded-xl border bg-white shadow-lg">
+          <div className="absolute right-0 top-full z-20 mt-1 w-36 overflow-hidden rounded-xl border border-border bg-white shadow-lg">
             <button
               type="button"
               onClick={() => {

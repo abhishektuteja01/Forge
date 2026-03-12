@@ -45,7 +45,7 @@ export function NudgeBadge({
       >
         <Bell className="h-5 w-5" />
         {unreadCount > 0 && (
-          <span className="bg-negative absolute -top-0.5 -right-0.5 flex h-5 min-w-[20px] items-center justify-center rounded-full px-1 text-[10px] font-bold text-white">
+          <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-negative px-1 text-[10px] font-bold text-white">
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
@@ -60,8 +60,8 @@ export function NudgeBadge({
             onClick={() => setIsOpen(false)}
           />
 
-          <div className="border-border absolute top-full right-0 z-50 mt-2 w-72 overflow-hidden rounded-2xl border bg-white shadow-lg">
-            <div className="border-border border-b px-4 py-3">
+          <div className="absolute right-0 top-full z-50 mt-2 w-72 overflow-hidden rounded-2xl border border-border bg-white shadow-lg">
+            <div className="border-b border-border px-4 py-3">
               <h3 className="text-sm font-bold text-gray-900">Nudges</h3>
             </div>
 
@@ -70,7 +70,7 @@ export function NudgeBadge({
                 {recentNudges.map((nudge) => (
                   <div
                     key={nudge.id}
-                    className={`border-border border-b px-4 py-3 last:border-b-0 ${
+                    className={`border-b border-border px-4 py-3 last:border-b-0 ${
                       !nudge.read ? "bg-indigo-50/50" : ""
                     }`}
                   >

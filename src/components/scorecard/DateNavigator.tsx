@@ -71,7 +71,7 @@ export function DateNavigator({
           <button
             type="button"
             onClick={() => onDateChange(today)}
-            className="text-primary rounded-lg bg-indigo-50 px-2.5 py-1 text-xs font-bold transition-colors hover:bg-indigo-100"
+            className="rounded-lg bg-indigo-50 px-2.5 py-1 text-xs font-bold text-primary transition-colors hover:bg-indigo-100"
           >
             Today
           </button>

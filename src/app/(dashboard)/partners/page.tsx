@@ -118,7 +118,7 @@ export default function PartnersPage() {
     return (
       <div className="flex flex-1 items-center justify-center p-6">
         <div className="flex max-w-sm flex-col items-center gap-3 text-center">
-          <p className="text-negative text-sm font-medium">{error}</p>
+          <p className="text-sm font-medium text-negative">{error}</p>
           <p className="text-sm text-gray-500">
             Check your connection and try refreshing.
           </p>
@@ -135,7 +135,7 @@ export default function PartnersPage() {
 
   // --------------- Render ---------------
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 mx-auto w-full max-w-lg px-4 py-6 duration-500">
+    <div className="mx-auto w-full max-w-lg px-4 py-6 duration-500 animate-in fade-in slide-in-from-bottom-4">
       {/* Page heading + nudge bell */}
       <div className="mb-2 flex items-start justify-between">
         <div>
@@ -163,7 +163,7 @@ export default function PartnersPage() {
         {/* ─── Pending Invites (sent to you) ──────── */}
         {pendingInvites.length > 0 && (
           <div className="space-y-3">
-            <h2 className="text-sm font-bold tracking-widest text-gray-400 uppercase">
+            <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400">
               Pending Invites
             </h2>
             {pendingInvites.map((invite) => (
@@ -172,7 +172,7 @@ export default function PartnersPage() {
                 className="flex items-center justify-between gap-4"
               >
                 <div className="flex items-center gap-3">
-                  <div className="text-primary flex h-10 w-10 items-center justify-center rounded-full bg-indigo-50 text-lg font-bold">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-50 text-lg font-bold text-primary">
                     {(invite.partner_profile.display_name ?? "?")
                       .charAt(0)
                       .toUpperCase()}
@@ -197,7 +197,7 @@ export default function PartnersPage() {
                     type="button"
                     onClick={() => handleAccept(invite.id)}
                     aria-label="Accept invite"
-                    className="text-positive flex h-10 w-10 items-center justify-center rounded-full bg-green-50 transition-colors hover:bg-green-100"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-positive transition-colors hover:bg-green-100"
                   >
                     <Check className="h-5 w-5" />
                   </button>
@@ -205,7 +205,7 @@ export default function PartnersPage() {
                     type="button"
                     onClick={() => handleDecline(invite.id)}
                     aria-label="Decline invite"
-                    className="text-negative flex h-10 w-10 items-center justify-center rounded-full bg-red-50 transition-colors hover:bg-red-100"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-red-50 text-negative transition-colors hover:bg-red-100"
                   >
                     <X className="h-5 w-5" />
                   </button>
@@ -218,7 +218,7 @@ export default function PartnersPage() {
         {/* ─── Active Partners ────────────────────── */}
         {partnerships.length > 0 && currentUserId && (
           <div className="space-y-3">
-            <h2 className="text-sm font-bold tracking-widest text-gray-400 uppercase">
+            <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400">
               Your Partners
             </h2>
             {partnerships.map((partnership) => (
@@ -237,7 +237,7 @@ export default function PartnersPage() {
         {/* ─── Sent Invites (waiting for acceptance) ─ */}
         {sentInvites.length > 0 && (
           <div className="space-y-3">
-            <h2 className="text-sm font-bold tracking-widest text-gray-400 uppercase">
+            <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400">
               Sent Invites
             </h2>
             {sentInvites.map((invite) => (
@@ -265,7 +265,7 @@ export default function PartnersPage() {
                 <button
                   type="button"
                   onClick={() => handleCancelSentInvite(invite.id)}
-                  className="hover:text-negative text-sm font-medium text-gray-400 transition-colors"
+                  className="text-sm font-medium text-gray-400 transition-colors hover:text-negative"
                 >
                   Cancel
                 </button>
@@ -277,10 +277,10 @@ export default function PartnersPage() {
         {/* ─── Empty State ───────────────────────── */}
         {!hasContent && (
           <div className="flex flex-col items-center justify-center border-2 border-gray-900 bg-white px-6 py-16 text-center">
-            <div className="border-primary mb-6 flex h-14 w-14 items-center justify-center border-2 bg-white">
-              <Users className="text-primary h-7 w-7" />
+            <div className="mb-6 flex h-14 w-14 items-center justify-center border-2 border-primary bg-white">
+              <Users className="h-7 w-7 text-primary" />
             </div>
-            <h3 className="font-display mb-2 text-lg font-bold text-gray-900">
+            <h3 className="mb-2 font-display text-lg font-bold text-gray-900">
               Better together
             </h3>
             <p className="mb-2 max-w-xs text-sm text-gray-500">

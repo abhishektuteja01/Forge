@@ -19,13 +19,13 @@ export default function DashboardLayout({
   ];
 
   return (
-    <div className="bg-surface flex min-h-screen flex-col md:flex-row">
+    <div className="flex min-h-screen flex-col bg-surface md:flex-row">
       {/* 
         Mobile Top Header (visible only on small screens)
       */}
-      <header className="border-border sticky top-0 z-10 flex h-14 shrink-0 items-center border-b bg-white px-4 md:hidden">
+      <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center border-b border-border bg-white px-4 md:hidden">
         <div className="flex items-center gap-2">
-          <Flame className="text-primary h-5 w-5" />
+          <Flame className="h-5 w-5 text-primary" />
           <span className="font-display text-lg font-bold tracking-tight text-gray-900">
             Forge
           </span>
@@ -35,10 +35,10 @@ export default function DashboardLayout({
       {/* 
         Desktop Sidebar Navigation (hidden on small screens)
       */}
-      <aside className="border-border sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r bg-white md:flex">
+      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-border bg-white md:flex">
         <div className="p-6">
           <Link href="/scorecard" className="flex items-center gap-2">
-            <Flame className="text-primary h-6 w-6" />
+            <Flame className="h-6 w-6 text-primary" />
             <span className="font-display text-2xl font-bold tracking-tight text-gray-900">
               Forge
             </span>
@@ -56,7 +56,7 @@ export default function DashboardLayout({
                 href={item.href}
                 className={`flex items-center gap-3 rounded-xl px-3 py-3 font-medium transition-colors ${
                   isActive
-                    ? "text-primary bg-indigo-50"
+                    ? "bg-indigo-50 text-primary"
                     : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                 }`}
               >
@@ -82,7 +82,7 @@ export default function DashboardLayout({
       {/* 
         Mobile Bottom Navigation (visible only on small screens)
       */}
-      <nav className="safe-area-bottom border-border fixed right-0 bottom-0 left-0 z-50 flex h-16 items-center justify-around overflow-y-hidden border-t bg-white px-2 md:hidden">
+      <nav className="safe-area-bottom fixed bottom-0 left-0 right-0 z-50 flex h-16 items-center justify-around overflow-y-hidden border-t border-border bg-white px-2 md:hidden">
         {navItems.map((item) => {
           const isActive = pathname.startsWith(item.href);
           const Icon = item.icon;
@@ -101,7 +101,7 @@ export default function DashboardLayout({
                 <Icon className="h-6 w-6" strokeWidth={isActive ? 2.5 : 2} />
               </div>
               <span
-                className={`text-[10px] leading-none font-medium ${isActive ? "text-primary font-semibold" : ""}`}
+                className={`text-[10px] font-medium leading-none ${isActive ? "font-semibold text-primary" : ""}`}
               >
                 {item.name}
               </span>

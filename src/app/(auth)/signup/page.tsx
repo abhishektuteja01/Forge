@@ -99,7 +99,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 w-full duration-500">
+    <div className="w-full duration-500 animate-in fade-in slide-in-from-bottom-4">
       <Card>
         <div className="mb-6 text-center">
           <h1 className="font-display text-2xl font-bold tracking-tight text-gray-900">
@@ -111,13 +111,13 @@ export default function SignupPage() {
         </div>
 
         {error && (
-          <div className="text-negative mb-6 flex items-center justify-center rounded-xl border border-red-100 bg-red-50 p-4 text-center text-sm font-medium">
+          <div className="mb-6 flex items-center justify-center rounded-xl border border-red-100 bg-red-50 p-4 text-center text-sm font-medium text-negative">
             {error}
           </div>
         )}
 
         {success ? (
-          <div className="animate-in fade-in mb-6 flex flex-col items-center justify-center space-y-2 rounded-xl border border-green-200 bg-green-50 p-4 text-center text-sm font-medium text-green-700 duration-300">
+          <div className="mb-6 flex flex-col items-center justify-center space-y-2 rounded-xl border border-green-200 bg-green-50 p-4 text-center text-sm font-medium text-green-700 duration-300 animate-in fade-in">
             <svg
               className="mb-2 h-8 w-8 text-green-500"
               fill="none"
@@ -137,7 +137,7 @@ export default function SignupPage() {
           <>
             <form
               onSubmit={handleSignup}
-              className="animate-in fade-in space-y-4 duration-300"
+              className="space-y-4 duration-300 animate-in fade-in"
             >
               <Input
                 label="Name"
@@ -196,13 +196,13 @@ export default function SignupPage() {
               </div>
             </form>
 
-            <div className="animate-in fade-in mt-6 flex items-center justify-between duration-300">
-              <div className="border-border flex-1 border-t"></div>
+            <div className="mt-6 flex items-center justify-between duration-300 animate-in fade-in">
+              <div className="flex-1 border-t border-border"></div>
               <span className="px-4 text-sm font-medium text-gray-400">or</span>
-              <div className="border-border flex-1 border-t"></div>
+              <div className="flex-1 border-t border-border"></div>
             </div>
 
-            <div className="animate-in fade-in mt-6 duration-300">
+            <div className="mt-6 duration-300 animate-in fade-in">
               <Button
                 type="button"
                 variant="secondary"
@@ -246,7 +246,7 @@ export default function SignupPage() {
           Already have an account?{" "}
           <Link
             href="/login"
-            className="text-primary font-semibold hover:underline"
+            className="font-semibold text-primary hover:underline"
           >
             Log in
           </Link>

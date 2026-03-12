@@ -44,10 +44,10 @@ export function ScorecardSummary({
     <Card className="space-y-4">
       {/* Header row */}
       <div className="flex items-center justify-between">
-        <span className="text-xs font-bold tracking-widest text-gray-500 uppercase">
+        <span className="text-xs font-bold uppercase tracking-widest text-gray-500">
           Today&apos;s Progress
         </span>
-        <span className="text-primary rounded-full bg-indigo-50 px-3 py-1 text-sm font-bold">
+        <span className="rounded-full bg-indigo-50 px-3 py-1 text-sm font-bold text-primary">
           {completedCount}/{total} done
         </span>
       </div>
@@ -55,7 +55,7 @@ export function ScorecardSummary({
       {/* Progress bar */}
       <div className="h-3 w-full overflow-hidden rounded-full bg-gray-100">
         <div
-          className="bg-primary h-full rounded-full transition-all duration-500 ease-out"
+          className="h-full rounded-full bg-primary transition-all duration-500 ease-out"
           style={{ width: `${percentage}%` }}
         />
       </div>

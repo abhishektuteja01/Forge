@@ -42,7 +42,7 @@ export const Modal: React.FC<ModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
       {/* Backdrop overlay */}
       <div
-        className="animate-in fade-in fixed inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity duration-200"
+        className="fixed inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity duration-200 animate-in fade-in"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -52,10 +52,10 @@ export const Modal: React.FC<ModalProps> = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? "modal-title" : undefined}
-        className="border-border animate-in slide-in-from-bottom-8 sm:slide-in-from-bottom-4 relative flex max-h-[90vh] w-full max-w-lg min-w-[320px] flex-col rounded-t-3xl border bg-white shadow-xl duration-300 sm:w-auto sm:rounded-2xl"
+        className="relative flex max-h-[90vh] w-full min-w-[320px] max-w-lg flex-col rounded-t-3xl border border-border bg-white shadow-xl duration-300 animate-in slide-in-from-bottom-8 sm:w-auto sm:rounded-2xl sm:slide-in-from-bottom-4"
       >
         {/* Header */}
-        <div className="border-border sticky top-0 z-10 flex items-center justify-between rounded-t-3xl border-b bg-white px-6 py-4 sm:rounded-t-2xl">
+        <div className="sticky top-0 z-10 flex items-center justify-between rounded-t-3xl border-b border-border bg-white px-6 py-4 sm:rounded-t-2xl">
           {title && (
             <h2
               id="modal-title"

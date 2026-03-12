@@ -126,7 +126,7 @@ export function SharedView({ snapshot }: SharedViewProps) {
     <div className="space-y-6">
       {/* ─── Streak Summary ─────────────────────── */}
       <Card className="space-y-4">
-        <h2 className="text-sm font-bold tracking-widest text-gray-400 uppercase">
+        <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400">
           Overview
         </h2>
 
@@ -139,7 +139,7 @@ export function SharedView({ snapshot }: SharedViewProps) {
                 {snapshot.currentStreak}
               </span>
             </div>
-            <p className="mt-1 text-[10px] font-medium tracking-widest text-gray-400 uppercase">
+            <p className="mt-1 text-[10px] font-medium uppercase tracking-widest text-gray-400">
               Day streak
             </p>
           </div>
@@ -147,12 +147,12 @@ export function SharedView({ snapshot }: SharedViewProps) {
           {/* Longest streak */}
           <div className="text-center">
             <div className="flex items-center justify-center gap-1">
-              <TrendingUp className="text-primary h-5 w-5" />
+              <TrendingUp className="h-5 w-5 text-primary" />
               <span className="font-display text-3xl font-bold text-gray-900">
                 {snapshot.longestStreak}
               </span>
             </div>
-            <p className="mt-1 text-[10px] font-medium tracking-widest text-gray-400 uppercase">
+            <p className="mt-1 text-[10px] font-medium uppercase tracking-widest text-gray-400">
               Best streak
             </p>
           </div>
@@ -162,7 +162,7 @@ export function SharedView({ snapshot }: SharedViewProps) {
             <span className="font-display text-3xl font-bold text-gray-900">
               {snapshot.completionRateThisWeek}%
             </span>
-            <p className="mt-1 text-[10px] font-medium tracking-widest text-gray-400 uppercase">
+            <p className="mt-1 text-[10px] font-medium uppercase tracking-widest text-gray-400">
               This week
             </p>
           </div>
@@ -172,10 +172,10 @@ export function SharedView({ snapshot }: SharedViewProps) {
       {/* ─── Today's Scorecard ──────────────────── */}
       <Card className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-sm font-bold tracking-widest text-gray-400 uppercase">
+          <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400">
             Today&apos;s Scorecard
           </h2>
-          <span className="text-primary rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold">
+          <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold text-primary">
             {todayDone}/{todayTotal} ({todayPercent}%)
           </span>
         </div>
@@ -183,7 +183,7 @@ export function SharedView({ snapshot }: SharedViewProps) {
         {/* Progress bar */}
         <div className="h-2 w-full overflow-hidden rounded-full bg-gray-100">
           <div
-            className="bg-primary h-full rounded-full transition-all duration-500 ease-out"
+            className="h-full rounded-full bg-primary transition-all duration-500 ease-out"
             style={{ width: `${todayPercent}%` }}
           />
         </div>
@@ -194,7 +194,7 @@ export function SharedView({ snapshot }: SharedViewProps) {
             <p className="mb-2 text-xs font-semibold text-gray-500">
               {group.label}
             </p>
-            <div className="border-border divide-y divide-gray-100 overflow-hidden rounded-xl border">
+            <div className="divide-y divide-gray-100 overflow-hidden rounded-xl border border-border">
               {group.routines.map((routine) => {
                 const isDone = completedToday.has(routine.id);
                 const tag = TAG_STYLES[routine.tag];
@@ -249,7 +249,7 @@ export function SharedView({ snapshot }: SharedViewProps) {
       {/* ─── Habit Stacks ───────────────────────── */}
       {chains.length > 0 && (
         <Card className="space-y-4">
-          <h2 className="text-sm font-bold tracking-widest text-gray-400 uppercase">
+          <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400">
             Habit Stacks
           </h2>
 
@@ -257,7 +257,7 @@ export function SharedView({ snapshot }: SharedViewProps) {
             {chains.map((chain) => (
               <div
                 key={chain.anchor.id}
-                className="border-border rounded-xl border p-4"
+                className="rounded-xl border border-border p-4"
               >
                 {/* Anchor */}
                 <ChainNode
@@ -271,10 +271,10 @@ export function SharedView({ snapshot }: SharedViewProps) {
                   <div key={routine.id}>
                     <div className="flex items-center gap-2 py-1 pl-5">
                       <div className="flex flex-col items-center">
-                        <div className="bg-primary h-3 w-0.5" />
-                        <ArrowDown className="text-primary h-3 w-3" />
+                        <div className="h-3 w-0.5 bg-primary" />
+                        <ArrowDown className="h-3 w-3 text-primary" />
                       </div>
-                      <span className="text-primary text-xs italic">
+                      <span className="text-xs italic text-primary">
                         then...
                       </span>
                     </div>
@@ -317,7 +317,7 @@ function ChainNode({
         {isDone ? <Check className="h-4 w-4" strokeWidth={3} /> : tag.label}
       </div>
       <div>
-        <span className="text-[9px] font-bold tracking-widest text-gray-400 uppercase">
+        <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400">
           {role}
         </span>
         <span
