@@ -2,14 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Users,
-  Loader2,
-  Check,
-  X,
-  Link2,
-  Clock,
-} from "lucide-react";
+import { Users, Loader2, Check, X, Link2, Clock } from "lucide-react";
 import { usePartners } from "@/hooks/usePartners";
 import { createClient } from "@/lib/supabase/client";
 import { InvitePartner } from "@/components/partners/InvitePartner";
@@ -122,11 +115,7 @@ export default function PartnersPage() {
   }
 
   // --------------- Error state ---------------
-  if (
-    error &&
-    partnerships.length === 0 &&
-    pendingInvites.length === 0
-  ) {
+  if (error && partnerships.length === 0 && pendingInvites.length === 0) {
     return (
       <div className="flex flex-1 items-center justify-center p-6">
         <div className="flex max-w-sm flex-col items-center gap-3 text-center">
@@ -179,12 +168,13 @@ export default function PartnersPage() {
               Pending Invites
             </h2>
             {pendingInvites.map((invite) => (
-              <Card key={invite.id} className="flex items-center justify-between gap-4">
+              <Card
+                key={invite.id}
+                className="flex items-center justify-between gap-4"
+              >
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-50 text-lg font-bold text-primary">
-                    {(
-                      invite.partner_profile.display_name ?? "?"
-                    )
+                    {(invite.partner_profile.display_name ?? "?")
                       .charAt(0)
                       .toUpperCase()}
                   </div>

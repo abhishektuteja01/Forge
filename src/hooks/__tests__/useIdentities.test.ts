@@ -40,7 +40,9 @@ function makeIdentity(overrides: Partial<Identity> = {}): Identity {
   };
 }
 
-function makeIdentityHabit(overrides: Partial<IdentityHabit> = {}): IdentityHabit {
+function makeIdentityHabit(
+  overrides: Partial<IdentityHabit> = {}
+): IdentityHabit {
   return {
     id: "ih1",
     identity_id: "i1",
@@ -130,7 +132,12 @@ describe("buildIdentitiesWithDetails", () => {
     const routines = [makeRoutine({ id: "r1", name: "Read" })];
     const checkIns: CheckIn[] = [];
 
-    const result = buildIdentitiesWithDetails(identities, links, routines, checkIns);
+    const result = buildIdentitiesWithDetails(
+      identities,
+      links,
+      routines,
+      checkIns
+    );
 
     expect(result).toHaveLength(1);
     expect(result[0].linked_routines).toHaveLength(1);
@@ -142,12 +149,32 @@ describe("buildIdentitiesWithDetails", () => {
     const links = [makeIdentityHabit({ identity_id: "i1", routine_id: "r1" })];
     const routines = [makeRoutine({ id: "r1" })];
     const checkIns = [
-      makeCheckIn({ id: "c1", routine_id: "r1", date: "2026-03-10", completed: true }),
-      makeCheckIn({ id: "c2", routine_id: "r1", date: "2026-03-11", completed: true }),
-      makeCheckIn({ id: "c3", routine_id: "r1", date: "2026-03-09", completed: true }),
+      makeCheckIn({
+        id: "c1",
+        routine_id: "r1",
+        date: "2026-03-10",
+        completed: true,
+      }),
+      makeCheckIn({
+        id: "c2",
+        routine_id: "r1",
+        date: "2026-03-11",
+        completed: true,
+      }),
+      makeCheckIn({
+        id: "c3",
+        routine_id: "r1",
+        date: "2026-03-09",
+        completed: true,
+      }),
     ];
 
-    const result = buildIdentitiesWithDetails(identities, links, routines, checkIns);
+    const result = buildIdentitiesWithDetails(
+      identities,
+      links,
+      routines,
+      checkIns
+    );
     expect(result[0].total_votes).toBe(3);
   });
 
@@ -156,11 +183,26 @@ describe("buildIdentitiesWithDetails", () => {
     const links = [makeIdentityHabit({ identity_id: "i1", routine_id: "r1" })];
     const routines = [makeRoutine({ id: "r1" })];
     const checkIns = [
-      makeCheckIn({ id: "c1", routine_id: "r1", date: "2026-03-11", completed: true }),
-      makeCheckIn({ id: "c2", routine_id: "r1", date: "2026-03-10", completed: false }),
+      makeCheckIn({
+        id: "c1",
+        routine_id: "r1",
+        date: "2026-03-11",
+        completed: true,
+      }),
+      makeCheckIn({
+        id: "c2",
+        routine_id: "r1",
+        date: "2026-03-10",
+        completed: false,
+      }),
     ];
 
-    const result = buildIdentitiesWithDetails(identities, links, routines, checkIns);
+    const result = buildIdentitiesWithDetails(
+      identities,
+      links,
+      routines,
+      checkIns
+    );
     expect(result[0].total_votes).toBe(1);
   });
 
@@ -169,11 +211,26 @@ describe("buildIdentitiesWithDetails", () => {
     const links = [makeIdentityHabit({ identity_id: "i1", routine_id: "r1" })];
     const routines = [makeRoutine({ id: "r1" })];
     const checkIns = [
-      makeCheckIn({ id: "c1", routine_id: "r1", date: "2026-03-11", completed: true }),
-      makeCheckIn({ id: "c2", routine_id: "r1", date: "2026-03-10", completed: true }),
+      makeCheckIn({
+        id: "c1",
+        routine_id: "r1",
+        date: "2026-03-11",
+        completed: true,
+      }),
+      makeCheckIn({
+        id: "c2",
+        routine_id: "r1",
+        date: "2026-03-10",
+        completed: true,
+      }),
     ];
 
-    const result = buildIdentitiesWithDetails(identities, links, routines, checkIns);
+    const result = buildIdentitiesWithDetails(
+      identities,
+      links,
+      routines,
+      checkIns
+    );
     expect(result[0].votes_today).toBe(1);
   });
 
@@ -183,13 +240,38 @@ describe("buildIdentitiesWithDetails", () => {
     const routines = [makeRoutine({ id: "r1" })];
     // March 11 2026 is a Wednesday. Week starts March 5 (Thursday in last7Days logic).
     const checkIns = [
-      makeCheckIn({ id: "c1", routine_id: "r1", date: "2026-03-11", completed: true }),
-      makeCheckIn({ id: "c2", routine_id: "r1", date: "2026-03-09", completed: true }),
-      makeCheckIn({ id: "c3", routine_id: "r1", date: "2026-03-05", completed: true }),
-      makeCheckIn({ id: "c4", routine_id: "r1", date: "2026-03-01", completed: true }), // outside week
+      makeCheckIn({
+        id: "c1",
+        routine_id: "r1",
+        date: "2026-03-11",
+        completed: true,
+      }),
+      makeCheckIn({
+        id: "c2",
+        routine_id: "r1",
+        date: "2026-03-09",
+        completed: true,
+      }),
+      makeCheckIn({
+        id: "c3",
+        routine_id: "r1",
+        date: "2026-03-05",
+        completed: true,
+      }),
+      makeCheckIn({
+        id: "c4",
+        routine_id: "r1",
+        date: "2026-03-01",
+        completed: true,
+      }), // outside week
     ];
 
-    const result = buildIdentitiesWithDetails(identities, links, routines, checkIns);
+    const result = buildIdentitiesWithDetails(
+      identities,
+      links,
+      routines,
+      checkIns
+    );
     // votes_this_week counts check-ins from the first of the last 7 days onward
     expect(result[0].votes_this_week).toBe(3);
   });
@@ -199,23 +281,44 @@ describe("buildIdentitiesWithDetails", () => {
     const links = [makeIdentityHabit({ identity_id: "i1", routine_id: "r1" })];
     const routines = [makeRoutine({ id: "r1" })];
     const checkIns = [
-      makeCheckIn({ id: "c1", routine_id: "r1", date: "2026-03-11", completed: true }),
-      makeCheckIn({ id: "c2", routine_id: "r1", date: "2026-03-09", completed: true }),
+      makeCheckIn({
+        id: "c1",
+        routine_id: "r1",
+        date: "2026-03-11",
+        completed: true,
+      }),
+      makeCheckIn({
+        id: "c2",
+        routine_id: "r1",
+        date: "2026-03-09",
+        completed: true,
+      }),
     ];
 
-    const result = buildIdentitiesWithDetails(identities, links, routines, checkIns);
+    const result = buildIdentitiesWithDetails(
+      identities,
+      links,
+      routines,
+      checkIns
+    );
     expect(result[0].vote_history).toHaveLength(7);
 
     // Today should have 1 vote
-    const todayEntry = result[0].vote_history.find((d) => d.date === "2026-03-11");
+    const todayEntry = result[0].vote_history.find(
+      (d) => d.date === "2026-03-11"
+    );
     expect(todayEntry?.count).toBe(1);
 
     // March 9 should have 1 vote
-    const mar9Entry = result[0].vote_history.find((d) => d.date === "2026-03-09");
+    const mar9Entry = result[0].vote_history.find(
+      (d) => d.date === "2026-03-09"
+    );
     expect(mar9Entry?.count).toBe(1);
 
     // Other days should be 0
-    const mar10Entry = result[0].vote_history.find((d) => d.date === "2026-03-10");
+    const mar10Entry = result[0].vote_history.find(
+      (d) => d.date === "2026-03-10"
+    );
     expect(mar10Entry?.count).toBe(0);
   });
 
@@ -224,10 +327,20 @@ describe("buildIdentitiesWithDetails", () => {
     const links: IdentityHabit[] = [];
     const routines = [makeRoutine({ id: "r1" })];
     const checkIns = [
-      makeCheckIn({ id: "c1", routine_id: "r1", date: "2026-03-11", completed: true }),
+      makeCheckIn({
+        id: "c1",
+        routine_id: "r1",
+        date: "2026-03-11",
+        completed: true,
+      }),
     ];
 
-    const result = buildIdentitiesWithDetails(identities, links, routines, checkIns);
+    const result = buildIdentitiesWithDetails(
+      identities,
+      links,
+      routines,
+      checkIns
+    );
     expect(result[0].linked_routines).toHaveLength(0);
     expect(result[0].total_votes).toBe(0);
     expect(result[0].votes_today).toBe(0);
@@ -247,10 +360,20 @@ describe("buildIdentitiesWithDetails", () => {
       makeRoutine({ id: "r2", name: "Exercise" }),
     ];
     const checkIns = [
-      makeCheckIn({ id: "c1", routine_id: "r1", date: "2026-03-11", completed: true }),
+      makeCheckIn({
+        id: "c1",
+        routine_id: "r1",
+        date: "2026-03-11",
+        completed: true,
+      }),
     ];
 
-    const result = buildIdentitiesWithDetails(identities, links, routines, checkIns);
+    const result = buildIdentitiesWithDetails(
+      identities,
+      links,
+      routines,
+      checkIns
+    );
     expect(result[0].total_votes).toBe(1); // reader has a vote
     expect(result[1].total_votes).toBe(0); // fit has no vote
   });
@@ -259,12 +382,21 @@ describe("buildIdentitiesWithDetails", () => {
     const identities = [makeIdentity({ id: "i1" })];
     const links = [
       makeIdentityHabit({ id: "ih1", identity_id: "i1", routine_id: "r1" }),
-      makeIdentityHabit({ id: "ih2", identity_id: "i1", routine_id: "r_missing" }),
+      makeIdentityHabit({
+        id: "ih2",
+        identity_id: "i1",
+        routine_id: "r_missing",
+      }),
     ];
     const routines = [makeRoutine({ id: "r1", name: "Read" })];
     const checkIns: CheckIn[] = [];
 
-    const result = buildIdentitiesWithDetails(identities, links, routines, checkIns);
+    const result = buildIdentitiesWithDetails(
+      identities,
+      links,
+      routines,
+      checkIns
+    );
     expect(result[0].linked_routines).toHaveLength(1);
     expect(result[0].linked_routines[0].name).toBe("Read");
   });

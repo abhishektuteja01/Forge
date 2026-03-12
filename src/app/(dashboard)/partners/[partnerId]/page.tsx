@@ -75,8 +75,7 @@ export default function PartnerProgressPage() {
   );
 
   // --------------- Display name ---------------
-  const displayName =
-    snapshot?.profile.display_name ?? "Partner";
+  const displayName = snapshot?.profile.display_name ?? "Partner";
 
   // --------------- Loading state ---------------
   if (loading) {
@@ -84,9 +83,7 @@ export default function PartnerProgressPage() {
       <div className="flex flex-1 items-center justify-center p-6">
         <div className="flex flex-col items-center gap-3 text-gray-400">
           <Loader2 className="h-8 w-8 animate-spin" />
-          <span className="text-sm font-medium">
-            Loading progress...
-          </span>
+          <span className="text-sm font-medium">Loading progress...</span>
         </div>
       </div>
     );

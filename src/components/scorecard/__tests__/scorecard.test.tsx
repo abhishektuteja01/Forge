@@ -77,10 +77,7 @@ describe("ScorecardSummary", () => {
   });
 
   it("counts only completed check-ins", () => {
-    const routines = [
-      makeRoutine({ id: "r1" }),
-      makeRoutine({ id: "r2" }),
-    ];
+    const routines = [makeRoutine({ id: "r1" }), makeRoutine({ id: "r2" })];
     const checkIns = new Map<string, CheckIn>();
     checkIns.set("r1", makeCheckIn({ routine_id: "r1", completed: true }));
     checkIns.set("r2", makeCheckIn({ routine_id: "r2", completed: false }));
@@ -284,25 +281,29 @@ describe("RoutineGroup", () => {
 
 describe("AddRoutineForm", () => {
   it("renders form fields", () => {
-    render(
-      <AddRoutineForm onSubmit={async () => {}} onClose={() => {}} />
-    );
+    render(<AddRoutineForm onSubmit={async () => {}} onClose={() => {}} />);
     expect(screen.getByText("Routine name")).toBeInTheDocument();
-    expect(screen.getByText("How does this habit affect you?")).toBeInTheDocument();
-    expect(screen.getByText("When do you usually do this?")).toBeInTheDocument();
+    expect(
+      screen.getByText("How does this habit affect you?")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("When do you usually do this?")
+    ).toBeInTheDocument();
   });
 
   it("shows Add Routine button in create mode", () => {
-    render(
-      <AddRoutineForm onSubmit={async () => {}} onClose={() => {}} />
-    );
+    render(<AddRoutineForm onSubmit={async () => {}} onClose={() => {}} />);
     expect(screen.getByText("Add Routine")).toBeInTheDocument();
   });
 
   it("shows Save Changes button in edit mode", () => {
     const routine = makeRoutine({ name: "Exercise" });
     render(
-      <AddRoutineForm routine={routine} onSubmit={async () => {}} onClose={() => {}} />
+      <AddRoutineForm
+        routine={routine}
+        onSubmit={async () => {}}
+        onClose={() => {}}
+      />
     );
     expect(screen.getByText("Save Changes")).toBeInTheDocument();
   });
@@ -310,24 +311,24 @@ describe("AddRoutineForm", () => {
   it("pre-fills name in edit mode", () => {
     const routine = makeRoutine({ name: "Exercise" });
     render(
-      <AddRoutineForm routine={routine} onSubmit={async () => {}} onClose={() => {}} />
+      <AddRoutineForm
+        routine={routine}
+        onSubmit={async () => {}}
+        onClose={() => {}}
+      />
     );
     expect(screen.getByDisplayValue("Exercise")).toBeInTheDocument();
   });
 
   it("renders all tag options", () => {
-    render(
-      <AddRoutineForm onSubmit={async () => {}} onClose={() => {}} />
-    );
+    render(<AddRoutineForm onSubmit={async () => {}} onClose={() => {}} />);
     expect(screen.getByText("Positive (+)")).toBeInTheDocument();
     expect(screen.getByText("Negative (−)")).toBeInTheDocument();
     expect(screen.getByText("Neutral (=)")).toBeInTheDocument();
   });
 
   it("renders all time of day options", () => {
-    render(
-      <AddRoutineForm onSubmit={async () => {}} onClose={() => {}} />
-    );
+    render(<AddRoutineForm onSubmit={async () => {}} onClose={() => {}} />);
     expect(screen.getByText("Morning")).toBeInTheDocument();
     expect(screen.getByText("Afternoon")).toBeInTheDocument();
     expect(screen.getByText("Evening")).toBeInTheDocument();
@@ -337,17 +338,13 @@ describe("AddRoutineForm", () => {
 
   it("calls onClose when Cancel is clicked", () => {
     const onClose = vi.fn();
-    render(
-      <AddRoutineForm onSubmit={async () => {}} onClose={onClose} />
-    );
+    render(<AddRoutineForm onSubmit={async () => {}} onClose={onClose} />);
     fireEvent.click(screen.getByText("Cancel"));
     expect(onClose).toHaveBeenCalledOnce();
   });
 
   it("allows selecting a tag", () => {
-    render(
-      <AddRoutineForm onSubmit={async () => {}} onClose={() => {}} />
-    );
+    render(<AddRoutineForm onSubmit={async () => {}} onClose={() => {}} />);
     const positiveBtn = screen.getByText("Positive (+)");
     fireEvent.click(positiveBtn);
     // After click, the button should have the active class
@@ -355,9 +352,7 @@ describe("AddRoutineForm", () => {
   });
 
   it("allows selecting a time of day", () => {
-    render(
-      <AddRoutineForm onSubmit={async () => {}} onClose={() => {}} />
-    );
+    render(<AddRoutineForm onSubmit={async () => {}} onClose={() => {}} />);
     const morningBtn = screen.getByText("Morning");
     fireEvent.click(morningBtn);
     expect(morningBtn.className).toContain("border-primary");

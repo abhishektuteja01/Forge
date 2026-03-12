@@ -5,7 +5,11 @@ import { InvitePartner } from "../InvitePartner";
 import { PartnerCard } from "../PartnerCard";
 import { NudgeBadge } from "../NudgeBadge";
 import { SharedView } from "../SharedView";
-import type { PartnershipWithProfile, Nudge, PartnerSnapshot } from "@/types/partners";
+import type {
+  PartnershipWithProfile,
+  Nudge,
+  PartnerSnapshot,
+} from "@/types/partners";
 import type { Routine } from "@/types/database";
 
 // ─── Factories ───────────────────────────────────────────
@@ -55,18 +59,45 @@ function makeRoutine(overrides: Partial<Routine> = {}): Routine {
   };
 }
 
-function makeSnapshot(overrides: Partial<PartnerSnapshot> = {}): PartnerSnapshot {
+function makeSnapshot(
+  overrides: Partial<PartnerSnapshot> = {}
+): PartnerSnapshot {
   return {
     profile: { id: "user-2", display_name: "Jordan" },
     routines: [
-      makeRoutine({ id: "r1", name: "Morning coffee", tag: "neutral", time_of_day: "morning" }),
-      makeRoutine({ id: "r2", name: "Read 10 pages", tag: "positive", time_of_day: "evening" }),
+      makeRoutine({
+        id: "r1",
+        name: "Morning coffee",
+        tag: "neutral",
+        time_of_day: "morning",
+      }),
+      makeRoutine({
+        id: "r2",
+        name: "Read 10 pages",
+        tag: "positive",
+        time_of_day: "evening",
+      }),
     ],
     checkIns: [
-      { id: "c1", user_id: "user-2", routine_id: "r1", date: new Date().toISOString().slice(0, 10), completed: true, created_at: "", updated_at: "" },
+      {
+        id: "c1",
+        user_id: "user-2",
+        routine_id: "r1",
+        date: new Date().toISOString().slice(0, 10),
+        completed: true,
+        created_at: "",
+        updated_at: "",
+      },
     ],
     stacks: [
-      { id: "s1", user_id: "user-2", anchor_routine_id: "r1", stacked_routine_id: "r2", position: 0, created_at: "" },
+      {
+        id: "s1",
+        user_id: "user-2",
+        anchor_routine_id: "r1",
+        stacked_routine_id: "r2",
+        position: 0,
+        created_at: "",
+      },
     ],
     currentStreak: 5,
     longestStreak: 12,
@@ -92,18 +123,24 @@ describe("InvitePartner", () => {
   });
 
   it("shows URL after generating", async () => {
-    const onGenerate = vi.fn().mockResolvedValue("https://forge.app/invite/abc-123");
+    const onGenerate = vi
+      .fn()
+      .mockResolvedValue("https://forge.app/invite/abc-123");
     render(<InvitePartner onGenerateLink={onGenerate} />);
 
     fireEvent.click(screen.getByText("Generate Invite Link"));
 
     await waitFor(() => {
-      expect(screen.getByText("https://forge.app/invite/abc-123")).toBeInTheDocument();
+      expect(
+        screen.getByText("https://forge.app/invite/abc-123")
+      ).toBeInTheDocument();
     });
   });
 
   it("copies to clipboard on generate", async () => {
-    const onGenerate = vi.fn().mockResolvedValue("https://forge.app/invite/abc-123");
+    const onGenerate = vi
+      .fn()
+      .mockResolvedValue("https://forge.app/invite/abc-123");
     render(<InvitePartner onGenerateLink={onGenerate} />);
 
     fireEvent.click(screen.getByText("Generate Invite Link"));
@@ -116,7 +153,9 @@ describe("InvitePartner", () => {
   });
 
   it("shows Copied! feedback after copy", async () => {
-    const onGenerate = vi.fn().mockResolvedValue("https://forge.app/invite/abc-123");
+    const onGenerate = vi
+      .fn()
+      .mockResolvedValue("https://forge.app/invite/abc-123");
     render(<InvitePartner onGenerateLink={onGenerate} />);
 
     fireEvent.click(screen.getByText("Generate Invite Link"));
@@ -219,13 +258,19 @@ describe("PartnerCard", () => {
 
 describe("NudgeBadge", () => {
   it("renders bell icon", () => {
-    render(<NudgeBadge nudges={[]} unreadCount={0} onMarkRead={async () => {}} />);
+    render(
+      <NudgeBadge nudges={[]} unreadCount={0} onMarkRead={async () => {}} />
+    );
     expect(screen.getByLabelText("Nudges")).toBeInTheDocument();
   });
 
   it("shows unread count badge", () => {
     render(
-      <NudgeBadge nudges={[makeNudge()]} unreadCount={3} onMarkRead={async () => {}} />
+      <NudgeBadge
+        nudges={[makeNudge()]}
+        unreadCount={3}
+        onMarkRead={async () => {}}
+      />
     );
     expect(screen.getByText("3")).toBeInTheDocument();
   });
@@ -238,13 +283,17 @@ describe("NudgeBadge", () => {
   });
 
   it("hides badge when unread is 0", () => {
-    render(<NudgeBadge nudges={[]} unreadCount={0} onMarkRead={async () => {}} />);
+    render(
+      <NudgeBadge nudges={[]} unreadCount={0} onMarkRead={async () => {}} />
+    );
     expect(screen.queryByText("0")).not.toBeInTheDocument();
   });
 
   it("opens dropdown on click", () => {
     const nudges = [makeNudge({ id: "n1", message: "Stay strong!" })];
-    render(<NudgeBadge nudges={nudges} unreadCount={1} onMarkRead={async () => {}} />);
+    render(
+      <NudgeBadge nudges={nudges} unreadCount={1} onMarkRead={async () => {}} />
+    );
 
     fireEvent.click(screen.getByLabelText(/Nudges/));
     expect(screen.getByText("Stay strong!")).toBeInTheDocument();
@@ -253,7 +302,9 @@ describe("NudgeBadge", () => {
   it("calls onMarkRead when opened with unread nudges", async () => {
     const onMarkRead = vi.fn().mockResolvedValue(undefined);
     const nudges = [makeNudge()];
-    render(<NudgeBadge nudges={nudges} unreadCount={1} onMarkRead={onMarkRead} />);
+    render(
+      <NudgeBadge nudges={nudges} unreadCount={1} onMarkRead={onMarkRead} />
+    );
 
     fireEvent.click(screen.getByLabelText(/Nudges/));
 
@@ -263,14 +314,18 @@ describe("NudgeBadge", () => {
   });
 
   it("shows empty state when no nudges", () => {
-    render(<NudgeBadge nudges={[]} unreadCount={0} onMarkRead={async () => {}} />);
+    render(
+      <NudgeBadge nudges={[]} unreadCount={0} onMarkRead={async () => {}} />
+    );
     fireEvent.click(screen.getByLabelText("Nudges"));
     expect(screen.getByText("No nudges yet")).toBeInTheDocument();
   });
 
   it("shows nudge timestamp", () => {
     const nudges = [makeNudge({ id: "n1", message: "Go!" })];
-    render(<NudgeBadge nudges={nudges} unreadCount={0} onMarkRead={async () => {}} />);
+    render(
+      <NudgeBadge nudges={nudges} unreadCount={0} onMarkRead={async () => {}} />
+    );
     fireEvent.click(screen.getByLabelText("Nudges"));
     // Should render the formatted date
     expect(screen.getByText("Go!")).toBeInTheDocument();
@@ -286,7 +341,10 @@ describe("SharedView", () => {
     expect(screen.getByText("12")).toBeInTheDocument(); // longest streak
     // React splits {number}% into separate text nodes, use a function matcher
     const weeklyEl = screen.getByText((_, el) => {
-      return el?.tagName === "SPAN" && !!el?.textContent?.replace(/\s/g, "").includes("68%");
+      return (
+        el?.tagName === "SPAN" &&
+        !!el?.textContent?.replace(/\s/g, "").includes("68%")
+      );
     });
     expect(weeklyEl).toBeInTheDocument();
   });
@@ -306,8 +364,12 @@ describe("SharedView", () => {
   it("renders routine names", () => {
     render(<SharedView snapshot={makeSnapshot()} />);
     // Routines appear in both scorecard and stacks sections
-    expect(screen.getAllByText("Morning coffee").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText("Read 10 pages").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("Morning coffee").length).toBeGreaterThanOrEqual(
+      1
+    );
+    expect(screen.getAllByText("Read 10 pages").length).toBeGreaterThanOrEqual(
+      1
+    );
   });
 
   it("renders completion fraction", () => {

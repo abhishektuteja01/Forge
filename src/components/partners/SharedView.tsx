@@ -40,7 +40,10 @@ function buildChainViews(
   const routineMap = new Map<string, Routine>();
   routines.forEach((r) => routineMap.set(r.id, r));
 
-  const chainMap = new Map<string, { anchor: Routine; steps: { routine: Routine; position: number }[] }>();
+  const chainMap = new Map<
+    string,
+    { anchor: Routine; steps: { routine: Routine; position: number }[] }
+  >();
 
   stacks.forEach((s) => {
     const anchor = routineMap.get(s.anchor_routine_id);
@@ -209,9 +212,7 @@ export function SharedView({ snapshot }: SharedViewProps) {
                           : "border-gray-200 bg-white"
                       }`}
                     >
-                      {isDone && (
-                        <Check className="h-4 w-4" strokeWidth={3} />
-                      )}
+                      {isDone && <Check className="h-4 w-4" strokeWidth={3} />}
                     </div>
 
                     {/* Name */}

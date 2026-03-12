@@ -59,9 +59,7 @@ export function InvitePartner({ onGenerateLink }: InvitePartnerProps) {
         </p>
       </div>
 
-      {error && (
-        <p className="text-sm font-medium text-negative">{error}</p>
-      )}
+      {error && <p className="text-sm font-medium text-negative">{error}</p>}
 
       {!inviteUrl ? (
         <Button

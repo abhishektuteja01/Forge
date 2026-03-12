@@ -52,10 +52,7 @@ export function createMockSupabase() {
   }
 
   /** Override the next mutation (insert/update/delete) result */
-  function setNextMutationResult(result: {
-    data?: unknown;
-    error?: unknown;
-  }) {
+  function setNextMutationResult(result: { data?: unknown; error?: unknown }) {
     nextMutationResult = {
       data: result.data ?? null,
       error: result.error ?? null,
@@ -128,30 +125,34 @@ export function createMockSupabase() {
     });
 
     // Make the builder itself thenable so `await supabase.from(...).select(...)` works
-    builder.then = vi.fn().mockImplementation(
-      (
-        resolve: (value: unknown) => void,
-        reject?: (reason: unknown) => void
-      ) => {
-        if (mutationType !== "select" && nextMutationResult) {
-          const result = nextMutationResult;
-          nextMutationResult = null;
-          return Promise.resolve(result).then(resolve, reject);
+    builder.then = vi
+      .fn()
+      .mockImplementation(
+        (
+          resolve: (value: unknown) => void,
+          reject?: (reason: unknown) => void
+        ) => {
+          if (mutationType !== "select" && nextMutationResult) {
+            const result = nextMutationResult;
+            nextMutationResult = null;
+            return Promise.resolve(result).then(resolve, reject);
+          }
+          const data = tableData.get(table) ?? [];
+          return Promise.resolve({
+            data: isSingle ? (data[0] ?? null) : data,
+            error: null,
+          }).then(resolve, reject);
         }
-        const data = tableData.get(table) ?? [];
-        return Promise.resolve({
-          data: isSingle ? (data[0] ?? null) : data,
-          error: null,
-        }).then(resolve, reject);
-      }
-    );
+      );
 
     return builder;
   }
 
   // The mock supabase client
   const mockSupabase = {
-    from: vi.fn().mockImplementation((table: string) => createQueryBuilder(table)),
+    from: vi
+      .fn()
+      .mockImplementation((table: string) => createQueryBuilder(table)),
     auth: {
       getUser: vi.fn().mockResolvedValue({
         data: { user: mockUser() },

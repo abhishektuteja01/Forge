@@ -26,10 +26,25 @@ function createChainableQuery(data: unknown = [], error: unknown = null) {
   const builder: Record<string, unknown> = {};
 
   const chainMethods = [
-    "select", "eq", "neq", "in", "is", "or", "not",
-    "order", "limit", "filter", "match",
-    "gt", "gte", "lt", "lte",
-    "insert", "update", "delete", "upsert",
+    "select",
+    "eq",
+    "neq",
+    "in",
+    "is",
+    "or",
+    "not",
+    "order",
+    "limit",
+    "filter",
+    "match",
+    "gt",
+    "gte",
+    "lt",
+    "lte",
+    "insert",
+    "update",
+    "delete",
+    "upsert",
   ];
 
   chainMethods.forEach((m) => {
@@ -38,8 +53,10 @@ function createChainableQuery(data: unknown = [], error: unknown = null) {
 
   builder.single = vi.fn().mockResolvedValue(resolved);
 
-  builder.then = (resolve: (v: unknown) => void, reject?: (r: unknown) => void) =>
-    Promise.resolve(resolved).then(resolve, reject);
+  builder.then = (
+    resolve: (v: unknown) => void,
+    reject?: (r: unknown) => void
+  ) => Promise.resolve(resolved).then(resolve, reject);
 
   return builder;
 }
@@ -81,7 +98,17 @@ beforeEach(() => {
 
 describe("useRoutines mutations", () => {
   const routines = [
-    { id: "r1", user_id: "user-1", name: "Coffee", tag: "neutral", time_of_day: "morning", sort_order: 0, archived_at: null, created_at: "2026-01-01", updated_at: "2026-01-01" },
+    {
+      id: "r1",
+      user_id: "user-1",
+      name: "Coffee",
+      tag: "neutral",
+      time_of_day: "morning",
+      sort_order: 0,
+      archived_at: null,
+      created_at: "2026-01-01",
+      updated_at: "2026-01-01",
+    },
   ];
 
   it("addRoutine calls insert and refreshes", async () => {
@@ -91,7 +118,11 @@ describe("useRoutines mutations", () => {
     await waitFor(() => expect(result.current.loading).toBe(false));
 
     await act(async () => {
-      await result.current.addRoutine({ name: "Journal", tag: "positive", time_of_day: "morning" });
+      await result.current.addRoutine({
+        name: "Journal",
+        tag: "positive",
+        time_of_day: "morning",
+      });
     });
 
     // from("routines").insert(...) should have been called
@@ -146,7 +177,15 @@ describe("useRoutines mutations", () => {
 
 describe("useCheckIns mutations", () => {
   const checkIns = [
-    { id: "c1", user_id: "user-1", routine_id: "r1", date: "2026-03-11", completed: false, created_at: "2026-03-11", updated_at: "2026-03-11" },
+    {
+      id: "c1",
+      user_id: "user-1",
+      routine_id: "r1",
+      date: "2026-03-11",
+      completed: false,
+      created_at: "2026-03-11",
+      updated_at: "2026-03-11",
+    },
   ];
 
   it("toggleCheckIn flips existing check-in to completed", async () => {
@@ -196,11 +235,38 @@ describe("useCheckIns mutations", () => {
 
 describe("useStacks mutations", () => {
   const routines = [
-    { id: "r1", user_id: "user-1", name: "Coffee", tag: "neutral", time_of_day: "morning", sort_order: 0, archived_at: null, created_at: "2026-01-01", updated_at: "2026-01-01" },
-    { id: "r2", user_id: "user-1", name: "Journal", tag: "positive", time_of_day: "morning", sort_order: 1, archived_at: null, created_at: "2026-01-01", updated_at: "2026-01-01" },
+    {
+      id: "r1",
+      user_id: "user-1",
+      name: "Coffee",
+      tag: "neutral",
+      time_of_day: "morning",
+      sort_order: 0,
+      archived_at: null,
+      created_at: "2026-01-01",
+      updated_at: "2026-01-01",
+    },
+    {
+      id: "r2",
+      user_id: "user-1",
+      name: "Journal",
+      tag: "positive",
+      time_of_day: "morning",
+      sort_order: 1,
+      archived_at: null,
+      created_at: "2026-01-01",
+      updated_at: "2026-01-01",
+    },
   ];
   const stacks = [
-    { id: "s1", user_id: "user-1", anchor_routine_id: "r1", stacked_routine_id: "r2", position: 0, created_at: "2026-01-01" },
+    {
+      id: "s1",
+      user_id: "user-1",
+      anchor_routine_id: "r1",
+      stacked_routine_id: "r2",
+      position: 0,
+      created_at: "2026-01-01",
+    },
   ];
 
   it("addStack calls insert and refreshes", async () => {
@@ -255,7 +321,14 @@ describe("useStacks mutations", () => {
 
 describe("useIdentities mutations", () => {
   const identities = [
-    { id: "i1", user_id: "user-1", statement: "I am a reader", archived_at: null, created_at: "2026-01-01", updated_at: "2026-01-01" },
+    {
+      id: "i1",
+      user_id: "user-1",
+      statement: "I am a reader",
+      archived_at: null,
+      created_at: "2026-01-01",
+      updated_at: "2026-01-01",
+    },
   ];
 
   it("addIdentity calls insert for identity and links", async () => {
@@ -263,7 +336,9 @@ describe("useIdentities mutations", () => {
     mockFrom.mockImplementation((table: string) => {
       if (table === "identities") {
         const builder = createChainableQuery(identities);
-        builder.single = vi.fn().mockResolvedValue({ data: { id: "i-new" }, error: null });
+        builder.single = vi
+          .fn()
+          .mockResolvedValue({ data: { id: "i-new" }, error: null });
         return builder;
       }
       return createChainableQuery([]);
@@ -365,10 +440,23 @@ describe("usePartners mutations", () => {
 
   it("acceptInvite updates partnership status", async () => {
     const partnerships = [
-      { id: "p1", requester_id: "user-2", partner_id: "user-1", invite_token: "tok", invite_email: null, status: "pending", created_at: "2026-03-01", updated_at: "2026-03-01" },
+      {
+        id: "p1",
+        requester_id: "user-2",
+        partner_id: "user-1",
+        invite_token: "tok",
+        invite_email: null,
+        status: "pending",
+        created_at: "2026-03-01",
+        updated_at: "2026-03-01",
+      },
     ];
 
-    setupTables({ partnerships, nudges: [], profiles: [{ id: "user-2", display_name: "Someone" }] });
+    setupTables({
+      partnerships,
+      nudges: [],
+      profiles: [{ id: "user-2", display_name: "Someone" }],
+    });
 
     const { result } = renderHook(() => usePartners());
 
@@ -425,7 +513,15 @@ describe("usePartners mutations", () => {
 
   it("markNudgesRead updates unread nudges", async () => {
     const nudges = [
-      { id: "n1", partnership_id: "p1", sender_id: "user-2", receiver_id: "user-1", message: "Go!", read: false, created_at: "2026-03-11" },
+      {
+        id: "n1",
+        partnership_id: "p1",
+        sender_id: "user-2",
+        receiver_id: "user-1",
+        message: "Go!",
+        read: false,
+        created_at: "2026-03-11",
+      },
     ];
 
     setupTables({ partnerships: [], nudges, profiles: [] });

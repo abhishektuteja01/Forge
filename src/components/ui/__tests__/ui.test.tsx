@@ -11,7 +11,9 @@ import { Modal } from "../Modal";
 describe("Button", () => {
   it("renders children", () => {
     render(<Button>Click me</Button>);
-    expect(screen.getByRole("button", { name: "Click me" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Click me" })
+    ).toBeInTheDocument();
   });
 
   it("shows loading spinner when loading", () => {
@@ -79,7 +81,9 @@ describe("Input", () => {
   it("calls onChange handler", () => {
     const onChange = vi.fn();
     render(<Input label="Name" onChange={onChange} />);
-    fireEvent.change(screen.getByRole("textbox"), { target: { value: "test" } });
+    fireEvent.change(screen.getByRole("textbox"), {
+      target: { value: "test" },
+    });
     expect(onChange).toHaveBeenCalled();
   });
 });

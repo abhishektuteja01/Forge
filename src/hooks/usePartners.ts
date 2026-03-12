@@ -2,12 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { createClient } from "@/lib/supabase/client";
-import type {
-  Profile,
-  Routine,
-  CheckIn,
-  HabitStack,
-} from "@/types/database";
+import type { Profile, Routine, CheckIn, HabitStack } from "@/types/database";
 import type {
   Partnership,
   PartnershipWithProfile,
@@ -47,7 +42,11 @@ export function getWeekStart(): string {
 export function computeStreaks(
   checkIns: CheckIn[],
   routines: Routine[]
-): { currentStreak: number; longestStreak: number; completionRateThisWeek: number } {
+): {
+  currentStreak: number;
+  longestStreak: number;
+  completionRateThisWeek: number;
+} {
   // Collect unique dates with at least one completed check-in
   const completedDates = new Set<string>();
   checkIns.forEach((ci) => {
@@ -197,9 +196,7 @@ export function usePartners(): UsePartnersReturn {
         supabase
           .from("partnerships")
           .select("*")
-          .or(
-            `requester_id.eq.${user.id},partner_id.eq.${user.id}`
-          )
+          .or(`requester_id.eq.${user.id},partner_id.eq.${user.id}`)
           .neq("status", "declined")
           .order("created_at", { ascending: false }),
         supabase
@@ -333,13 +330,11 @@ export function usePartners(): UsePartnersReturn {
 
     const token = generateToken();
 
-    const { error: insertError } = await supabase
-      .from("partnerships")
-      .insert({
-        requester_id: user.id,
-        invite_token: token,
-        status: "pending",
-      });
+    const { error: insertError } = await supabase.from("partnerships").insert({
+      requester_id: user.id,
+      invite_token: token,
+      status: "pending",
+    });
 
     if (insertError) throw insertError;
 
@@ -408,11 +403,7 @@ export function usePartners(): UsePartnersReturn {
   );
 
   const sendNudge = useCallback(
-    async (
-      partnershipId: string,
-      receiverId: string,
-      message: string
-    ) => {
+    async (partnershipId: string, receiverId: string, message: string) => {
       const supabase = createClient();
       const {
         data: { user },
@@ -498,10 +489,7 @@ export function usePartners(): UsePartnersReturn {
             .eq("user_id", partnerUserId)
             .is("archived_at", null)
             .order("sort_order", { ascending: true }),
-          supabase
-            .from("check_ins")
-            .select("*")
-            .eq("user_id", partnerUserId),
+          supabase.from("check_ins").select("*").eq("user_id", partnerUserId),
           supabase
             .from("habit_stacks")
             .select("*")

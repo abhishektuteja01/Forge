@@ -111,9 +111,7 @@ describe("IdentityCard", () => {
 
   it("calls onManageLinks when clicked", () => {
     const onManageLinks = vi.fn();
-    render(
-      <IdentityCard {...defaultProps} onManageLinks={onManageLinks} />
-    );
+    render(<IdentityCard {...defaultProps} onManageLinks={onManageLinks} />);
     fireEvent.click(screen.getByLabelText("Identity options"));
     fireEvent.click(screen.getByText("Manage linked habits"));
     expect(onManageLinks).toHaveBeenCalledWith(defaultProps.identity);
@@ -130,14 +128,12 @@ describe("IdentityForm", () => {
 
   it("renders create mode with empty input and routine picker", () => {
     render(
-      <IdentityForm
-        mode="create"
-        routines={routines}
-        onClose={() => {}}
-      />
+      <IdentityForm mode="create" routines={routines} onClose={() => {}} />
     );
     expect(screen.getByText("Identity statement")).toBeInTheDocument();
-    expect(screen.getByText("Link habits to this identity")).toBeInTheDocument();
+    expect(
+      screen.getByText("Link habits to this identity")
+    ).toBeInTheDocument();
     expect(screen.getByText("Read")).toBeInTheDocument();
     expect(screen.getByText("Exercise")).toBeInTheDocument();
     expect(screen.getByText("Create Identity")).toBeInTheDocument();
@@ -171,7 +167,9 @@ describe("IdentityForm", () => {
     // Should NOT show statement input
     expect(screen.queryByText("Identity statement")).not.toBeInTheDocument();
     // Should show routine picker
-    expect(screen.getByText("Link habits to this identity")).toBeInTheDocument();
+    expect(
+      screen.getByText("Link habits to this identity")
+    ).toBeInTheDocument();
     expect(screen.getByText("Update Links")).toBeInTheDocument();
   });
 
@@ -194,9 +192,7 @@ describe("IdentityForm", () => {
   });
 
   it("shows empty state when no routines exist", () => {
-    render(
-      <IdentityForm mode="create" routines={[]} onClose={() => {}} />
-    );
+    render(<IdentityForm mode="create" routines={[]} onClose={() => {}} />);
     expect(screen.getByText(/No routines yet/)).toBeInTheDocument();
   });
 
@@ -219,7 +215,9 @@ describe("IdentityForm", () => {
     fireEvent.click(screen.getByText("Create Identity"));
 
     await waitFor(() => {
-      expect(onSubmitCreate).toHaveBeenCalledWith("I am a morning person", ["r1"]);
+      expect(onSubmitCreate).toHaveBeenCalledWith("I am a morning person", [
+        "r1",
+      ]);
     });
     await waitFor(() => {
       expect(onClose).toHaveBeenCalled();
@@ -286,7 +284,9 @@ describe("IdentityForm", () => {
     fireEvent.click(screen.getByText("Create Identity"));
 
     await waitFor(() => {
-      expect(screen.getByText("Identity statement is required")).toBeInTheDocument();
+      expect(
+        screen.getByText("Identity statement is required")
+      ).toBeInTheDocument();
     });
     expect(onSubmitCreate).not.toHaveBeenCalled();
   });
@@ -307,7 +307,11 @@ describe("VoteCounter", () => {
 
   it("renders total vote count", () => {
     render(
-      <VoteCounter totalVotes={42} votesToday={0} voteHistory={defaultHistory} />
+      <VoteCounter
+        totalVotes={42}
+        votesToday={0}
+        voteHistory={defaultHistory}
+      />
     );
     expect(screen.getByText("42")).toBeInTheDocument();
     expect(screen.getByText("votes")).toBeInTheDocument();
@@ -322,14 +326,22 @@ describe("VoteCounter", () => {
 
   it("shows +N today badge when votesToday > 0", () => {
     render(
-      <VoteCounter totalVotes={10} votesToday={3} voteHistory={defaultHistory} />
+      <VoteCounter
+        totalVotes={10}
+        votesToday={3}
+        voteHistory={defaultHistory}
+      />
     );
     expect(screen.getByText("+3 today")).toBeInTheDocument();
   });
 
   it("hides today badge when votesToday is 0", () => {
     render(
-      <VoteCounter totalVotes={10} votesToday={0} voteHistory={defaultHistory} />
+      <VoteCounter
+        totalVotes={10}
+        votesToday={0}
+        voteHistory={defaultHistory}
+      />
     );
     expect(screen.queryByText(/today/)).not.toBeInTheDocument();
   });

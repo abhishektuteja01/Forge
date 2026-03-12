@@ -1,5 +1,9 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { computeStreaks, getWeekStart, getLocalDateString } from "../usePartners";
+import {
+  computeStreaks,
+  getWeekStart,
+  getLocalDateString,
+} from "../usePartners";
 import type { CheckIn, Routine } from "@/types/database";
 
 // ─── Factories ───────────────────────────────────────────
@@ -196,9 +200,24 @@ describe("computeStreaks", () => {
     ];
     // 3 days this week, 1 active routine = 3 max
     const checkIns = [
-      makeCheckIn({ id: "c1", routine_id: "r1", date: "2026-03-11", completed: true }),
-      makeCheckIn({ id: "c2", routine_id: "r1", date: "2026-03-10", completed: true }),
-      makeCheckIn({ id: "c3", routine_id: "r1", date: "2026-03-09", completed: true }),
+      makeCheckIn({
+        id: "c1",
+        routine_id: "r1",
+        date: "2026-03-11",
+        completed: true,
+      }),
+      makeCheckIn({
+        id: "c2",
+        routine_id: "r1",
+        date: "2026-03-10",
+        completed: true,
+      }),
+      makeCheckIn({
+        id: "c3",
+        routine_id: "r1",
+        date: "2026-03-09",
+        completed: true,
+      }),
     ];
 
     const result = computeStreaks(checkIns, mixedRoutines);

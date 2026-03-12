@@ -85,11 +85,25 @@ describe("StackCard", () => {
       ...makeChain(),
       steps: [
         {
-          stack: { id: "s1", user_id: "u1", anchor_routine_id: "r1", stacked_routine_id: "r2", position: 0, created_at: "" },
+          stack: {
+            id: "s1",
+            user_id: "u1",
+            anchor_routine_id: "r1",
+            stacked_routine_id: "r2",
+            position: 0,
+            created_at: "",
+          },
           routine: makeRoutine({ id: "r2", name: "Journal" }),
         },
         {
-          stack: { id: "s2", user_id: "u1", anchor_routine_id: "r1", stacked_routine_id: "r3", position: 1, created_at: "" },
+          stack: {
+            id: "s2",
+            user_id: "u1",
+            anchor_routine_id: "r1",
+            stacked_routine_id: "r3",
+            position: 1,
+            created_at: "",
+          },
           routine: makeRoutine({ id: "r3", name: "Stretch" }),
         },
       ],
@@ -111,7 +125,11 @@ describe("StackBuilder", () => {
 
   it("renders anchor picker with routine names", () => {
     render(
-      <StackBuilder routines={routines} onSubmit={async () => {}} onClose={() => {}} />
+      <StackBuilder
+        routines={routines}
+        onSubmit={async () => {}}
+        onClose={() => {}}
+      />
     );
     expect(screen.getByText("Morning coffee")).toBeInTheDocument();
     expect(screen.getByText("Read 10 pages")).toBeInTheDocument();
@@ -120,10 +138,16 @@ describe("StackBuilder", () => {
 
   it("shows step 2 after anchor is selected", () => {
     render(
-      <StackBuilder routines={routines} onSubmit={async () => {}} onClose={() => {}} />
+      <StackBuilder
+        routines={routines}
+        onSubmit={async () => {}}
+        onClose={() => {}}
+      />
     );
     // Step 2 shouldn't be visible yet
-    expect(screen.queryByText("2. Stack a habit on top")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("2. Stack a habit on top")
+    ).not.toBeInTheDocument();
 
     // Select anchor
     fireEvent.click(screen.getByText("Morning coffee"));
@@ -134,7 +158,11 @@ describe("StackBuilder", () => {
 
   it("filters stacked picker to exclude selected anchor", () => {
     render(
-      <StackBuilder routines={routines} onSubmit={async () => {}} onClose={() => {}} />
+      <StackBuilder
+        routines={routines}
+        onSubmit={async () => {}}
+        onClose={() => {}}
+      />
     );
     // Select anchor
     fireEvent.click(screen.getByText("Morning coffee"));
@@ -151,7 +179,11 @@ describe("StackBuilder", () => {
 
   it("shows preview when both anchor and stacked are selected", () => {
     render(
-      <StackBuilder routines={routines} onSubmit={async () => {}} onClose={() => {}} />
+      <StackBuilder
+        routines={routines}
+        onSubmit={async () => {}}
+        onClose={() => {}}
+      />
     );
     // Select anchor
     fireEvent.click(screen.getByText("Morning coffee"));
@@ -166,7 +198,11 @@ describe("StackBuilder", () => {
   it("calls onClose when Cancel is clicked", () => {
     const onClose = vi.fn();
     render(
-      <StackBuilder routines={routines} onSubmit={async () => {}} onClose={onClose} />
+      <StackBuilder
+        routines={routines}
+        onSubmit={async () => {}}
+        onClose={onClose}
+      />
     );
     fireEvent.click(screen.getByText("Cancel"));
     expect(onClose).toHaveBeenCalledOnce();
@@ -174,7 +210,11 @@ describe("StackBuilder", () => {
 
   it("shows empty state when no routines", () => {
     render(
-      <StackBuilder routines={[]} onSubmit={async () => {}} onClose={() => {}} />
+      <StackBuilder
+        routines={[]}
+        onSubmit={async () => {}}
+        onClose={() => {}}
+      />
     );
     expect(screen.getByText(/No routines yet/)).toBeInTheDocument();
   });
@@ -208,7 +248,11 @@ describe("StackBuilder", () => {
 
   it("switches to new routine mode and shows form fields", () => {
     render(
-      <StackBuilder routines={routines} onSubmit={async () => {}} onClose={() => {}} />
+      <StackBuilder
+        routines={routines}
+        onSubmit={async () => {}}
+        onClose={() => {}}
+      />
     );
     // Select anchor first
     fireEvent.click(screen.getByText("Morning coffee"));
@@ -254,7 +298,11 @@ describe("StackBuilder", () => {
   it("shows error when onSubmit rejects", async () => {
     const onSubmit = vi.fn().mockRejectedValue(new Error("Failed to create"));
     render(
-      <StackBuilder routines={routines} onSubmit={onSubmit} onClose={() => {}} />
+      <StackBuilder
+        routines={routines}
+        onSubmit={onSubmit}
+        onClose={() => {}}
+      />
     );
 
     fireEvent.click(screen.getByText("Morning coffee"));

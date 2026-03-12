@@ -1,8 +1,5 @@
 import { describe, it, expect } from "vitest";
-import {
-  buildStacksWithRoutines,
-  buildChains,
-} from "../useStacks";
+import { buildStacksWithRoutines, buildChains } from "../useStacks";
 import type { HabitStack, Routine } from "@/types/database";
 
 // ─── Factories ───────────────────────────────────────────
@@ -42,7 +39,13 @@ describe("buildStacksWithRoutines", () => {
       makeRoutine({ id: "r1", name: "Coffee" }),
       makeRoutine({ id: "r2", name: "Journal" }),
     ];
-    const stacks = [makeStack({ id: "s1", anchor_routine_id: "r1", stacked_routine_id: "r2" })];
+    const stacks = [
+      makeStack({
+        id: "s1",
+        anchor_routine_id: "r1",
+        stacked_routine_id: "r2",
+      }),
+    ];
 
     const result = buildStacksWithRoutines(stacks, routines);
 
@@ -53,7 +56,9 @@ describe("buildStacksWithRoutines", () => {
 
   it("skips stacks where anchor routine is missing", () => {
     const routines = [makeRoutine({ id: "r2", name: "Journal" })];
-    const stacks = [makeStack({ anchor_routine_id: "r1", stacked_routine_id: "r2" })];
+    const stacks = [
+      makeStack({ anchor_routine_id: "r1", stacked_routine_id: "r2" }),
+    ];
 
     const result = buildStacksWithRoutines(stacks, routines);
     expect(result).toHaveLength(0);
@@ -61,7 +66,9 @@ describe("buildStacksWithRoutines", () => {
 
   it("skips stacks where stacked routine is missing", () => {
     const routines = [makeRoutine({ id: "r1", name: "Coffee" })];
-    const stacks = [makeStack({ anchor_routine_id: "r1", stacked_routine_id: "r2" })];
+    const stacks = [
+      makeStack({ anchor_routine_id: "r1", stacked_routine_id: "r2" }),
+    ];
 
     const result = buildStacksWithRoutines(stacks, routines);
     expect(result).toHaveLength(0);
@@ -86,8 +93,18 @@ describe("buildStacksWithRoutines", () => {
       makeRoutine({ id: "r3", name: "Stretch" }),
     ];
     const stacks = [
-      makeStack({ id: "s1", anchor_routine_id: "r1", stacked_routine_id: "r2", position: 0 }),
-      makeStack({ id: "s2", anchor_routine_id: "r1", stacked_routine_id: "r3", position: 1 }),
+      makeStack({
+        id: "s1",
+        anchor_routine_id: "r1",
+        stacked_routine_id: "r2",
+        position: 0,
+      }),
+      makeStack({
+        id: "s2",
+        anchor_routine_id: "r1",
+        stacked_routine_id: "r3",
+        position: 1,
+      }),
     ];
 
     const result = buildStacksWithRoutines(stacks, routines);
@@ -107,8 +124,18 @@ describe("buildChains", () => {
       makeRoutine({ id: "r3", name: "Stretch" }),
     ];
     const stacks = [
-      makeStack({ id: "s1", anchor_routine_id: "r1", stacked_routine_id: "r2", position: 0 }),
-      makeStack({ id: "s2", anchor_routine_id: "r1", stacked_routine_id: "r3", position: 1 }),
+      makeStack({
+        id: "s1",
+        anchor_routine_id: "r1",
+        stacked_routine_id: "r2",
+        position: 0,
+      }),
+      makeStack({
+        id: "s2",
+        anchor_routine_id: "r1",
+        stacked_routine_id: "r3",
+        position: 1,
+      }),
     ];
     const enriched = buildStacksWithRoutines(stacks, routines);
     const chains = buildChains(enriched);
@@ -128,8 +155,18 @@ describe("buildChains", () => {
     ];
     // Insert in reverse position order
     const stacks = [
-      makeStack({ id: "s2", anchor_routine_id: "r1", stacked_routine_id: "r3", position: 1 }),
-      makeStack({ id: "s1", anchor_routine_id: "r1", stacked_routine_id: "r2", position: 0 }),
+      makeStack({
+        id: "s2",
+        anchor_routine_id: "r1",
+        stacked_routine_id: "r3",
+        position: 1,
+      }),
+      makeStack({
+        id: "s1",
+        anchor_routine_id: "r1",
+        stacked_routine_id: "r2",
+        position: 0,
+      }),
     ];
     const enriched = buildStacksWithRoutines(stacks, routines);
     const chains = buildChains(enriched);
@@ -146,8 +183,18 @@ describe("buildChains", () => {
       makeRoutine({ id: "r4", name: "Walk" }),
     ];
     const stacks = [
-      makeStack({ id: "s1", anchor_routine_id: "r1", stacked_routine_id: "r2", position: 0 }),
-      makeStack({ id: "s2", anchor_routine_id: "r3", stacked_routine_id: "r4", position: 0 }),
+      makeStack({
+        id: "s1",
+        anchor_routine_id: "r1",
+        stacked_routine_id: "r2",
+        position: 0,
+      }),
+      makeStack({
+        id: "s2",
+        anchor_routine_id: "r3",
+        stacked_routine_id: "r4",
+        position: 0,
+      }),
     ];
     const enriched = buildStacksWithRoutines(stacks, routines);
     const chains = buildChains(enriched);
@@ -161,7 +208,12 @@ describe("buildChains", () => {
       makeRoutine({ id: "r2", name: "Journal" }),
     ];
     const stacks = [
-      makeStack({ id: "s1", anchor_routine_id: "r1", stacked_routine_id: "r2", position: 0 }),
+      makeStack({
+        id: "s1",
+        anchor_routine_id: "r1",
+        stacked_routine_id: "r2",
+        position: 0,
+      }),
     ];
     const enriched = buildStacksWithRoutines(stacks, routines);
     const chains = buildChains(enriched);

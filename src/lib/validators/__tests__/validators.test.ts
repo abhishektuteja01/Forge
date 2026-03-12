@@ -323,8 +323,8 @@ describe("signupSchema", () => {
     });
     expect(result.success).toBe(false);
     if (!result.success) {
-      const mismatchError = result.error.issues.find(
-        (i) => i.path.includes("confirmPassword")
+      const mismatchError = result.error.issues.find((i) =>
+        i.path.includes("confirmPassword")
       );
       expect(mismatchError).toBeDefined();
     }

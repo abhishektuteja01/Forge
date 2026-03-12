@@ -31,10 +31,25 @@ function createChainableQuery(data: unknown = [], error: unknown = null) {
   const builder: Record<string, unknown> = {};
 
   const chainMethods = [
-    "select", "eq", "neq", "in", "is", "or", "not",
-    "order", "limit", "filter", "match",
-    "gt", "gte", "lt", "lte",
-    "insert", "update", "delete", "upsert",
+    "select",
+    "eq",
+    "neq",
+    "in",
+    "is",
+    "or",
+    "not",
+    "order",
+    "limit",
+    "filter",
+    "match",
+    "gt",
+    "gte",
+    "lt",
+    "lte",
+    "insert",
+    "update",
+    "delete",
+    "upsert",
   ];
 
   chainMethods.forEach((m) => {
@@ -44,8 +59,10 @@ function createChainableQuery(data: unknown = [], error: unknown = null) {
   builder.single = vi.fn().mockResolvedValue(resolved);
 
   // Make builder thenable
-  builder.then = (resolve: (v: unknown) => void, reject?: (r: unknown) => void) =>
-    Promise.resolve(resolved).then(resolve, reject);
+  builder.then = (
+    resolve: (v: unknown) => void,
+    reject?: (r: unknown) => void
+  ) => Promise.resolve(resolved).then(resolve, reject);
 
   return builder;
 }
@@ -98,7 +115,17 @@ describe("useRoutines", () => {
 
   it("fetches routines on mount", async () => {
     const routines = [
-      { id: "r1", user_id: "user-1", name: "Coffee", tag: "neutral", time_of_day: "morning", sort_order: 0, archived_at: null, created_at: "2026-01-01", updated_at: "2026-01-01" },
+      {
+        id: "r1",
+        user_id: "user-1",
+        name: "Coffee",
+        tag: "neutral",
+        time_of_day: "morning",
+        sort_order: 0,
+        archived_at: null,
+        created_at: "2026-01-01",
+        updated_at: "2026-01-01",
+      },
     ];
     setupTableMocks({ routines });
 
@@ -132,7 +159,15 @@ describe("useRoutines", () => {
 describe("useCheckIns", () => {
   it("fetches check-ins for the given date", async () => {
     const checkIns = [
-      { id: "c1", user_id: "user-1", routine_id: "r1", date: "2026-03-11", completed: true, created_at: "2026-03-11", updated_at: "2026-03-11" },
+      {
+        id: "c1",
+        user_id: "user-1",
+        routine_id: "r1",
+        date: "2026-03-11",
+        completed: true,
+        created_at: "2026-03-11",
+        updated_at: "2026-03-11",
+      },
     ];
     setupTableMocks({ check_ins: checkIns });
 
@@ -148,8 +183,24 @@ describe("useCheckIns", () => {
 
   it("getCompletionStats calculates correctly", async () => {
     const checkIns = [
-      { id: "c1", user_id: "user-1", routine_id: "r1", date: "2026-03-11", completed: true, created_at: "2026-03-11", updated_at: "2026-03-11" },
-      { id: "c2", user_id: "user-1", routine_id: "r2", date: "2026-03-11", completed: false, created_at: "2026-03-11", updated_at: "2026-03-11" },
+      {
+        id: "c1",
+        user_id: "user-1",
+        routine_id: "r1",
+        date: "2026-03-11",
+        completed: true,
+        created_at: "2026-03-11",
+        updated_at: "2026-03-11",
+      },
+      {
+        id: "c2",
+        user_id: "user-1",
+        routine_id: "r2",
+        date: "2026-03-11",
+        completed: false,
+        created_at: "2026-03-11",
+        updated_at: "2026-03-11",
+      },
     ];
     setupTableMocks({ check_ins: checkIns });
 
@@ -184,11 +235,38 @@ describe("useCheckIns", () => {
 describe("useStacks", () => {
   it("fetches stacks and routines in parallel", async () => {
     const routines = [
-      { id: "r1", user_id: "user-1", name: "Coffee", tag: "neutral", time_of_day: "morning", sort_order: 0, archived_at: null, created_at: "2026-01-01", updated_at: "2026-01-01" },
-      { id: "r2", user_id: "user-1", name: "Journal", tag: "positive", time_of_day: "morning", sort_order: 1, archived_at: null, created_at: "2026-01-01", updated_at: "2026-01-01" },
+      {
+        id: "r1",
+        user_id: "user-1",
+        name: "Coffee",
+        tag: "neutral",
+        time_of_day: "morning",
+        sort_order: 0,
+        archived_at: null,
+        created_at: "2026-01-01",
+        updated_at: "2026-01-01",
+      },
+      {
+        id: "r2",
+        user_id: "user-1",
+        name: "Journal",
+        tag: "positive",
+        time_of_day: "morning",
+        sort_order: 1,
+        archived_at: null,
+        created_at: "2026-01-01",
+        updated_at: "2026-01-01",
+      },
     ];
     const stacks = [
-      { id: "s1", user_id: "user-1", anchor_routine_id: "r1", stacked_routine_id: "r2", position: 0, created_at: "2026-01-01" },
+      {
+        id: "s1",
+        user_id: "user-1",
+        anchor_routine_id: "r1",
+        stacked_routine_id: "r2",
+        position: 0,
+        created_at: "2026-01-01",
+      },
     ];
 
     setupTableMocks({ habit_stacks: stacks, routines });
@@ -225,16 +303,41 @@ describe("useStacks", () => {
 describe("useIdentities", () => {
   it("fetches and enriches identities with vote data", async () => {
     const identities = [
-      { id: "i1", user_id: "user-1", statement: "I am a reader", archived_at: null, created_at: "2026-01-01", updated_at: "2026-01-01" },
+      {
+        id: "i1",
+        user_id: "user-1",
+        statement: "I am a reader",
+        archived_at: null,
+        created_at: "2026-01-01",
+        updated_at: "2026-01-01",
+      },
     ];
     const identityHabits = [
       { id: "ih1", identity_id: "i1", routine_id: "r1", user_id: "user-1" },
     ];
     const routines = [
-      { id: "r1", user_id: "user-1", name: "Read", tag: "positive", time_of_day: "evening", sort_order: 0, archived_at: null, created_at: "2026-01-01", updated_at: "2026-01-01" },
+      {
+        id: "r1",
+        user_id: "user-1",
+        name: "Read",
+        tag: "positive",
+        time_of_day: "evening",
+        sort_order: 0,
+        archived_at: null,
+        created_at: "2026-01-01",
+        updated_at: "2026-01-01",
+      },
     ];
     const checkIns = [
-      { id: "c1", user_id: "user-1", routine_id: "r1", date: "2026-03-11", completed: true, created_at: "2026-03-11", updated_at: "2026-03-11" },
+      {
+        id: "c1",
+        user_id: "user-1",
+        routine_id: "r1",
+        date: "2026-03-11",
+        completed: true,
+        created_at: "2026-03-11",
+        updated_at: "2026-03-11",
+      },
     ];
 
     setupTableMocks({
@@ -275,14 +378,29 @@ describe("useIdentities", () => {
 describe("usePartners", () => {
   it("fetches partnerships and nudges on mount", async () => {
     const partnerships = [
-      { id: "p1", requester_id: "user-1", partner_id: "user-2", invite_token: "tok", invite_email: null, status: "active", created_at: "2026-03-01", updated_at: "2026-03-01" },
+      {
+        id: "p1",
+        requester_id: "user-1",
+        partner_id: "user-2",
+        invite_token: "tok",
+        invite_email: null,
+        status: "active",
+        created_at: "2026-03-01",
+        updated_at: "2026-03-01",
+      },
     ];
     const nudges = [
-      { id: "n1", partnership_id: "p1", sender_id: "user-2", receiver_id: "user-1", message: "Keep going!", read: false, created_at: "2026-03-11" },
+      {
+        id: "n1",
+        partnership_id: "p1",
+        sender_id: "user-2",
+        receiver_id: "user-1",
+        message: "Keep going!",
+        read: false,
+        created_at: "2026-03-11",
+      },
     ];
-    const profiles = [
-      { id: "user-2", display_name: "Partner Person" },
-    ];
+    const profiles = [{ id: "user-2", display_name: "Partner Person" }];
 
     mockFrom.mockImplementation((table: string) => {
       if (table === "partnerships") return createChainableQuery(partnerships);
@@ -298,7 +416,9 @@ describe("usePartners", () => {
     });
 
     expect(result.current.partnerships).toHaveLength(1);
-    expect(result.current.partnerships[0].partner_profile.display_name).toBe("Partner Person");
+    expect(result.current.partnerships[0].partner_profile.display_name).toBe(
+      "Partner Person"
+    );
     expect(result.current.unreadNudgeCount).toBe(1);
     expect(result.current.nudges).toHaveLength(1);
   });
@@ -320,8 +440,26 @@ describe("usePartners", () => {
 
   it("separates active partnerships from pending invites", async () => {
     const partnerships = [
-      { id: "p1", requester_id: "user-2", partner_id: "user-1", invite_token: "tok1", invite_email: null, status: "active", created_at: "2026-03-01", updated_at: "2026-03-01" },
-      { id: "p2", requester_id: "user-3", partner_id: "user-1", invite_token: "tok2", invite_email: null, status: "pending", created_at: "2026-03-10", updated_at: "2026-03-10" },
+      {
+        id: "p1",
+        requester_id: "user-2",
+        partner_id: "user-1",
+        invite_token: "tok1",
+        invite_email: null,
+        status: "active",
+        created_at: "2026-03-01",
+        updated_at: "2026-03-01",
+      },
+      {
+        id: "p2",
+        requester_id: "user-3",
+        partner_id: "user-1",
+        invite_token: "tok2",
+        invite_email: null,
+        status: "pending",
+        created_at: "2026-03-10",
+        updated_at: "2026-03-10",
+      },
     ];
     const profiles = [
       { id: "user-2", display_name: "Active Partner" },
@@ -342,8 +480,12 @@ describe("usePartners", () => {
     });
 
     expect(result.current.partnerships).toHaveLength(1);
-    expect(result.current.partnerships[0].partner_profile.display_name).toBe("Active Partner");
+    expect(result.current.partnerships[0].partner_profile.display_name).toBe(
+      "Active Partner"
+    );
     expect(result.current.pendingInvites).toHaveLength(1);
-    expect(result.current.pendingInvites[0].partner_profile.display_name).toBe("Pending Person");
+    expect(result.current.pendingInvites[0].partner_profile.display_name).toBe(
+      "Pending Person"
+    );
   });
 });
