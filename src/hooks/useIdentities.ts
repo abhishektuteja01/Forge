@@ -23,7 +23,7 @@ interface UseIdentitiesReturn {
 }
 
 /** Get YYYY-MM-DD for today in local timezone */
-function getLocalDateString(date: Date): string {
+export function getLocalDateString(date: Date): string {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
@@ -31,7 +31,7 @@ function getLocalDateString(date: Date): string {
 }
 
 /** Get an array of YYYY-MM-DD strings for the last 7 days (today inclusive) */
-function getLast7Days(): string[] {
+export function getLast7Days(): string[] {
   const days: string[] = [];
   const now = new Date();
   for (let i = 6; i >= 0; i--) {
@@ -46,7 +46,7 @@ function getLast7Days(): string[] {
  * Compute enriched identity data by joining identities, identity_habits,
  * routines, and check_ins in JavaScript.
  */
-function buildIdentitiesWithDetails(
+export function buildIdentitiesWithDetails(
   rawIdentities: Identity[],
   identityHabits: IdentityHabit[],
   routines: Routine[],

@@ -77,8 +77,11 @@ export async function updateSession(request: NextRequest) {
       `[Middleware Check] Path: ${url.pathname} | Onboarded: ${isOnboardingComplete}`
     );
 
+    const isInviteRoute = url.pathname.startsWith("/invite");
+
     if (!isOnboardingComplete) {
-      if (!isOnboardingRoute) {
+      // Allow invite routes even if onboarding isn't complete
+      if (!isOnboardingRoute && !isInviteRoute) {
         url.pathname = "/onboarding";
         return redirectWithCookies(url);
       }

@@ -21,7 +21,7 @@ interface UseStacksReturn {
  * Build enriched stacks by joining raw habit_stacks with routines in JS.
  * Safer than relying on Supabase PostgREST multi-FK joins.
  */
-function buildStacksWithRoutines(
+export function buildStacksWithRoutines(
   rawStacks: HabitStack[],
   routines: Routine[]
 ): StackWithRoutines[] {
@@ -51,7 +51,7 @@ function buildStacksWithRoutines(
  * Group enriched stacks into chains by anchor_routine_id.
  * Each chain has one anchor and one or more ordered steps.
  */
-function buildChains(stacks: StackWithRoutines[]): StackChain[] {
+export function buildChains(stacks: StackWithRoutines[]): StackChain[] {
   const chainMap = new Map<
     string,
     { anchor: Routine; steps: { stack: HabitStack; routine: Routine }[] }
