@@ -110,7 +110,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="w-full duration-500 animate-in fade-in slide-in-from-bottom-4">
+    <div className="animate-in fade-in slide-in-from-bottom-4 w-full duration-500">
       <Card>
         <div className="mb-6 text-center">
           <h1 className="font-display text-2xl font-bold tracking-tight text-gray-900">
@@ -122,7 +122,7 @@ export default function LoginPage() {
         </div>
 
         {error && (
-          <div className="mb-6 flex items-center justify-center rounded-xl border border-red-100 bg-red-50 p-4 text-center text-sm font-medium text-negative">
+          <div className="text-negative mb-6 flex items-center justify-center rounded-xl border border-red-100 bg-red-50 p-4 text-center text-sm font-medium">
             {error}
           </div>
         )}
@@ -164,9 +164,9 @@ export default function LoginPage() {
         </form>
 
         <div className="mt-6 flex items-center justify-between">
-          <div className="flex-1 border-t border-border"></div>
+          <div className="border-border flex-1 border-t"></div>
           <span className="px-4 text-sm font-medium text-gray-400">or</span>
-          <div className="flex-1 border-t border-border"></div>
+          <div className="border-border flex-1 border-t"></div>
         </div>
 
         <div className="mt-6">
@@ -209,7 +209,7 @@ export default function LoginPage() {
           Don&apos;t have an account?{" "}
           <Link
             href="/signup"
-            className="font-semibold text-primary hover:underline"
+            className="text-primary font-semibold hover:underline"
           >
             Sign up
           </Link>

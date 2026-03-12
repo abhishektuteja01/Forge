@@ -22,12 +22,12 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           id={inputId}
           ref={ref}
-          className={`min-h-[44px] w-full rounded-none border-2 bg-white px-4 py-3 font-sans text-gray-900 outline-none transition-colors duration-200 placeholder:text-gray-400 focus:border-primary focus:ring-0 ${error ? "border-negative focus:border-negative" : "border-gray-900"} ${className} `}
+          className={`focus:border-primary min-h-[44px] w-full rounded-none border-2 bg-white px-4 py-3 font-sans text-gray-900 transition-colors duration-200 outline-none placeholder:text-gray-400 focus:ring-0 ${error ? "border-negative focus:border-negative" : "border-gray-900"} ${className} `}
           {...props}
         />
 
         {error && (
-          <p className="text-sm font-medium text-negative" role="alert">
+          <p className="text-negative text-sm font-medium" role="alert">
             {error}
           </p>
         )}

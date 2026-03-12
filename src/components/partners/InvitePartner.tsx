@@ -54,7 +54,7 @@ export function InvitePartner({ onGenerateLink }: InvitePartnerProps) {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400">
+        <h2 className="text-sm font-bold tracking-widest text-gray-400 uppercase">
           Invite a Partner
         </h2>
         <p className="mt-1 text-sm text-gray-500">
@@ -63,7 +63,7 @@ export function InvitePartner({ onGenerateLink }: InvitePartnerProps) {
         </p>
       </div>
 
-      {error && <p className="text-sm font-medium text-negative">{error}</p>}
+      {error && <p className="text-negative text-sm font-medium">{error}</p>}
 
       {!inviteUrl ? (
         <Button
@@ -79,14 +79,14 @@ export function InvitePartner({ onGenerateLink }: InvitePartnerProps) {
       ) : (
         <div className="space-y-3">
           {/* Show the generated link */}
-          <div className="flex items-center gap-2 rounded-xl border border-border bg-gray-50 px-4 py-3">
+          <div className="border-border flex items-center gap-2 rounded-xl border bg-gray-50 px-4 py-3">
             <span className="min-w-0 flex-1 truncate text-sm text-gray-700">
               {inviteUrl}
             </span>
             <button
               type="button"
               onClick={handleCopyAgain}
-              className="flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-indigo-50"
+              className="text-primary flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors hover:bg-indigo-50"
             >
               {copied ? (
                 <>
@@ -107,7 +107,7 @@ export function InvitePartner({ onGenerateLink }: InvitePartnerProps) {
             type="button"
             onClick={handleGenerate}
             disabled={loading}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-primary"
+            className="hover:text-primary inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors"
           >
             {loading ? (
               <Loader2 className="h-3.5 w-3.5 animate-spin" />

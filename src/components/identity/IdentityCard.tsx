@@ -57,7 +57,7 @@ export function IdentityCard({
     <Card className="space-y-5">
       {/* Header: statement + menu */}
       <div className="flex items-start justify-between gap-4">
-        <h3 className="font-display text-lg font-bold leading-snug tracking-tight text-gray-900">
+        <h3 className="font-display text-lg leading-snug font-bold tracking-tight text-gray-900">
           &ldquo;{identity.statement}&rdquo;
         </h3>
 
@@ -72,7 +72,7 @@ export function IdentityCard({
           </button>
 
           {menuOpen && (
-            <div className="absolute right-0 top-full z-20 mt-1 w-44 overflow-hidden rounded-xl border border-border bg-white shadow-lg">
+            <div className="border-border absolute top-full right-0 z-20 mt-1 w-44 overflow-hidden rounded-xl border bg-white shadow-lg">
               <button
                 type="button"
                 onClick={() => {
@@ -120,7 +120,7 @@ export function IdentityCard({
           </div>
           <div className="h-2 w-full overflow-hidden rounded-full bg-gray-100">
             <div
-              className="h-full rounded-full bg-primary transition-all duration-500 ease-out"
+              className="bg-primary h-full rounded-full transition-all duration-500 ease-out"
               style={{ width: `${weeklyPercent}%` }}
             />
           </div>
@@ -136,7 +136,7 @@ export function IdentityCard({
 
       {/* Linked routines */}
       <div className="space-y-2">
-        <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+        <p className="text-[10px] font-bold tracking-widest text-gray-400 uppercase">
           Linked habits
         </p>
         {identity.linked_routines.length > 0 ? (
@@ -154,7 +154,7 @@ export function IdentityCard({
           <button
             type="button"
             onClick={() => onManageLinks(identity)}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-gray-300 px-3 py-2 text-xs font-medium text-gray-400 transition-colors hover:border-primary hover:text-primary"
+            className="hover:border-primary hover:text-primary inline-flex items-center gap-1.5 rounded-lg border border-dashed border-gray-300 px-3 py-2 text-xs font-medium text-gray-400 transition-colors"
           >
             <LinkIcon className="h-3 w-3" />
             Link habits to start voting

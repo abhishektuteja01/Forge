@@ -117,18 +117,18 @@ export function OnboardingWizard() {
       <h1 className="sr-only">Onboarding</h1>
 
       {error && (
-        <div className="mb-6 border-2 border-negative bg-red-50 p-4 text-sm font-bold text-negative animate-in fade-in slide-in-from-top-4">
+        <div className="border-negative text-negative animate-in fade-in slide-in-from-top-4 mb-6 border-2 bg-red-50 p-4 text-sm font-bold">
           {error}
         </div>
       )}
 
       {/* Step 1 */}
       {step === 1 && (
-        <div className="flex flex-col duration-500 animate-in fade-in slide-in-from-bottom-4">
-          <div className="mb-4 inline-flex items-center self-start border-2 border-primary px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-primary">
+        <div className="animate-in fade-in slide-in-from-bottom-4 flex flex-col duration-500">
+          <div className="border-primary text-primary mb-4 inline-flex items-center self-start border-2 px-3 py-1 text-xs font-bold tracking-[0.2em] uppercase">
             Step 1 of 2
           </div>
-          <h1 className="mb-6 font-display text-4xl font-bold tracking-tight text-gray-900">
+          <h1 className="font-display mb-6 text-4xl font-bold tracking-tight text-gray-900">
             Welcome to the Forge.
           </h1>
           <p className="mb-10 text-xl leading-relaxed text-gray-500">
@@ -155,11 +155,11 @@ export function OnboardingWizard() {
 
       {/* Step 2 */}
       {step === 2 && (
-        <div className="flex flex-col duration-500 animate-in fade-in slide-in-from-right-8">
-          <div className="mb-4 inline-flex items-center self-start border-2 border-primary px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-primary">
+        <div className="animate-in fade-in slide-in-from-right-8 flex flex-col duration-500">
+          <div className="border-primary text-primary mb-4 inline-flex items-center self-start border-2 px-3 py-1 text-xs font-bold tracking-[0.2em] uppercase">
             Step 2 of 2
           </div>
-          <h2 className="mb-2 font-display text-3xl font-bold tracking-tight text-gray-900">
+          <h2 className="font-display mb-2 text-3xl font-bold tracking-tight text-gray-900">
             Current Habits
           </h2>
           <p className="mb-8 text-sm text-gray-500">
@@ -191,7 +191,7 @@ export function OnboardingWizard() {
                   onChange={(e) =>
                     handleUpdate(routine.id, "tag", e.target.value)
                   }
-                  className={`cursor-pointer appearance-none border-2 bg-transparent px-3 py-1 text-xs font-bold uppercase tracking-wider outline-none focus:ring-2 focus:ring-gray-900 ${
+                  className={`cursor-pointer appearance-none border-2 bg-transparent px-3 py-1 text-xs font-bold tracking-wider uppercase outline-none focus:ring-2 focus:ring-gray-900 ${
                     tagColors[routine.tag]
                   }`}
                 >
@@ -205,7 +205,7 @@ export function OnboardingWizard() {
                   onChange={(e) =>
                     handleUpdate(routine.id, "time_of_day", e.target.value)
                   }
-                  className="cursor-pointer appearance-none border-2 border-gray-900 bg-white px-3 py-1 text-xs font-bold uppercase tracking-wider text-gray-900 outline-none focus:ring-2 focus:ring-primary"
+                  className="focus:ring-primary cursor-pointer appearance-none border-2 border-gray-900 bg-white px-3 py-1 text-xs font-bold tracking-wider text-gray-900 uppercase outline-none focus:ring-2"
                 >
                   <option value="">Any Time</option>
                   <option value="morning">Morning</option>
@@ -218,7 +218,7 @@ export function OnboardingWizard() {
                   type="button"
                   onClick={() => handleRemoveRow(routine.id)}
                   disabled={routines.length <= 1}
-                  className="p-1 text-gray-400 hover:text-negative disabled:opacity-30"
+                  className="hover:text-negative p-1 text-gray-400 disabled:opacity-30"
                 >
                   <Trash2 className="h-4 w-4" />
                 </button>
@@ -230,7 +230,7 @@ export function OnboardingWizard() {
             <button
               type="button"
               onClick={handleAddRow}
-              className="inline-flex items-center text-sm font-bold uppercase tracking-widest text-primary hover:text-indigo-600"
+              className="text-primary inline-flex items-center text-sm font-bold tracking-widest uppercase hover:text-indigo-600"
             >
               <Plus className="mr-1 h-4 w-4" /> Add Row
             </button>

@@ -1,37 +1,27 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: #ffffff;
-    --foreground: #111827;
-    /* text-gray-900 */
-    --surface: #f9fafb;
-    /* bg-gray-50 */
-    --border: #e5e7eb;
-    /* border-gray-200 */
-    --primary: #6366f1;
-    /* text-indigo-500 */
-    --primary-foreground: #ffffff;
-    --positive: #22c55e;
-    /* text-green-500 */
-    --negative: #ef4444;
-    /* text-red-500 */
-    --neutral: #9ca3af;
-    /* text-gray-400 */
-  }
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #111827;
+  --color-surface: #f9fafb;
+  --color-border: #e5e7eb;
+  --color-primary: #6366f1;
+  --color-primary-foreground: #ffffff;
+  --color-positive: #22c55e;
+  --color-negative: #ef4444;
+  --color-neutral: #9ca3af;
+
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-outfit);
 }
 
 @layer base {
   body {
-    @apply bg-white font-sans text-gray-900 antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
   }
 }
 
 /* Custom Utilities for Micro-interactions */
-@layer utilities {
-  .animate-vote {
-    @apply transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg;
-  }
+@utility animate-vote {
+  @apply transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg;
 }
