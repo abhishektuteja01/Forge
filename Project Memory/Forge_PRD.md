@@ -207,40 +207,68 @@ The app uses progressive disclosure to avoid overwhelming users: new users start
 forge/
 ├── src/
 │   ├── app/                    # Next.js App Router pages
-│   │   ├── (auth)/             # Auth route group (login, signup)
+│   │   ├── (auth)/             # Auth route group
+│   │   │   ├── layout.tsx
+│   │   │   ├── login/page.tsx
+│   │   │   ├── signup/page.tsx
+│   │   │   └── callback/route.ts         # Google OAuth callback
 │   │   ├── (dashboard)/        # Protected route group
-│   │   │   ├── scorecard/      # Habits Scorecard page
-│   │   │   ├── stacks/         # Habit Stacking page
-│   │   │   ├── identity/       # Identity Voting page
-│   │   │   ├── audit/          # Four Laws Audit page (Sprint 2)
-│   │   │   ├── visualizer/     # Compound Visualizer page (Sprint 2)
-│   │   │   └── partners/       # Accountability Partners page (Sprint 2)
+│   │   │   ├── layout.tsx
+│   │   │   ├── page.tsx                  # Dashboard home
+│   │   │   ├── scorecard/page.tsx
+│   │   │   ├── stacks/page.tsx
+│   │   │   ├── identity/page.tsx
+│   │   │   └── settings/page.tsx
+│   │   ├── onboarding/page.tsx           # Standalone, no dashboard nav
 │   │   ├── layout.tsx          # Root layout
-│   │   └── page.tsx            # Landing page
+│   │   ├── page.tsx            # Landing page
+│   │   └── not-found.tsx
 │   ├── components/
 │   │   ├── ui/                 # Reusable UI primitives (Button, Card, Modal, etc.)
-│   │   ├── scorecard/          # Scorecard-specific components
-│   │   ├── stacks/             # Stacking-specific components
-│   │   ├── identity/           # Identity-specific components
-│   │   └── layout/             # Navigation, sidebar, header
+│   │   ├── scorecard/          # Scorecard-specific components (Owner: Abhishek)
+│   │   ├── stacks/             # Stacking-specific components (Owner: Derek)
+│   │   ├── identity/           # Identity-specific components (Owner: Derek)
+│   │   ├── onboarding/         # Onboarding-specific components (Owner: Abhishek)
+│   │   └── layout/             # Navigation, sidebar, header (Owner: Derek)
+│   ├── hooks/                  # Custom React hooks
+│   │   ├── useRoutines.ts      # Abhishek
+│   │   ├── useCheckIns.ts      # Abhishek
+│   │   ├── useAuth.ts          # Abhishek
+│   │   ├── useStacks.ts        # Derek
+│   │   ├── useIdentities.ts    # Derek
+│   │   └── useFeatureFlags.ts
 │   ├── lib/
 │   │   ├── supabase/
 │   │   │   ├── client.ts       # Supabase browser client
 │   │   │   ├── server.ts       # Supabase server client
-│   │   │   └── middleware.ts   # Auth middleware
+│   │   │   └── middleware.ts   # Auth middleware helper
+│   │   ├── validators/         # Zod schemas (routine.ts, identity.ts, stack.ts)
 │   │   ├── utils.ts            # General utility functions
 │   │   └── constants.ts        # App-wide constants
-│   ├── hooks/                  # Custom React hooks
 │   ├── types/                  # TypeScript type definitions
+│   │   ├── database.ts         # Auto-generated Supabase types
+│   │   ├── auth.ts             # Abhishek
+│   │   ├── scorecard.ts        # Abhishek
+│   │   ├── stacks.ts           # Derek
+│   │   ├── identity.ts         # Derek
+│   │   └── common.ts           # Shared enums (Tag, TimeOfDay)
 │   └── styles/
 │       └── globals.css         # Tailwind base + custom styles
 ├── supabase/
-│   └── migrations/             # Database migration files
+│   ├── migrations/             # Database migration files
+│   ├── seed.sql                # Seed data for development
+│   └── config.toml             # Supabase project config
+├── e2e/                        # Playwright end-to-end tests
+├── .github/
+│   └── workflows/ci.yml       # CI/CD pipeline
+├── middleware.ts               # Root Next.js middleware (delegates to lib/supabase/middleware.ts)
 ├── public/                     # Static assets
 ├── .env.local                  # Environment variables (not committed)
-├── CLAUDE.md                   # AI rules file
+├── .env.example                # Template for environment variables
+├── AGENTS.md                   # AI coding agent rules file
 ├── tailwind.config.ts
 ├── tsconfig.json
+├── playwright.config.ts
 ├── next.config.js
 └── package.json
 ```
@@ -248,13 +276,22 @@ forge/
 ### Key Architectural Decisions
 - **App Router** over Pages Router for modern Next.js patterns (server components, layouts, route groups)
 - **Server Components by default**, Client Components only where interactivity is needed (forms, charts, real-time UI)
-- **Supabase Row-Level Security (RLS)** for data access control — no custom API layer needed for MVP
+- **Supabase Row-Level Security (RLS)** for data access control — no custom API layer needed. All CRUD operations go directly through the Supabase client (server client in Server Components, browser client in Client Components)
+- **No API route handlers** for CRUD — RLS enforces user isolation at the database level
+- **Zod validation** on all user input, both client-side and server-side, with schemas in `lib/validators/`
 - **Mobile-first responsive design** — all layouts built for 375px+ screens first, then scaled up
-- **TypeScript throughout** for type safety
+- **TypeScript throughout** in strict mode for type safety
 
 ---
 
 ## 6. Data Model
+
+### Conventions
+- Every table has a uuid primary key (`id`)
+- User-owned tables include `user_id` (uuid FK → profiles.id) for Row-Level Security
+- Timestamps use `timestamptz` with `DEFAULT now()`
+- Use `text` with check constraints instead of Postgres enums (easier to evolve)
+- Soft-delete via `archived_at timestamptz` for routines and identities — always filter `WHERE archived_at IS NULL`
 
 ### Tables
 
@@ -273,10 +310,12 @@ forge/
 | id | uuid (PK) | Auto-generated |
 | user_id | uuid (FK) | References profiles.id |
 | name | text | Routine name |
-| tag | enum | 'positive', 'negative', 'neutral' |
-| time_of_day | text (nullable) | Optional: 'morning', 'afternoon', 'evening', 'night' |
+| tag | text | Check constraint: 'positive', 'negative', 'neutral' |
+| time_of_day | text (nullable) | Check constraint: 'morning', 'afternoon', 'evening', 'night' |
 | sort_order | integer | Display ordering |
+| archived_at | timestamptz (nullable) | Soft-delete timestamp; null = active |
 | created_at | timestamptz | Auto-generated |
+| updated_at | timestamptz | Auto-generated |
 
 #### `check_ins`
 | Column | Type | Notes |
@@ -287,6 +326,7 @@ forge/
 | date | date | The check-in date |
 | completed | boolean | Default false |
 | created_at | timestamptz | Auto-generated |
+| updated_at | timestamptz | Auto-generated |
 | **Unique constraint** | | (routine_id, date) — one check-in per routine per day |
 
 #### `habit_stacks`
@@ -305,7 +345,9 @@ forge/
 | id | uuid (PK) | Auto-generated |
 | user_id | uuid (FK) | References profiles.id |
 | statement | text | e.g., "I am someone who reads daily" |
+| archived_at | timestamptz (nullable) | Soft-delete timestamp; null = active |
 | created_at | timestamptz | Auto-generated |
+| updated_at | timestamptz | Auto-generated |
 
 #### `identity_habits`
 | Column | Type | Notes |
@@ -313,6 +355,7 @@ forge/
 | id | uuid (PK) | Auto-generated |
 | identity_id | uuid (FK) | References identities.id |
 | routine_id | uuid (FK) | References routines.id |
+| user_id | uuid (FK) | Denormalized from identity; required for RLS policy |
 
 > **Note:** Identity "votes" are calculated, not stored. A vote = a completed check-in for any routine linked to that identity. Query `check_ins` joined with `identity_habits` to get vote counts.
 
@@ -321,9 +364,14 @@ forge/
 ## 7. Auth & Security
 
 - **Supabase Auth** handles all authentication (email/password + Google OAuth)
-- **Row-Level Security (RLS)** policies on all tables: users can only read/write their own data
-- **Auth middleware** in Next.js protects dashboard routes — unauthenticated users redirect to `/login`
-- **Environment variables** for Supabase URL and anon key stored in `.env.local`, never committed
+- **Google OAuth callback** requires a dedicated route handler at `(auth)/callback/route.ts` to exchange the auth code for a session
+- **Row-Level Security (RLS)** policies on all tables: users can only read/write their own data. Standard policy pattern:
+  ```sql
+  CREATE POLICY "Users access own data" ON table_name FOR ALL
+    USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+  ```
+- **Auth middleware:** Root `middleware.ts` delegates to `lib/supabase/middleware.ts` to protect all `(dashboard)` routes — unauthenticated users redirect to `/login`
+- **Environment variables** for Supabase URL and anon key stored in `.env.local`, never committed. **Never expose the `service_role` key client-side.**
 - **HTTPS only** in production (handled by Vercel)
 
 ---
@@ -376,7 +424,34 @@ forge/
 
 ---
 
-## 10. Success Metrics
+## 10. Testing, CI/CD & Git
+
+### Testing Strategy
+- **Unit tests:** Vitest + React Testing Library, co-located with source files. Target 70%+ coverage on hooks and utility functions.
+- **End-to-end tests:** Playwright tests in `e2e/` directory. E2E specs verify user story acceptance criteria.
+
+### Code Quality
+- **Linting:** ESLint (`eslint-config-next`) + Prettier (`prettier-plugin-tailwindcss`). Run `npm run lint` and `npm run format:check` before every commit. Zero warnings or errors allowed in CI.
+
+### CI/CD Pipeline (GitHub Actions)
+Pipeline runs on every PR and `main` push:
+1. **Lint** — ESLint + Prettier check + TypeScript compile (`tsc --noEmit`)
+2. **Test** — Vitest (unit) + Playwright (E2E), coverage report uploaded
+3. **Build** — `next build` must pass with zero errors
+4. **Deploy** — Vercel auto-deploys: preview on PR, production on `main` merge
+
+### Security
+- Run `npm audit` in CI. Fix critical/high vulnerabilities before merge.
+
+### Git Conventions
+- **Branches:** `<type>/<issue>-<desc>` from `main`. Types: `feature/`, `fix/`, `chore/`, `docs/`.
+- **Commits:** `<type>: <description> #<issue>`. Present tense, under 72 chars. Dependency changes committed separately.
+- **PRs:** Squash merge. Teammate review required. Screenshots for UI changes. `Closes #X` in body.
+- **Definition of Done:** Acceptance criteria met, conventions followed, works at 375px, no errors, PR approved.
+
+---
+
+## 11. Success Metrics
 
 - User can complete the full habit tracking loop (sign up → add routines → check in → see progress) in under 3 minutes
 - Scorecard loads in under 1 second on mobile
@@ -386,7 +461,7 @@ forge/
 
 ---
 
-## 11. Out of Scope (for now)
+## 12. Out of Scope (for now)
 
 - Native mobile app (iOS/Android)
 - AI-powered suggestions or insights
