@@ -39,7 +39,7 @@ export default async function GrowthPage() {
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 mx-auto w-full max-w-4xl px-4 py-8 duration-500">
       <div className="mb-8 flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center border-2 border-gray-900 bg-indigo-50 text-primary">
+        <div className="text-primary flex h-12 w-12 items-center justify-center border-2 border-gray-900 bg-indigo-50">
           <TrendingUp className="h-6 w-6" />
         </div>
         <div>

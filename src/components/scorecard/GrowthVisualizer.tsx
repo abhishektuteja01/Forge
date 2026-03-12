@@ -64,7 +64,7 @@ export const GrowthVisualizer: React.FC<GrowthVisualizerProps> = ({
             step="0.1"
             value={baseline}
             onChange={(e) => setBaseline(Number(e.target.value))}
-            className="h-12 w-full border-2 border-gray-900 px-4 font-bold text-gray-900 outline-none focus:ring-2 focus:ring-primary"
+            className="focus:ring-primary h-12 w-full border-2 border-gray-900 px-4 font-bold text-gray-900 outline-none focus:ring-2"
           />
         </div>
 
@@ -97,7 +97,11 @@ export const GrowthVisualizer: React.FC<GrowthVisualizerProps> = ({
               data={chartData}
               margin={{ top: 20, right: 20, left: 0, bottom: 20 }}
             >
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
+              <CartesianGrid
+                strokeDasharray="3 3"
+                vertical={false}
+                stroke="#f3f4f6"
+              />
               <XAxis
                 dataKey="day"
                 tick={{ fontSize: 12, fill: "#9ca3af" }}
@@ -123,7 +127,7 @@ export const GrowthVisualizer: React.FC<GrowthVisualizerProps> = ({
                 content={({ active, payload, label }: any) => {
                   if (active && payload && payload.length) {
                     return (
-                      <div className="rounded-none border-2 border-border bg-white p-3 shadow-sm">
+                      <div className="border-border rounded-none border-2 bg-white p-3 shadow-sm">
                         <p className="mb-2 text-xs font-bold text-gray-900">
                           Day {label}
                         </p>
@@ -184,8 +188,8 @@ export const GrowthVisualizer: React.FC<GrowthVisualizerProps> = ({
       </div>
 
       {/* Summary Callout */}
-      <div className="bg-gray-50 border-l-4 border-primary p-6">
-        <p className="text-lg font-medium leading-relaxed text-gray-900">
+      <div className="border-primary border-l-4 bg-gray-50 p-6">
+        <p className="text-lg leading-relaxed font-medium text-gray-900">
           At 1% better each day, you&apos;d reach{" "}
           <span className="text-positive font-bold">{summary.better}%</span>{" "}
           consistency by day {horizon}. At 1% worse, you&apos;d be at{" "}
