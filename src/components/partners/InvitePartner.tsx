@@ -22,9 +22,13 @@ export function InvitePartner({ onGenerateLink }: InvitePartnerProps) {
       setInviteUrl(url);
 
       // Auto-copy to clipboard
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      try {
+        await navigator.clipboard.writeText(url);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      } catch {
+        // Ignored if clipboard fails (e.g. non-HTTPS localhost)
+      }
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Failed to generate invite link";

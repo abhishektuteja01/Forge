@@ -24,7 +24,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     // Base classes
     const baseClass =
-      "inline-flex justify-center items-center font-semibold rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
+      "inline-flex justify-center items-center font-bold uppercase tracking-widest rounded-none transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
 
     // Size variations mapping (keeping 44px min-height for touch targets per PRD)
     const sizeMap = {
@@ -36,11 +36,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     // Variant mapping
     const variantMap = {
       primary:
-        "bg-indigo-500 text-white hover:bg-indigo-600 focus:ring-indigo-500 shadow-sm hover:shadow active:scale-[0.98]",
+        "bg-gray-900 text-white hover:bg-black focus:ring-gray-900 active:scale-[0.98]",
       secondary:
-        "bg-white text-gray-900 border-2 border-border hover:bg-gray-50 focus:ring-gray-200 active:scale-[0.98]",
+        "bg-white text-gray-900 border-2 border-gray-900 hover:bg-gray-100 focus:ring-gray-900 active:scale-[0.98]",
       danger:
-        "bg-negative text-white hover:bg-red-600 focus:ring-red-500 shadow-sm active:scale-[0.98]",
+        "bg-negative text-white hover:bg-red-800 focus:ring-negative active:scale-[0.98]",
       ghost:
         "bg-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:ring-gray-200",
     };

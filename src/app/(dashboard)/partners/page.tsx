@@ -136,7 +136,7 @@ export default function PartnersPage() {
 
   // --------------- Render ---------------
   return (
-    <div className="mx-auto w-full max-w-lg px-4 py-6">
+    <div className="mx-auto w-full max-w-lg px-4 py-6 duration-500 animate-in fade-in slide-in-from-bottom-4">
       {/* Page heading + nudge bell */}
       <div className="mb-2 flex items-start justify-between">
         <div>
@@ -277,8 +277,8 @@ export default function PartnersPage() {
 
         {/* ─── Empty State ───────────────────────── */}
         {!hasContent && (
-          <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 px-6 py-16 text-center">
-            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50">
+          <div className="flex flex-col items-center justify-center border-2 border-gray-900 bg-white px-6 py-16 text-center">
+            <div className="mb-6 flex h-14 w-14 items-center justify-center border-2 border-primary bg-white">
               <Users className="h-7 w-7 text-primary" />
             </div>
             <h3 className="mb-2 font-display text-lg font-bold text-gray-900">

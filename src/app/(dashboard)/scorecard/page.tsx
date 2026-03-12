@@ -160,7 +160,7 @@ export default function ScorecardPage() {
 
   // --------------- Render ---------------
   return (
-    <div className="mx-auto w-full max-w-lg px-4 py-6">
+    <div className="mx-auto w-full max-w-lg px-4 py-6 duration-500 animate-in fade-in slide-in-from-bottom-4">
       {/* Date navigation */}
       <DateNavigator
         selectedDate={selectedDate}
@@ -199,8 +199,8 @@ export default function ScorecardPage() {
         </div>
       ) : (
         /* Empty state */
-        <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 px-6 py-16 text-center">
-          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50">
+        <div className="flex flex-col items-center justify-center border-2 border-gray-900 bg-white px-6 py-16 text-center">
+          <div className="mb-6 flex h-14 w-14 items-center justify-center border-2 border-primary bg-white">
             <Plus className="h-7 w-7 text-primary" />
           </div>
           <h3 className="mb-2 font-display text-lg font-bold text-gray-900">
@@ -213,7 +213,7 @@ export default function ScorecardPage() {
           <button
             type="button"
             onClick={handleOpenAdd}
-            className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-600"
+            className="inline-flex items-center gap-2 border-2 border-gray-900 bg-gray-900 px-6 py-3 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-black"
           >
             <Plus className="h-4 w-4" />
             Add your first routine
@@ -227,7 +227,7 @@ export default function ScorecardPage() {
           type="button"
           onClick={handleOpenAdd}
           aria-label="Add routine"
-          className="fixed bottom-24 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-all hover:bg-indigo-600 hover:shadow-xl active:scale-95 md:bottom-8 md:right-8"
+          className="fixed bottom-24 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-none border-2 border-gray-900 bg-primary text-white transition-all hover:bg-indigo-600 active:scale-95 md:bottom-8 md:right-8"
         >
           <Plus className="h-6 w-6" strokeWidth={2.5} />
         </button>
