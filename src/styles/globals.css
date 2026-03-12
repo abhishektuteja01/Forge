@@ -25,7 +25,7 @@
 
 @layer base {
   body {
-    @apply bg-white text-gray-900 antialiased font-sans;
+    @apply bg-white font-sans text-gray-900 antialiased;
   }
 }
 

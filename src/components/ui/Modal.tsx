@@ -11,7 +11,12 @@ export interface ModalProps {
   children: React.ReactNode;
 }
 
-export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
+export const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  title,
+  children,
+}) => {
   // Handle escape key to close
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -34,42 +39,43 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }
 
   // Render modal into a portal attached to document.body
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
       {/* Backdrop overlay */}
-      <div 
-        className="fixed inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity animate-in fade-in duration-200"
+      <div
+        className="fixed inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity duration-200 animate-in fade-in"
         onClick={onClose}
         aria-hidden="true"
       />
-      
+
       {/* Modal Dialog */}
-      <div 
-        role="dialog" 
-        aria-modal="true" 
+      <div
+        role="dialog"
+        aria-modal="true"
         aria-labelledby={title ? "modal-title" : undefined}
-        className="relative w-full sm:w-auto max-w-lg min-w-[320px] bg-white rounded-t-3xl sm:rounded-2xl shadow-xl border border-border animate-in slide-in-from-bottom-8 sm:slide-in-from-bottom-4 duration-300 max-h-[90vh] flex flex-col"
+        className="relative flex max-h-[90vh] w-full min-w-[320px] max-w-lg flex-col rounded-t-3xl border border-border bg-white shadow-xl duration-300 animate-in slide-in-from-bottom-8 sm:w-auto sm:rounded-2xl sm:slide-in-from-bottom-4"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-border z-10 sticky top-0 bg-white sm:rounded-t-2xl rounded-t-3xl">
+        <div className="sticky top-0 z-10 flex items-center justify-between rounded-t-3xl border-b border-border bg-white px-6 py-4 sm:rounded-t-2xl">
           {title && (
-            <h2 id="modal-title" className="text-lg font-bold font-display tracking-tight text-gray-900">
+            <h2
+              id="modal-title"
+              className="font-display text-lg font-bold tracking-tight text-gray-900"
+            >
               {title}
             </h2>
           )}
-          
+
           <button
             onClick={onClose}
             aria-label="Close modal"
-            className="p-2 ml-auto -mr-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+            className="-mr-2 ml-auto rounded-full p-2 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
           >
-            <X className="w-5 h-5" />
+            <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Content (scrollable if too long) */}
-        <div className="p-6 overflow-y-auto">
-          {children}
-        </div>
+        <div className="overflow-y-auto p-6">{children}</div>
       </div>
     </div>,
     document.body

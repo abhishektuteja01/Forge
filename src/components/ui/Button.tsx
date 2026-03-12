@@ -49,19 +49,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         disabled={disabled || loading}
-        className={`
-          ${baseClass} 
-          ${sizeMap[size]} 
-          ${variantMap[variant]} 
-          ${fullWidth ? "w-full" : ""}
-          ${className}
-        `}
+        className={` ${baseClass} ${sizeMap[size]} ${variantMap[variant]} ${fullWidth ? "w-full" : ""} ${className} `}
         {...props}
       >
         {loading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            <span className="opacity-0">{children}</span> {/* Keeps layout stable */}
+            <span className="opacity-0">{children}</span>{" "}
+            {/* Keeps layout stable */}
           </>
         ) : (
           children
